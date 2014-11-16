@@ -18,5 +18,6 @@ public class PartieDeCartes {
 			Joueur joueur = (Joueur) iterator.next();
 			System.out.println(joueur);
 		}
+		System.out.println("Test1");
 	}
 }
