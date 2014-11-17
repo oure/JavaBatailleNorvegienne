@@ -19,5 +19,6 @@ public class PartieDeCartes {
 			System.out.println(joueur);
 		}
 		System.out.println("Test1");
+		//Je demande un pull OMG
 	}
 }
