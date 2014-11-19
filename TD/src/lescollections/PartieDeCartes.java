@@ -23,6 +23,7 @@ public class PartieDeCartes {
 		//Je demande un pull OMG
 		System.out.println("Commi 12:52");
 		System.out.println("Je suis Crystal et je rajoute quelque chose ! ");
+		System.out.println("Je suis oure et j'effectue mon premier commiy");
 	
 	}
 }
