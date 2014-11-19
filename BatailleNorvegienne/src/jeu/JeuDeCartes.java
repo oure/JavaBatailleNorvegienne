@@ -30,7 +30,8 @@ public class JeuDeCartes {
 	public void distribuer(HashSet<Joueur> lj) {
 		while(ls.size()/lj.size()>0){
 			
-			for (Iterator iterator = lj.iterator(); iterator.hasNext();) {
+			
+			for (Iterator<Joueur> iterator = lj.iterator(); iterator.hasNext();) {
 				Joueur joueur = (Joueur) iterator.next();
 				joueur.recevoirCarte(prendre());
 

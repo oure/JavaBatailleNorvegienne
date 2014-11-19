@@ -1,6 +1,7 @@
 package jeu;
 
 public class Carte {
+	
 	int valeur;
 	public Carte(int v){
 		valeur=v;
