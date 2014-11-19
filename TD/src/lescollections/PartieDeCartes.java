@@ -19,6 +19,7 @@ public class PartieDeCartes {
 			System.out.println(joueur);
 		}
 		System.out.println("Test1");
+		System.out.println("Commit 3 cody");
 		//Je demande un pull OMG
 	}
 }
