@@ -22,6 +22,7 @@ public class PartieDeCartes {
 		System.out.println("Commit 3 cody");
 		//Je demande un pull OMG
 		System.out.println("Commi 12:52");
-		
+		System.out.println("Je suis Crystal et je rajoute quelque chose ! ");
+	
 	}
 }
