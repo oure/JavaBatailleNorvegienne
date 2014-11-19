@@ -1,2 +1,4 @@
-public class test{
+package lescollections;
+public class Test{
+	public Test(){}
 }
