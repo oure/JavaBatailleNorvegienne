@@ -24,6 +24,7 @@ public class PartieDeCartes {
 		System.out.println("Commi 12:52");
 		System.out.println("Je suis Crystal et je rajoute quelque chose ! ");
 		System.out.println("Je suis oure et j'effectue mon premier commiy");
-	
+				System.out.println("test de 15:36");
+
 	}
 }
