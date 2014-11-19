@@ -18,13 +18,11 @@ public class PartieDeCartes {
 			Joueur joueur = (Joueur) iterator.next();
 			System.out.println(joueur);
 		}
-		System.out.println("Test1");
-		System.out.println("Commit 3 cody");
-		//Je demande un pull OMG
-		System.out.println("Commi 12:52");
-		System.out.println("Je suis Crystal et je rajoute quelque chose ! ");
 		System.out.println("Je suis oure et j'effectue mon premier commiy");
-				System.out.println("test de 15:36");
+		System.out.println("test de 15:36");
+		System.out.println("test de 15:36");
+		System.out.println("test de 15:36");
+		System.out.println("test de 15:36");
 
 	}
 }
