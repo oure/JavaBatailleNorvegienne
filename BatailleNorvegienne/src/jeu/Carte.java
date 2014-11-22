@@ -5,7 +5,13 @@ import java.util.LinkedList;
 
 public class Carte {
 	
-	int valeur;
+	private int valeur;
+	private enum couleur{ 
+		TREFLE,
+		PIC,
+		CARREAU,
+		COEUR
+	}
 	public Carte(int v){
 		valeur=v;
 	}
