@@ -1,47 +1,45 @@
 package jeu;
+import JoueurIA;
 
 import java.util.*;
 
 /**
  * 
  */
-public class Tas {
+public class Distributeur extends JoueurIA {
 
     /**
      * 
      */
-    public Tas() {
-    }
-
-    /**
-     * 
-     */
-    private Set<Carte> liste_cartes;
-
-
-    /**
-     * @return
-     */
-    public void vider_tas() {
-        // TODO implement here
-        
+    public Distributeur() {
     }
 
     /**
      * @return
      */
-    public Carte afficher_derniere_carte_du_tas() {
+    public void distribuer_cartes_visibles() {
         // TODO implement here
-        return null;
     }
 
     /**
-     * @param Carte 
      * @return
      */
-    public Boolean ajouter_carte_au_tas(Carte carte) {
+    public void distribuer_cartes_cachees() {
         // TODO implement here
-        return null;
+    }
+
+    /**
+     * @return
+     */
+    public void distribuer_cartes_main() {
+        // TODO implement here
+    }
+
+    /**
+     * @return
+     */
+    public void melanger() {
+        // TODO implement here
     }
 
 }

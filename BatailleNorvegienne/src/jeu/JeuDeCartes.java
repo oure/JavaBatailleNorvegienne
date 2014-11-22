@@ -41,7 +41,9 @@ public class JeuDeCartes {
 				Joueur joueur = (Joueur) iterator.next();
 				if (ls.isEmpty())
 					break;
-				joueur.recevoirCarte(prendre());
+				HashSet<Carte> hs = new HashSet<Carte>();
+				hs.add(prendre());
+				joueur.recevoirCarte(hs);
 			}
 		}
 	}

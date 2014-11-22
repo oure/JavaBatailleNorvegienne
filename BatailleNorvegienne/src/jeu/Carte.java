@@ -1,10 +1,8 @@
 package jeu;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-
 public class Carte {
 	int valeur, couleur;
+	private boolean estVisible;
 
 	public Carte(int v, int c) {
 		if (v >= 1 && v <= 13) {
@@ -23,6 +21,14 @@ public class Carte {
 
 	public int getValeur() {
 		return valeur;
+	}
+
+	public boolean isEstVisible() {
+		return estVisible;
+	}
+
+	public void setEstVisible(boolean estVisible) {
+		this.estVisible = estVisible;
 	}
 
 	public void setValeur(int valeur) {

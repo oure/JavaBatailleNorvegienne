@@ -1,6 +1,7 @@
 package jeu;
 
 import java.util.HashSet;
+import java.util.LinkedList;
 
 
 public class PartieDeCartes {
