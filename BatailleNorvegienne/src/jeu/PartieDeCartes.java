@@ -8,6 +8,7 @@ public class PartieDeCartes {
 	Pioche pioche=new Pioche();
 	HashSet<JeuDeCartes> setJeuDeCartes=new HashSet<JeuDeCartes>();
 	LinkedList<Joueur> llJoueur=new LinkedList<Joueur>();
+	Tas tas=new Tas();
 
 		public static void main(String[] args) {
 		JeuDeCartes jeuDeCarte=new JeuDeCartes();
