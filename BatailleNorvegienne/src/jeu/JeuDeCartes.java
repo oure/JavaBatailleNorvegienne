@@ -20,7 +20,7 @@ public class JeuDeCartes {
 	public JeuDeCartes() {
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 4; j++) {
-				ls.add(new Carte(i + 1));
+				ls.add(new Carte(i + 1,0+1));
 			}
 		}
 	}
