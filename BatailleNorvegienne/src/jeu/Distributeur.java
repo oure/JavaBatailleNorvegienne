@@ -1,23 +1,15 @@
 package jeu;
-import JoueurIA;
-
-import java.util.*;
-
 /**
  * 
  */
 public class Distributeur extends JoueurIA {
 
-    /**
-     * 
-     */
-    public Distributeur() {
-    }
+    public Distributeur(String nom, int degreeStrat) {
+		super(nom, degreeStrat);
+		// TODO Auto-generated constructor stub
+	}
 
-    /**
-     * @return
-     */
-    public void distribuer_cartes_visibles() {
+	public void distribuer_cartes_visibles() {
         // TODO implement here
     }
 
