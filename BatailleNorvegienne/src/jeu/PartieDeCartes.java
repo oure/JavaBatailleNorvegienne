@@ -22,7 +22,7 @@ public class PartieDeCartes {
 					cond=false;
 					break;
 				}
-				joueur
+				
 				
 			}
 			

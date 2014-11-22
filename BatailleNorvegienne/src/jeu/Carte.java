@@ -21,11 +21,11 @@ public class Carte {
 	 * sinon renvoie -1
 	 **/
 	public int comparer(LinkedList<Carte> st){
-		int val;
+		int val=0;
 		for (Iterator<Carte> iterator = st.iterator(); iterator.hasNext();) {
 			Carte carte = (Carte) iterator.next();
 			val=carte.getValeur();
-			if(val>carte.getValeur())
+			//if(val>carte.getValeur())
 				
 		}
 		return val; 
