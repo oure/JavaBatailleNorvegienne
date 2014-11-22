@@ -38,7 +38,7 @@ public class Joueur {
 			Carte carte = (Carte) iterator.next();
 			ss += carte.getValeur() + " ";
 		}
-		if (ss != null)
+		if (ss != "")
 			return "Nom : " + nom + ", Carte(s) : "+ss;
 		else 
 			return "Nom : "+" pas de carte";

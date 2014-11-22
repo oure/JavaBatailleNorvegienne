@@ -28,20 +28,4 @@ public class Carte {
 	public void setValeur(int valeur) {
 		this.valeur = valeur;
 	}
-
-	/**
-	 * Retourne la postion de la carte la plus haute 
-	 * sinon renvoie -1
-	 **/
-	public int comparer(LinkedList<Carte> st) {
-		int val = 0;
-		for (Iterator<Carte> iterator = st.iterator(); iterator.hasNext();) {
-			Carte carte = (Carte) iterator.next();
-			val = carte.getValeur();
-			// if(val>carte.getValeur())
-
-		}
-		return val;
-	}
-
 }
