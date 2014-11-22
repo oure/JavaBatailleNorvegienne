@@ -1,20 +1,24 @@
 package jeu;
 
 public class Carte {
-	int valeur, couleur;
+	enum Couleur { Pique, Coeur, Carreau, Trefle };
+	
+	int valeur;
+	Couleur  couleur;
 	private boolean estVisible;
 
-	public Carte(int v, int c) {
+	public Carte(int v, Couleur c) {
 		if (v >= 1 && v <= 13) {
-			valeur = v;
+			valeur = v; 
 		} else {
 			System.out.println("Erreur: problème de valeurs !");
 			System.exit(0);
 		}
-		if (c >= 0 && c < 5) {
+		if (c==Couleur.Pique ||c==Couleur.Coeur||c==Couleur.Carreau||c==Couleur.Trefle) {
 			couleur = c;
-		} else {
-			System.out.println("Erreur: problème de valeurs !");
+		}
+		 else {
+			System.out.println("Erreur: probleme de valeurs !");
 			System.exit(0);
 		}
 	}

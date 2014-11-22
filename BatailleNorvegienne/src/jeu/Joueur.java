@@ -4,7 +4,7 @@ import java.util.Set;
 
 public class Joueur {
 	private String nom;
-	private CartesEnMain cartesEnMain;
+	private CartesEnMain cartesEnMain=new CartesEnMain();
 	private CartesfacesVisibles cartefaceVisibles;
 	private CartesFacesCachees carteFacesCachees;
 
@@ -49,7 +49,7 @@ public class Joueur {
 		// TODO Auto-generated method stub
 		
 	}
-    public Boolean envoyerTasSurJoueur(Joueur j, Tas tas) {
+    public Boolean envoyerTasSurJoueur(Joueur j, Table tas) {
         // TODO implement here
         return null;
     }
@@ -66,9 +66,13 @@ public class Joueur {
 //			return "Nom : " + " pas de carte";
 //	}
 
-	public void recevoirCarte(Set<Carte> s)// les cartes envoyes par un autre joueur 
+	public void recevoirCarte(Set<Carte> s)   // les cartes envoyes par un autre joueur 
 	{
-		cartesEnMain.addAll(s);
+		//cartesEnMain.addAll(s);
+	}
+	
+	public void recevoirUneCarte(Carte ca){
+		cartesEnMain.ajouterCarteMain(ca);
 	}
 
     public void piocher(int i,Pioche pioche)

@@ -8,9 +8,10 @@ public class PartieDeCartes {
 	Pioche pioche=new Pioche();
 	HashSet<JeuDeCartes> setJeuDeCartes=new HashSet<JeuDeCartes>();
 	LinkedList<Joueur> llJoueur=new LinkedList<Joueur>();
-	Tas tas=new Tas();
+	Table tas=new Table();
 
 		public static void main(String[] args) {
+		
 		JeuDeCartes jeuDeCarte=new JeuDeCartes();
 		System.out.println("Jeu de 32 cartes : "+jeuDeCarte);
 		jeuDeCarte.melanger();
