@@ -5,33 +5,31 @@ import java.util.*;
 /**
  * 
  */
-public class Tas {
+public class Table {
 
     /**
      * 
      */
-    public Tas() {
+    public Table() {
     }
 
     /**
      * 
      */
-    private Set<Carte> liste_cartes;
+    private Set<Carte> listeCartes;
 
 
     /**
      * @return
      */
-    public void vider_tas() {
-        // TODO implement here
+    public void viderTas() {
         
     }
 
     /**
      * @return
      */
-    public Carte afficher_derniere_carte_du_tas() {
-        // TODO implement here
+    public Carte afficherDerniereCarteDuTas() {
         return null;
     }
 
@@ -39,7 +37,7 @@ public class Tas {
      * @param Carte 
      * @return
      */
-    public Boolean ajouter_carte_au_tas(Carte carte) {
+    public Boolean ajouterCarteAuTas(Carte carte) {
         // TODO implement here
         return null;
     }

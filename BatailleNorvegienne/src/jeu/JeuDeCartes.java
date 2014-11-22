@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
+import jeu.Carte.Couleur;
+
 public class JeuDeCartes {
 	public List<Carte> getLs() {
 		return ls;
@@ -18,9 +20,26 @@ public class JeuDeCartes {
 	List<Carte> ls = new ArrayList<Carte>();
 
 	public JeuDeCartes() {
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 4; j++) {
-				ls.add(new Carte(i + 1,0+1));
+		for (int i = 1; i <= 8; i++) {
+			for (int j = 1; j <= 4; j++) {
+				switch (j) {
+				case 1:
+					ls.add(new Carte(i, Couleur.Pique));
+					break;
+				case 2:
+					ls.add(new Carte(i, Couleur.Coeur));
+
+					break;
+				case 3:
+					ls.add(new Carte(i, Couleur.Carreau));
+
+					break;
+				case 4:
+					ls.add(new Carte(i, Couleur.Trefle));
+
+					break;
+				}
+
 			}
 		}
 	}
