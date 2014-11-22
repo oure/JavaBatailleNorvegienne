@@ -14,9 +14,18 @@ public class PartieDeCartes {
 		lj.add(new Joueur("Johnny"));
 		lj.add(new Joueur("Joel"));
 		jeuDeCarte.distribuer(lj);
-		for (Iterator<Joueur> iterator = lj.iterator(); iterator.hasNext();) {
-			Joueur joueur = (Joueur) iterator.next();
-			System.out.println(joueur);
+		boolean cond=true;
+		while (cond){
+			for (Iterator<Joueur> iterator = lj.iterator(); iterator.hasNext();) {
+				Joueur joueur = (Joueur) iterator.next();
+				if (joueur.getSet().isEmpty()){
+					cond=false;
+					break;
+				}
+				joueur
+				
+			}
+			
 		}
 	}
 }

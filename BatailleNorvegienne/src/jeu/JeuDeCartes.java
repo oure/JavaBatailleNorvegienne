@@ -7,6 +7,14 @@ import java.util.Iterator;
 import java.util.List;
 
 public class JeuDeCartes {
+	public List<Carte> getLs() {
+		return ls;
+	}
+
+	public void setLs(List<Carte> ls) {
+		this.ls = ls;
+	}
+
 	List<Carte> ls = new ArrayList<Carte>();
 
 	public JeuDeCartes() {
@@ -23,18 +31,17 @@ public class JeuDeCartes {
 
 	public Carte prendre() {
 		Carte carte = ls.get(ls.size() - 1);
-		ls.remove(ls.size()-1);
+		ls.remove(ls.size() - 1);
 		return carte;
 	}
 
 	public void distribuer(HashSet<Joueur> lj) {
-		while(ls.size()/lj.size()>0){
-			
-			
+		while (!ls.isEmpty()) {
 			for (Iterator<Joueur> iterator = lj.iterator(); iterator.hasNext();) {
 				Joueur joueur = (Joueur) iterator.next();
+				if (ls.isEmpty())
+					break;
 				joueur.recevoirCarte(prendre());
-
 			}
 		}
 	}
