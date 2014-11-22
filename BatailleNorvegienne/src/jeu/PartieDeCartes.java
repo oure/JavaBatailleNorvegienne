@@ -1,8 +1,7 @@
 package jeu;
 
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
+
 
 public class PartieDeCartes {
 	Pioche pioche=new Pioche();
@@ -21,17 +20,17 @@ public class PartieDeCartes {
 		lj.add(new Joueur("Joel"));
 		jeuDeCarte.distribuer(lj);
 		boolean cond=true;
-		while (cond){
-			for (Iterator<Joueur> iterator = lj.iterator(); iterator.hasNext();) {
-				Joueur joueur = (Joueur) iterator.next();
-				if (joueur.getSet().isEmpty()){
-					cond=false;
-					break;
-				}
-				
-				
-			}
-			
-		}
+//		while (cond){
+//			for (Iterator<Joueur> iterator = lj.iterator(); iterator.hasNext();) {
+//				Joueur joueur = (Joueur) iterator.next();
+//				if (joueur.getSet().isEmpty()){
+//					cond=false;
+//					break;
+//				}
+//				
+//				
+//			}
+//			
+//		}
 	}
 }

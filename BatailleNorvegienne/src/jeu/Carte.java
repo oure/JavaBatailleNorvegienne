@@ -7,7 +7,7 @@ public class Carte {
 	int valeur, couleur;
 
 	public Carte(int v, int c) {
-		if (v >= 1 && v < 15) {
+		if (v >= 1 && v <= 13) {
 			valeur = v;
 		} else {
 			System.out.println("Erreur: problème de valeurs !");

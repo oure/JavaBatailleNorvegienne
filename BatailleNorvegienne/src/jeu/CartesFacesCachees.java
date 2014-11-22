@@ -1,5 +1,7 @@
 package jeu;
 
-public class CartesFacesCachees {
+import java.util.HashSet;
 
+public class CartesFacesCachees {
+	HashSet<Carte> hs=new HashSet<Carte>();
 }
