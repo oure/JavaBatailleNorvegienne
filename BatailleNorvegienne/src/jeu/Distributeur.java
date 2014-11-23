@@ -1,5 +1,8 @@
 package jeu;
 
+import java.util.HashSet;
+import java.util.LinkedList;
+
 /**
  * 
  */
@@ -9,7 +12,11 @@ public class Distributeur extends JoueurIA {
 		super(nom, degreeStrat);
 		// TODO Auto-generated constructor stub
 	}
-
+	public void distribuer(HashSet<JeuDeCartes> setJeuDeCartes,LinkedList<Joueur> lj){
+		distribuer_cartes_main();
+		distribuer_cartes_visibles();
+		distribuer_cartes_cachees();
+	}
 	public void distribuer_cartes_visibles() {
 		// TODO implement here
 	}

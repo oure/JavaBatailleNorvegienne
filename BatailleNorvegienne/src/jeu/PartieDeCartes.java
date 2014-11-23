@@ -6,15 +6,15 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class PartieDeCartes {
-	Pioche pioche = new Pioche();
-	HashSet<JeuDeCartes> setJeuDeCartes = new HashSet<JeuDeCartes>();
-	Table tas = new Table();
-	LinkedList<Joueur> llJoueur = new LinkedList<Joueur>();
+	private Pioche pioche = new Pioche();
+	private HashSet<JeuDeCartes> setJeuDeCartes = new HashSet<JeuDeCartes>();
+	private Table tas = new Table();
+	private LinkedList<Joueur> llJoueur = new LinkedList<Joueur>();
 
 	/*
 	 * Mise en place de la liste des joueurs.
 	 */
-	public void MiseEnPlaceDeLaListeDesJoueurs() {
+	private void MiseEnPlaceDeLaListeDesJoueurs() {
 		System.out.println("Mise en place de la liste des joueurs :");
 		Scanner reader = new Scanner(System.in);
 		System.out.println("Saisissez le nombre de joueur :");
@@ -25,7 +25,11 @@ public class PartieDeCartes {
 			// reader.nextLine();
 			System.out.print("Please input a name: ");
 			name = reader.nextLine();
-			llJoueur.add(new Joueur(name));
+			if (i!=2)
+				llJoueur.add(new Joueur(name));
+			else
+			llJoueur.add(new Distributeur(name, 1));
+		
 		}
 		reader.close();
 	}
@@ -33,7 +37,7 @@ public class PartieDeCartes {
 	/*
 	 * Creation d'un ou plusieurs jeu de carte en fonction du nombre de joueur.
 	 */
-	public void MiseEnPlaceDesJeuxdeCartes() {
+	private void MiseEnPlaceDesJeuxdeCartes() {
 		System.out.println("llJoueur.size()" + llJoueur.size());
 		if (llJoueur.size() <= 5 && llJoueur.size() > 1) {
 			setJeuDeCartes.add(new JeuDeCartes());
@@ -54,10 +58,24 @@ public class PartieDeCartes {
 		}
 	}
 
+	private void demarrer() {
+		MiseEnPlaceDeLaListeDesJoueurs();
+		MiseEnPlaceDesJeuxdeCartes();
+		Distribuer();
+	}
+
+	private void Distribuer() {
+		for (Iterator<Joueur> it = llJoueur.iterator(); it.hasNext();) {
+			Joueur joueur = (Joueur) it.next();
+			if (joueur instanceof Distributeur) {
+				((Distributeur) joueur).distribuer(setJeuDeCartes, llJoueur);
+			}
+		}
+	}
+
 	public static void main(String[] args) {
 		PartieDeCartes pdc = new PartieDeCartes();
-		pdc.MiseEnPlaceDeLaListeDesJoueurs();
-		pdc.MiseEnPlaceDesJeuxdeCartes();
+		pdc.demarrer();
 		// while (cond){
 		// for (Iterator<Joueur> iterator = lj.iterator(); iterator.hasNext();)
 		// {
