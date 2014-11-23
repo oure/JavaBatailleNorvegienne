@@ -12,4 +12,10 @@ public class CartesEnMain {
 	public void ajouterCarteMain(Carte car) {
 		cartemain.add(car);
 	}
+
+	@Override
+	public String toString() {
+		return "CartesEnMain [cartemain=" + cartemain + "]";
+	}
+	
 }

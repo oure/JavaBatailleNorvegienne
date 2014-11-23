@@ -86,6 +86,13 @@ public class Joueur {
 
 	}
 
+	@Override
+	public String toString() {
+		return "Joueur [nom=" + nom + ", cartesEnMain=" + cartesEnMain
+				+ ", cartefaceVisibles=" + cartefaceVisibles
+				+ ", carteFacesCachees=" + carteFacesCachees + "]";
+	}
+
 	public void echangerCarte(Carte c1, Carte c2) {
 		// TODO implement here
 	}

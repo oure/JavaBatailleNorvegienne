@@ -11,4 +11,10 @@ public class CartesfacesVisibles {
 	public void ajouterCarteMain(Carte car) {
 		hs.add(car);
 	}
+
+	@Override
+	public String toString() {
+		return "CartesfacesVisibles [hs=" + hs + "]";
+	}
+	
 }

@@ -73,6 +73,10 @@ public class PartieDeCartes {
 				break;
 			}
 		}
+		for (Iterator iterator = llJoueur.iterator(); iterator.hasNext();) {
+			Joueur joueur = (Joueur) iterator.next();
+			joueur.toString();
+		}
 	}
 
 	public static void main(String[] args) {
