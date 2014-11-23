@@ -3,11 +3,10 @@ package jeu;
 import java.util.HashSet;
 
 public class CartesEnMain {
-	HashSet<Carte> cartemain = new HashSet<Carte>();
+	private HashSet<Carte> cartemain = new HashSet<Carte>();
 
 	public void addAll(HashSet<Carte> s) {
-		// TODO Auto-generated method stub
-
+		cartemain.addAll(s);
 	}
 
 	public void ajouterCarteMain(Carte car) {

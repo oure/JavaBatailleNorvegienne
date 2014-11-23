@@ -68,7 +68,8 @@ public class PartieDeCartes {
 		for (Iterator<Joueur> it = llJoueur.iterator(); it.hasNext();) {
 			Joueur joueur = (Joueur) it.next();
 			if (joueur instanceof Distributeur) {
-				((Distributeur) joueur).distribuer(setJeuDeCartes, llJoueur);
+				pioche=((Distributeur) joueur).distribuer(setJeuDeCartes, llJoueur);
+				break;
 			}
 		}
 	}

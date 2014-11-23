@@ -2,9 +2,17 @@ package jeu;
 import java.util.*;
 
 public class Pioche {
-	LinkedList<Carte> lkc=new LinkedList<Carte>();
+	LinkedList<Carte> listeDeCarte=new LinkedList<Carte>();
  
-    public Pioche() {
+    public LinkedList<Carte> getLkc() {
+		return listeDeCarte;
+	}
+
+	public void setLkc(LinkedList<Carte> lkc) {
+		this.listeDeCarte = lkc;
+	}
+
+	public Pioche() {
     }
 
     public void vider_pioche() {
