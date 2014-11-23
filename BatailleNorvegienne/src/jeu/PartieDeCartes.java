@@ -2,6 +2,7 @@ package jeu;
 
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 
 public class PartieDeCartes {
@@ -9,9 +10,25 @@ public class PartieDeCartes {
 	HashSet<JeuDeCartes> setJeuDeCartes=new HashSet<JeuDeCartes>();
 	LinkedList<Joueur> llJoueur=new LinkedList<Joueur>();
 	Table tas=new Table();
-
-		public static void main(String[] args) {
+	/*
+	 * Mise en place de la liste des joueurs.
+	 */
+	public void MiseEnPlaceDeLaListeDesJoueurs(){
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Saisissez le nombre de joueur :");
+		int nbJoueur = sc.nextInt();
+		for (int i = 1; i <= nbJoueur; i++) {
+			System.out.println("Nom du joueur n°"+i+" :");
+			String NomDuJoueur = sc.nextLine();
+			llJoueur.add(new Joueur(NomDuJoueur));
+		}
+	}
+	public void MiseEnPlaceDesJeuxdeCartes(){
 		
+	}
+		public static void main(String[] args) {
+		PartieDeCartes pdc=new PartieDeCartes();
+		pdc.MiseEnPlaceDeLaListeDesJoueurs();
 		JeuDeCartes jeuDeCarte=new JeuDeCartes();
 		System.out.println("Jeu de 32 cartes : "+jeuDeCarte);
 		jeuDeCarte.melanger();
