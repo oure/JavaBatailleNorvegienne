@@ -20,7 +20,7 @@ public class JeuDeCartes {
 	List<Carte> ls = new ArrayList<Carte>();
 
 	public JeuDeCartes() {
-		for (int i = 1; i <= 8; i++) {
+		for (int i = 1; i <= 13; i++) {
 			for (int j = 1; j <= 4; j++) {
 				switch (j) {
 				case 1:
@@ -66,7 +66,6 @@ public class JeuDeCartes {
 			}
 		}
 	}
-
 	public String toString() {
 		String ss = "";
 		for (int i = 0; i < ls.size(); i++) {
