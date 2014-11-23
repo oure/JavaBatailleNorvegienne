@@ -4,20 +4,20 @@ import java.util.Set;
 
 public class Joueur {
 	private String nom;
-	private CartesEnMain cartesEnMain=new CartesEnMain();
-	private CartesfacesVisibles cartefaceVisibles;
-	private CartesFacesCachees carteFacesCachees;
+	private CartesEnMain cartesEnMain = new CartesEnMain();
+	private CartesfacesVisibles cartefaceVisibles = new CartesfacesVisibles();
+	private CartesFacesCachees carteFacesCachees = new CartesFacesCachees();
 
-	public CartesEnMain getCem() {
-		return cartesEnMain;
+	public void ajouterCarteEnMain(Carte c) {
+		cartesEnMain.ajouterCarteMain(c);
 	}
 
-	public void setCem(CartesEnMain cem) {
-		this.cartesEnMain = cem;
+	public void ajouterCartefacsVisible(Carte c){
+		cartefaceVisibles.ajouterCarteMain(c);
 	}
 
-	public CartesfacesVisibles getCfv() {
-		return cartefaceVisibles;
+	public void ajouterCarteFaceCachee(Carte c){
+		carteFacesCachees.ajouterUnecarteFaceCachee(c);
 	}
 
 	public void setCfv(CartesfacesVisibles cfv) {
@@ -40,53 +40,53 @@ public class Joueur {
 		this.nom = nom;
 	}
 
-
 	public Joueur(String nom) {
 		this.nom = nom;
 	}
 
 	public void jouer(Carte c, int i) {
 		// TODO Auto-generated method stub
-		
+
 	}
-    public Boolean envoyerTasSurJoueur(Joueur j, Table tas) {
-        // TODO implement here
-        return null;
-    }
 
-//	public String toString() {
-//		String ss = "";
-//		for (Iterator<Carte> iterator = cartesEnMain.iterator(); iterator.hasNext();) {
-//			Carte carte = (Carte) iterator.next();
-//			ss += carte.getValeur() + " ";
-//		}
-//		if (ss != "")
-//			return "Nom : " + nom + ", Carte(s) : " + ss;
-//		else
-//			return "Nom : " + " pas de carte";
-//	}
+	public Boolean envoyerTasSurJoueur(Joueur j, Table tas) {
+		// TODO implement here
+		return null;
+	}
 
-	public void recevoirCarte(Set<Carte> s)   // les cartes envoyes par un autre joueur 
+	// public String toString() {
+	// String ss = "";
+	// for (Iterator<Carte> iterator = cartesEnMain.iterator();
+	// iterator.hasNext();) {
+	// Carte carte = (Carte) iterator.next();
+	// ss += carte.getValeur() + " ";
+	// }
+	// if (ss != "")
+	// return "Nom : " + nom + ", Carte(s) : " + ss;
+	// else
+	// return "Nom : " + " pas de carte";
+	// }
+
+	public void recevoirCarte(Set<Carte> s) // les cartes envoyes par un autre
+											// joueur
 	{
-		//cartesEnMain.addAll(s);
+		// cartesEnMain.addAll(s);
 	}
-	
-	public void recevoirUneCarte(Carte ca){
+
+	public void recevoirUneCarte(Carte ca) {
 		cartesEnMain.ajouterCarteMain(ca);
 	}
 
-    public void piocher(int i,Pioche pioche)
-    {
-    	while (pioche.isEmpty()==false )
-    	{
-    		for (int j = 0; j < i; j++) 
-    		{
-    			//cartesEnMain.addAll(pioche.remove(j));
-    		} 
-    	}
-    
-    }
-    public void echangerCarte (Carte c1, Carte c2) {
-        // TODO implement here
-    }
+	public void piocher(int i, Pioche pioche) {
+		while (pioche.isEmpty() == false) {
+			for (int j = 0; j < i; j++) {
+				// cartesEnMain.addAll(pioche.remove(j));
+			}
+		}
+
+	}
+
+	public void echangerCarte(Carte c1, Carte c2) {
+		// TODO implement here
+	}
 }

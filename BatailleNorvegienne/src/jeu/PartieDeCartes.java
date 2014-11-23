@@ -69,6 +69,7 @@ public class PartieDeCartes {
 			Joueur joueur = (Joueur) it.next();
 			if (joueur instanceof Distributeur) {
 				pioche=((Distributeur) joueur).distribuer(setJeuDeCartes, llJoueur);
+				System.out.println("je suis le joueur n°"+joueur.getNom()+" et je vais distribuer ! ");
 				break;
 			}
 		}

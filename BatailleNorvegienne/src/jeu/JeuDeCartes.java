@@ -1,23 +1,23 @@
 package jeu;
-
+	
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import jeu.Carte.Couleur;
 
 public class JeuDeCartes {
+
+	LinkedList<Carte> ls = new LinkedList<Carte>();
 	public List<Carte> getLs() {
 		return ls;
 	}
 
-	public void setLs(List<Carte> ls) {
+	public void setLs(LinkedList<Carte> ls) {
 		this.ls = ls;
 	}
 
-	List<Carte> ls = new ArrayList<Carte>();
 
 	public JeuDeCartes() {
 		for (int i = 1; i <= 13; i++) {
@@ -54,18 +54,6 @@ public class JeuDeCartes {
 		return carte;
 	}
 
-	public void distribuer(HashSet<Joueur> lj) {
-		while (!ls.isEmpty()) {
-			for (Iterator<Joueur> iterator = lj.iterator(); iterator.hasNext();) {
-				Joueur joueur = (Joueur) iterator.next();
-				if (ls.isEmpty())
-					break;
-				HashSet<Carte> hs = new HashSet<Carte>();
-				hs.add(prendre());
-				joueur.recevoirCarte(hs);
-			}
-		}
-	}
 	public String toString() {
 		String ss = "";
 		for (int i = 0; i < ls.size(); i++) {

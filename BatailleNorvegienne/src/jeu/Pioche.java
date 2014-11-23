@@ -1,10 +1,18 @@
 package jeu;
+
 import java.util.*;
 
 public class Pioche {
-	LinkedList<Carte> listeDeCarte=new LinkedList<Carte>();
- 
-    public LinkedList<Carte> getLkc() {
+	LinkedList<Carte> listeDeCarte = new LinkedList<Carte>();
+	
+	public Pioche() {
+	}
+
+	public Pioche(LinkedList<Carte> lcc) {
+		listeDeCarte = lcc;
+	}
+
+	public LinkedList<Carte> getLkc() {
 		return listeDeCarte;
 	}
 
@@ -12,17 +20,14 @@ public class Pioche {
 		this.listeDeCarte = lkc;
 	}
 
-	public Pioche() {
-    }
+	public void vider_pioche() {
+		// TODO implement here
+	}
 
-    public void vider_pioche() {
-        // TODO implement here
-    }
-
-    public Carte prendre_carte() {
-        // TODO implement here
-        return null;
-    }
+	public Carte prendre_carte() {
+		// TODO implement here
+		return null;
+	}
 
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub
@@ -35,4 +40,3 @@ public class Pioche {
 	}
 
 }
-
