@@ -38,4 +38,11 @@ public class Carte {
 	public void setValeur(int valeur) {
 		this.valeur = valeur;
 	}
+
+	@Override
+	public String toString() {
+		return "Carte [valeur=" + valeur + ", couleur=" + couleur
+				+ ", estVisible=" + estVisible + "]";
+	}
+	
 }
