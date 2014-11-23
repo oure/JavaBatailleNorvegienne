@@ -14,7 +14,7 @@ public class PartieDeCartes {
 	/*
 	 * Mise en place de la liste des joueurs.
 	 */
-	private void MiseEnPlaceDeLaListeDesJoueurs() {
+	private void miseEnPlaceDeLaListeDesJoueurs() {
 		System.out.println("Mise en place de la liste des joueurs :");
 		Scanner reader = new Scanner(System.in);
 		System.out.println("Saisissez le nombre de joueur :");
@@ -37,7 +37,7 @@ public class PartieDeCartes {
 	/*
 	 * Creation d'un ou plusieurs jeu de carte en fonction du nombre de joueur.
 	 */
-	private void MiseEnPlaceDesJeuxdeCartes() {
+	private void miseEnPlaceDesJeuxdeCartes() {
 		System.out.println("llJoueur.size()" + llJoueur.size());
 		if (llJoueur.size() <= 5 && llJoueur.size() > 1) {
 			setJeuDeCartes.add(new JeuDeCartes());
@@ -59,12 +59,12 @@ public class PartieDeCartes {
 	}
 
 	private void demarrer() {
-		MiseEnPlaceDeLaListeDesJoueurs();
-		MiseEnPlaceDesJeuxdeCartes();
-		Distribuer();
+		miseEnPlaceDeLaListeDesJoueurs();
+		miseEnPlaceDesJeuxdeCartes();
+		distribuer();
 	}
 
-	private void Distribuer() {
+	private void distribuer() {
 		for (Iterator<Joueur> it = llJoueur.iterator(); it.hasNext();) {
 			Joueur joueur = (Joueur) it.next();
 			if (joueur instanceof Distributeur) {

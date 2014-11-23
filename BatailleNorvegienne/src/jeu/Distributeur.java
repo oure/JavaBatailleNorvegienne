@@ -20,13 +20,13 @@ public class Distributeur extends JoueurIA {
 			l.addAll((LinkedList<Carte>) jdc.getLs());
 		}
 		Pioche pioche = new Pioche();
-		distribuer_cartes_main(l, lj);
-		distribuer_cartes_visibles(l, lj);
-		distribuer_cartes_cachees(l, lj);
+		distribuerCartesEnmMain(l, lj);
+		distribuerCartesVisibles(l, lj);
+		distribuerCartesCachees(l, lj);
 		return pioche;
 	}
 
-	public void distribuer_cartes_visibles(LinkedList<Carte> l,
+	public void distribuerCartesVisibles(LinkedList<Carte> l,
 			LinkedList<Joueur> lj) {
 		for (int i = 1; i <= 3; i++) {
 			for (Iterator<Joueur> it = lj.iterator(); it.hasNext();) {
@@ -39,7 +39,7 @@ public class Distributeur extends JoueurIA {
 	/**
 	 * @return
 	 */
-	public void distribuer_cartes_cachees(LinkedList<Carte> l,
+	public void distribuerCartesCachees(LinkedList<Carte> l,
 			LinkedList<Joueur> lj) {
 		for (int i = 1; i <= 3; i++) {
 			for (Iterator<Joueur> it = lj.iterator(); it.hasNext();) {
@@ -52,7 +52,7 @@ public class Distributeur extends JoueurIA {
 	/**
 	 * @return
 	 */
-	public void distribuer_cartes_main(LinkedList<Carte> l,
+	public void distribuerCartesEnmMain(LinkedList<Carte> l,
 			LinkedList<Joueur> lj) {
 		for (int i = 1; i <= 3; i++) {
 			for (Iterator<Joueur> it = lj.iterator(); it.hasNext();) {
