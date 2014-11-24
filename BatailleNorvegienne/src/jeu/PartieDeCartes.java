@@ -11,11 +11,13 @@ public class PartieDeCartes {
 	private Table tas = new Table();
 	private LinkedList<Joueur> llJoueur = new LinkedList<Joueur>();
 
+	
 	/*
 	 * Mise en place de la liste des joueurs.
 	 */
+	
 	private void miseEnPlaceDeLaListeDesJoueurs() {
-		System.out.println("Mise en place de la liste des joueurs :");
+		System.out.println("Mise en place de la liste des joueurs :  bonjour");
 		Scanner reader = new Scanner(System.in);
 		System.out.println("Saisissez le nombre de joueur :");
 		int nbJoueur = reader.nextInt();
