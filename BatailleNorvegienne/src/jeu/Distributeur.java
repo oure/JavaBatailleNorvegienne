@@ -6,6 +6,8 @@ import java.util.LinkedList;
 
 public class Distributeur extends JoueurIA {
 
+	private LinkedList<Carte> ListeDeCarte = new LinkedList<Carte>();
+
 	public Distributeur(String nom, int degreeStrat) {
 		super(nom, degreeStrat);
 		// TODO Auto-generated constructor stub
@@ -13,25 +15,37 @@ public class Distributeur extends JoueurIA {
 
 	public Pioche distribuer(HashSet<JeuDeCartes> setJeuDeCartes,
 			LinkedList<Joueur> lj) {
-		LinkedList<Carte> l = new LinkedList<Carte>();
 		for (Iterator<JeuDeCartes> iterator = setJeuDeCartes.iterator(); iterator
 				.hasNext();) {
 			JeuDeCartes jdc = (JeuDeCartes) iterator.next();
-			l.addAll((LinkedList<Carte>) jdc.getLs());
+			ListeDeCarte.addAll((LinkedList<Carte>) jdc.getLs());
+		}
+		for (Iterator<Carte> it = ListeDeCarte.iterator(); it.hasNext();) {
+			Carte carte = (Carte) it.next();
+			System.out.print(carte.getValeur() + "-");
+
 		}
 		Pioche pioche = new Pioche();
-		distribuerCartesEnmMain(l, lj);
-		distribuerCartesVisibles(l, lj);
-		distribuerCartesCachees(l, lj);
+		distribuerCartesEnmMain(lj);
+		distribuerCartesVisibles(lj);
+		distribuerCartesCachees(lj);
+		pioche.setLkc(ListeDeCarte);
 		return pioche;
 	}
 
-	public void distribuerCartesVisibles(LinkedList<Carte> l,
-			LinkedList<Joueur> lj) {
+	public LinkedList<Carte> getL() {
+		return ListeDeCarte;
+	}
+
+	public void setL(LinkedList<Carte> l) {
+		this.ListeDeCarte = l;
+	}
+
+	public void distribuerCartesVisibles(LinkedList<Joueur> lj) {
 		for (int i = 1; i <= 3; i++) {
 			for (Iterator<Joueur> it = lj.iterator(); it.hasNext();) {
 				Joueur joueur = (Joueur) it.next();
-				joueur.ajouterCartefacsVisible((l.pop()));
+				joueur.ajouterCartefacsVisible((ListeDeCarte.pop()));
 			}
 		}
 	}
@@ -39,12 +53,11 @@ public class Distributeur extends JoueurIA {
 	/**
 	 * @return
 	 */
-	public void distribuerCartesCachees(LinkedList<Carte> l,
-			LinkedList<Joueur> lj) {
+	public void distribuerCartesCachees(LinkedList<Joueur> lj) {
 		for (int i = 1; i <= 3; i++) {
 			for (Iterator<Joueur> it = lj.iterator(); it.hasNext();) {
 				Joueur joueur = (Joueur) it.next();
-				joueur.ajouterCarteFaceCachee(l.pop());
+				joueur.ajouterCarteFaceCachee(ListeDeCarte.pop());
 			}
 		}
 	}
@@ -52,13 +65,12 @@ public class Distributeur extends JoueurIA {
 	/**
 	 * @return
 	 */
-	public void distribuerCartesEnmMain(LinkedList<Carte> l,
-			LinkedList<Joueur> lj) {
+	public void distribuerCartesEnmMain(LinkedList<Joueur> lj) {
 		for (int i = 1; i <= 3; i++) {
 			for (Iterator<Joueur> it = lj.iterator(); it.hasNext();) {
 				Joueur joueur = (Joueur) it.next();
-				joueur.ajouterCarteEnMain(l.pop());
+				joueur.ajouterCarteEnMain(ListeDeCarte.pop());
 			}
 		}
 	}
- }
+}

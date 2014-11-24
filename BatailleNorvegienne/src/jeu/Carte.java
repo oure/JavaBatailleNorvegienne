@@ -41,8 +41,7 @@ public class Carte {
 
 	@Override
 	public String toString() {
-		return "Carte [valeur=" + valeur + ", couleur=" + couleur
-				+ ", estVisible=" + estVisible + "]";
+		return "Carte [valeur=" + valeur + "]";
 	}
 	
 }

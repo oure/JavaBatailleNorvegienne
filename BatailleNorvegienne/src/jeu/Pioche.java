@@ -11,7 +11,14 @@ public class Pioche {
 	public Pioche(LinkedList<Carte> lcc) {
 		listeDeCarte = lcc;
 	}
-
+	public String toString(){
+		String s="";
+		for (Iterator iterator = listeDeCarte.iterator(); iterator.hasNext();) {
+			Carte carte = (Carte) iterator.next();
+			s+=" "+carte.getValeur();
+		}
+		return "Pioche "+s;
+	}
 	public LinkedList<Carte> getLkc() {
 		return listeDeCarte;
 	}

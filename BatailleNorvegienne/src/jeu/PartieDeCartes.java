@@ -45,6 +45,10 @@ public class PartieDeCartes {
 			setJeuDeCartes.add(new JeuDeCartes());
 			setJeuDeCartes.add(new JeuDeCartes());
 		}
+		else {
+			System.out.println("Veuillez renseigner le bon nombre d'utilisateur ! ");
+			System.exit(0);
+		}
 		System.out.println("jeu de carte non melanger");
 		for (Iterator<JeuDeCartes> it = setJeuDeCartes.iterator(); it.hasNext();) {
 			JeuDeCartes jdc = it.next();
@@ -75,8 +79,9 @@ public class PartieDeCartes {
 		}
 		for (Iterator iterator = llJoueur.iterator(); iterator.hasNext();) {
 			Joueur joueur = (Joueur) iterator.next();
-			joueur.toString();
+			System.out.println(joueur);
 		}
+		System.out.println(pioche);
 	}
 
 	public static void main(String[] args) {
