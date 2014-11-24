@@ -3,9 +3,18 @@ package jeu;
 import java.util.HashSet;
 
 public class CartesfacesVisibles {
-	HashSet<Carte> hs=new HashSet<Carte>();
+	private HashSet<Carte> hs=new HashSet<Carte>();
+	
 	public void addAll(HashSet<Carte> s) {
 		hs.addAll(s);
+	}
+
+	public HashSet<Carte> getHs() {
+		return hs;
+	}
+
+	public void setHs(HashSet<Carte> hs) {
+		this.hs = hs;
 	}
 
 	public void ajouterCarteMain(Carte car) {

@@ -12,6 +12,14 @@ public class CartesEnMain {
 	public void ajouterCarteMain(Carte car) {
 		cartemain.add(car);
 	}
+	
+	public HashSet<Carte> getCartemain() {
+		return cartemain;
+	}
+
+	public void setCartemain(HashSet<Carte> cartemain) {
+		this.cartemain = cartemain;
+	}
 
 	@Override
 	public String toString() {
