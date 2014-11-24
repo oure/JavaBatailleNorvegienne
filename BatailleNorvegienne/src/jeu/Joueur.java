@@ -11,7 +11,9 @@ public class Joueur {
 	public void ajouterCarteEnMain(Carte c) {
 		cartesEnMain.ajouterCarteMain(c);
 	}
-
+	public boolean avoirAucuneCarte(){
+		return (getCarteFacesCachees().isEmpty() && getCartefaceVisibles().isEmpty() && getCartesEnMain().isEmpty());
+	}
 	public void ajouterCartefacsVisible(Carte c){
 		cartefaceVisibles.ajouterCarteMain(c);
 	}
@@ -24,8 +26,28 @@ public class Joueur {
 		this.cartefaceVisibles = cfv;
 	}
 
-	public CartesFacesCachees getCfc() {
+	public CartesEnMain getCartesEnMain() {
+		return cartesEnMain;
+	}
+
+	public void setCartesEnMain(CartesEnMain cartesEnMain) {
+		this.cartesEnMain = cartesEnMain;
+	}
+
+	public CartesfacesVisibles getCartefaceVisibles() {
+		return cartefaceVisibles;
+	}
+
+	public void setCartefaceVisibles(CartesfacesVisibles cartefaceVisibles) {
+		this.cartefaceVisibles = cartefaceVisibles;
+	}
+
+	public CartesFacesCachees getCarteFacesCachees() {
 		return carteFacesCachees;
+	}
+
+	public void setCarteFacesCachees(CartesFacesCachees carteFacesCachees) {
+		this.carteFacesCachees = carteFacesCachees;
 	}
 
 	public void setCfc(CartesFacesCachees cfc) {

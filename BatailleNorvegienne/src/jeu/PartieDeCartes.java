@@ -25,11 +25,11 @@ public class PartieDeCartes {
 			// reader.nextLine();
 			System.out.print("Please input a name: ");
 			name = reader.nextLine();
-			if (i!=2)
+			if (i != 2)
 				llJoueur.add(new Joueur(name));
 			else
-			llJoueur.add(new Distributeur(name, 1));
-		
+				llJoueur.add(new Distributeur(name, 1));
+
 		}
 		reader.close();
 	}
@@ -44,9 +44,9 @@ public class PartieDeCartes {
 		} else if (llJoueur.size() > 5 && llJoueur.size() <= 11) {
 			setJeuDeCartes.add(new JeuDeCartes());
 			setJeuDeCartes.add(new JeuDeCartes());
-		}
-		else {
-			System.out.println("Veuillez renseigner le bon nombre d'utilisateur ! ");
+		} else {
+			System.out
+					.println("Veuillez renseigner le bon nombre d'utilisateur ! ");
 			System.exit(0);
 		}
 		System.out.println("jeu de carte non melanger");
@@ -66,14 +66,33 @@ public class PartieDeCartes {
 		miseEnPlaceDeLaListeDesJoueurs();
 		miseEnPlaceDesJeuxdeCartes();
 		distribuer();
+		deroulementDujeu();
+	}
+
+	private void deroulementDujeu() {
+		boolean cond=true;
+		while (cond) {
+			for (Iterator<Joueur> iterator = llJoueur.iterator(); iterator.hasNext();) {
+				Joueur joueur = (Joueur) iterator.next();
+				if (joueur.avoirAucuneCarte()) {
+					cond = false;
+					break;
+				}
+
+			}
+
+		}
+
 	}
 
 	private void distribuer() {
 		for (Iterator<Joueur> it = llJoueur.iterator(); it.hasNext();) {
 			Joueur joueur = (Joueur) it.next();
 			if (joueur instanceof Distributeur) {
-				pioche=((Distributeur) joueur).distribuer(setJeuDeCartes, llJoueur);
-				System.out.println("je suis le joueur n°"+joueur.getNom()+" et je vais distribuer ! ");
+				pioche = ((Distributeur) joueur).distribuer(setJeuDeCartes,
+						llJoueur);
+				System.out.println("je suis le joueur n°" + joueur.getNom()
+						+ " et je vais distribuer ! ");
 				break;
 			}
 		}
@@ -87,18 +106,5 @@ public class PartieDeCartes {
 	public static void main(String[] args) {
 		PartieDeCartes pdc = new PartieDeCartes();
 		pdc.demarrer();
-		// while (cond){
-		// for (Iterator<Joueur> iterator = lj.iterator(); iterator.hasNext();)
-		// {
-		// Joueur joueur = (Joueur) iterator.next();
-		// if (joueur.getSet().isEmpty()){
-		// cond=false;
-		// break;
-		// }
-		//
-		//
-		// }
-		//
-		// }
 	}
 }
