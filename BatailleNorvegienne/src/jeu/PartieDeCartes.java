@@ -70,19 +70,20 @@ public class PartieDeCartes {
 	}
 
 	private void deroulementDujeu() {
+		Joueur gagnant = null;
 		boolean cond=true;
 		while (cond) {
 			for (Iterator<Joueur> iterator = llJoueur.iterator(); iterator.hasNext();) {
 				Joueur joueur = (Joueur) iterator.next();
 				if (joueur.avoirAucuneCarte()) {
+					gagnant=joueur;
 					cond = false;
 					break;
 				}
-
 			}
 
 		}
-
+		System.out.println("Felicitation "+gagnant.getNom()+" vous avez vaincu !");
 	}
 
 	private void distribuer() {

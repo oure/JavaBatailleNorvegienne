@@ -115,7 +115,8 @@ public class Joueur {
 				+ ", carteFacesCachees=" + carteFacesCachees + "]";
 	}
 
-	public void echangerCarte(Carte c1, Carte c2) {
-		// TODO implement here
+	public void echangerCarte(Carte carteDeLaMain, Carte carteVisible) {
+		
+		getCartesEnMain();
 	}
 }

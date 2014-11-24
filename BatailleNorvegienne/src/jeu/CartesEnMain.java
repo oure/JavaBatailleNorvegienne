@@ -8,7 +8,9 @@ public class CartesEnMain {
 	public void addAll(HashSet<Carte> s) {
 		cartemain.addAll(s);
 	}
-
+	public void remplacer(Carte c){
+		
+	}
 	public void ajouterCarteMain(Carte car) {
 		cartemain.add(car);
 	}
