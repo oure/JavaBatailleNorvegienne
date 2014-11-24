@@ -16,5 +16,7 @@ public class CartesfacesVisibles {
 	public String toString() {
 		return "CartesfacesVisibles [hs=" + hs + "]";
 	}
-	
+	public boolean isEmpty(){
+		return hs.isEmpty();
+	}
 }

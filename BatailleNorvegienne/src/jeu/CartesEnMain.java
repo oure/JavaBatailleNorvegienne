@@ -17,5 +17,8 @@ public class CartesEnMain {
 	public String toString() {
 		return "CartesEnMain [cartemain=" + cartemain + "]";
 	}
+	public boolean isEmpty(){
+		return cartemain.isEmpty();
+	}
 	
 }
