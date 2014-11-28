@@ -13,7 +13,7 @@ public class Pioche {
 	}
 	public String toString(){
 		String s="";
-		for (Iterator iterator = listeDeCarte.iterator(); iterator.hasNext();) {
+		for (Iterator<Carte> iterator = listeDeCarte.iterator(); iterator.hasNext();) {
 			Carte carte = (Carte) iterator.next();
 			s+=" "+carte.getValeur();
 		}
