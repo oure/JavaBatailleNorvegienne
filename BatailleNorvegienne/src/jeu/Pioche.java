@@ -27,23 +27,23 @@ public class Pioche {
 		this.listeDeCarte = lkc;
 	}
 
-	public void vider_pioche() {
-		// TODO implement here
+	public void vider_pioche() {  //Cette méthode supprime tous les éléments de cette liste .
+	      listeDeCarte.clear();
+
 	}
 
-	public Carte prendre_carte() {
-		// TODO implement here
-		return null;
+	public Carte prendre_carte() { //récupérer et supprimer le dernier élément de la liste
+		return listeDeCarte.pollLast();
 	}
 
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+    return listeDeCarte.isEmpty();
+		  
 	}
 
-	public Object remove(int j) {
-		// TODO Auto-generated method stub
+	public Carte remove(int j) { //Cette méthode supprime et retourne le dernier élément de cette liste 
+	      listeDeCarte.removeLast();
 		return null;
 	}
-
+	  
 }
