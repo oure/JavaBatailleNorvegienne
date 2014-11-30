@@ -1,6 +1,9 @@
 package jeu;
 
-import java.util.Set;
+import java.util.*;
+
+import jeu.Carte.Couleur;
+
 
 public class Joueur {
 	private String nom;
@@ -15,7 +18,7 @@ public class Joueur {
 		return (getCarteFacesCachees().isEmpty() && getCartefaceVisibles().isEmpty() && getCartesEnMain().isEmpty());
 	}
 	public void ajouterCartefacsVisible(Carte c){
-		cartefaceVisibles.ajouterCarteMain(c);
+		cartefaceVisibles.ajouterCarteVisible(c);
 	}
 
 	public void ajouterCarteFaceCachee(Carte c){
@@ -28,8 +31,22 @@ public class Joueur {
 
 	public CartesEnMain getCartesEnMain() {
 		return cartesEnMain;
+		
 	}
-
+	public void afficheMain() {
+		cartesEnMain.afficherCarteMain();
+		
+	}
+	public void afficheCarteRetournees() {
+		carteFacesCachees.afficherCarteRetournees();
+		
+	}
+	public void afficheVisibles() {
+		cartefaceVisibles.afficherCarteVisibles();
+		
+	}
+ 
+	
 	public void setCartesEnMain(CartesEnMain cartesEnMain) {
 		this.cartesEnMain = cartesEnMain;
 	}
@@ -71,9 +88,12 @@ public class Joueur {
 
 	}
 
-	public Boolean envoyerTasSurJoueur(Joueur j, Table tas) {
-		// TODO implement here
-		return null;
+	public void envoyerTasSurJoueur(Joueur j, Table table) {
+		for (Iterator<Carte> iterator = table.getListe().iterator(); iterator.hasNext();) {
+			Carte carte =  iterator.next();
+			
+		}
+		table.viderTable();
 	}
 
 	// public String toString() {
@@ -102,7 +122,7 @@ public class Joueur {
 	public void piocher(int i, Pioche pioche) {
 		while (pioche.isEmpty() == false) {
 			for (int j = 0; j < i; j++) {
-				// cartesEnMain.addAll(pioche.remove(j));
+				cartesEnMain.add(pioche.pop());
 			}
 		}
 
@@ -115,8 +135,15 @@ public class Joueur {
 				+ ", carteFacesCachees=" + carteFacesCachees + "]";
 	}
 
-	public void echangerCarte(Carte carteDeLaMain, Carte carteVisible) {
-		
-		getCartesEnMain();
+	public void echangerCarte() {
+		Scanner reader = new Scanner(System.in);
+		System.out.print("Saisissez le numero  de la carte main a changer avec les cartes visibles:");
+		int n = reader.nextInt();
+		cartefaceVisibles.ajouterCarteVisible(Carte(n,Couleur c));
+		cartesEnMain.supCarteMain(m);	
+	    cartesEnMain.ajouterCarteMain(v);
+	    cartefaceVisibles.supCarteVisible(v);
 	}
+
+	
 }

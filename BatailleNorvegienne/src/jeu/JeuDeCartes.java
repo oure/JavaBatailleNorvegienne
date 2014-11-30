@@ -1,6 +1,5 @@
 package jeu;
-	
-import java.util.ArrayList;
+			
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -10,6 +9,7 @@ import jeu.Carte.Couleur;
 public class JeuDeCartes {
 
 	LinkedList<Carte> ls = new LinkedList<Carte>();
+
 	public List<Carte> getLs() {
 		return ls;
 	}
@@ -17,7 +17,6 @@ public class JeuDeCartes {
 	public void setLs(LinkedList<Carte> ls) {
 		this.ls = ls;
 	}
-
 
 	public JeuDeCartes() {
 		for (int i = 1; i <= 13; i++) {

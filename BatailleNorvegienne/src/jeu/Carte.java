@@ -22,11 +22,20 @@ public class Carte {
 			System.exit(0);
 		}
 	}
+	
+	public Carte(int v) {
+	
+		valeur = v; 
+		} 
 
 	public int getValeur() {
 		return valeur;
 	}
-
+	
+	public Couleur getCouleur() {
+		return couleur;
+	}
+	
 	public boolean isEstVisible() {
 		return estVisible;
 	}
@@ -41,7 +50,7 @@ public class Carte {
 
 	@Override
 	public String toString() {
-		return "Carte [valeur=" + valeur + "]";
+		return  valeur + " " + couleur;
 	}
 	
 }

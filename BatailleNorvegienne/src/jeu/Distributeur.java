@@ -29,7 +29,7 @@ public class Distributeur extends JoueurIA {
 		distribuerCartesEnmMain(lj);
 		distribuerCartesVisibles(lj);
 		distribuerCartesCachees(lj);
-		pioche.setLkc(ListeDeCarte);
+		pioche.setListeDeCarte(ListeDeCarte);
 		return pioche;
 	}
 

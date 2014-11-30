@@ -6,40 +6,39 @@ import java.util.*;
  * 
  */
 public class Table {
-
-    /**
-     * 
-     */
-    public Table() {
-    }
-
-    /**
-     * 
-     */
-    private Set<Carte> listeCartes;
-
+private	LinkedList<Carte> liste = new LinkedList<Carte>();
 
     /**
      * @return
      */
-    public void viderTas() {
-        
+    public void viderTable() {
+    	  liste.clear();  
     }
 
     /**
      * @return
      */
     public Carte afficherDerniereCarteDuTas() {
-        return null;
+        return liste.getLast();
     }
 
     /**
      * @param Carte 
-     * @return
      */
-    public Boolean ajouterCarteAuTas(Carte carte) {
-        // TODO implement here
-        return null;
+    public void ajouterCarteTable(HashSet<Carte> ca) {
+    for (Iterator<Carte> iterator = ca.iterator(); iterator.hasNext();) {
+	Carte carte = (Carte) iterator.next();
+		liste.add(carte);
+		ca.remove(carte);
     }
+    }
+
+	public LinkedList<Carte> getListe() {
+		return liste;
+	}
+
+	public void setListe(LinkedList<Carte> liste) {
+		this.liste = liste;
+	}
 
 }

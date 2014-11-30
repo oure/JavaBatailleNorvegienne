@@ -3,13 +3,28 @@ package jeu;
 import java.util.*;
 
 public class Pioche {
-	LinkedList<Carte> listeDeCarte = new LinkedList<Carte>();
 
-	public Pioche() {
+	/** Instance unique non preinitialisee */
+
+	private static  LinkedList<Carte> listeDeCarte = null;
+	
+	/** Constructeur prive */
+	public Pioche()
+	{}
+	
+	public static LinkedList<Carte> getListeDeCarte() {
+		return listeDeCarte;
 	}
 
-	public Pioche(LinkedList<Carte> lcc) {
-		listeDeCarte = lcc;
+	public void setListeDeCarte(LinkedList<Carte> listeDeCarte) {
+		Pioche.listeDeCarte = listeDeCarte;
+	}
+
+	/** Point d'acc�s pour l'instance unique du singleton */
+
+	private  LinkedList<Carte> getPioche() {
+			return  listeDeCarte;
+		
 	}
 
 	public String toString() {
@@ -20,14 +35,6 @@ public class Pioche {
 			s += " " + carte.getValeur();
 		}
 		return "Pioche " + s;
-	}
-
-	public LinkedList<Carte> getLkc() {
-		return listeDeCarte;
-	}
-
-	public void setLkc(LinkedList<Carte> lkc) {
-		this.listeDeCarte = lkc;
 	}
 
 	/*
