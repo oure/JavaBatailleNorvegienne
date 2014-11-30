@@ -14,14 +14,7 @@ public class PartieDeCartes {
 	/*
 	 * Mise en place de la liste des joueurs.
 	 */
-	public void afficherLaListeDesJoueurs() {
-		int i = 1;
-		for (Iterator iterator = llJoueur.iterator(); iterator.hasNext();) {
-			Joueur joueur = (Joueur) iterator.next();
-			System.out.println("Joueur numero "+i+" : " + joueur.getNom());
-			i++;
-		}
-	}
+
 
 	private void miseEnPlaceDeLaListeDesJoueurs() {
 		System.out.println("Mise en place de la liste des joueurs :");
@@ -76,10 +69,12 @@ public class PartieDeCartes {
 	private void deroulementDujeu() {
 		Joueur gagnant = null;
 		boolean cond = true;
+		/*
 		while (cond) {
 			for (Iterator<Joueur> iterator = llJoueur.iterator(); iterator
 					.hasNext();) {
 				Joueur joueur = (Joueur) iterator.next();
+				joueur.envoyerTasSurJoueur(llJoueur,tas);
 				if (joueur.avoirAucuneCarte()) {
 					gagnant = joueur;
 					cond = false;
@@ -88,8 +83,11 @@ public class PartieDeCartes {
 			}
 
 		}
-		System.out.println("Felicitation " + gagnant.getNom()
+				System.out.println("Felicitation " + gagnant.getNom()
 				+ " vous avez vaincu !");
+		*/
+		new Joueur("bhsribgi").envoyerTasSurJoueur(llJoueur,tas);
+
 	}
 
 	private void distribuer() {
@@ -117,6 +115,7 @@ public class PartieDeCartes {
 		miseEnPlaceDesJeuxdeCartes();
 		distribuer();
 		deroulementDujeu();
+		
 	}
 
 	public static void main(String[] args) {
