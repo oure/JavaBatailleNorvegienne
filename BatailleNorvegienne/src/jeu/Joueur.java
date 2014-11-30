@@ -88,10 +88,15 @@ public class Joueur {
 
 	}
 
-	public void envoyerTasSurJoueur(Joueur j, Table table) {
+	public void envoyerTasSurJoueur(LinkedList<Joueur> lj,Table table) {
+
+		Scanner reader = new Scanner(System.in);
+		System.out.print("Saisissez le nombre de joueur :");
+		int nbJoueur = reader.nextInt();
+		Joueur j=lj.get(index)
 		for (Iterator<Carte> iterator = table.getListe().iterator(); iterator.hasNext();) {
 			Carte carte =  iterator.next();
-			
+			j.ajouterCarteEnMain(carte);			
 		}
 		table.viderTable();
 	}
