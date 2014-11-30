@@ -34,7 +34,7 @@ public class Pioche {
 			Carte carte = (Carte) iterator.next();
 			s += " " + carte.getValeur();
 		}
-		return "Pioche " + s;
+		return "Pioche : " + s;
 	}
 
 	/*

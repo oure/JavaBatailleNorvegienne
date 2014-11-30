@@ -11,6 +11,9 @@ public class CartesEnMain {
 	public void addAll(HashSet<Carte> s) {
 		cartemain.addAll(s);
 	}
+	public void add(Carte c){
+		cartemain.add(c);
+	}
 	public void remplacer(Carte c){
 		
 	}
@@ -37,8 +40,7 @@ public class CartesEnMain {
 }
 	@Override
 	public String toString() {
-		
-		return "CartesEnMain [cartemain=" + cartemain + "]";
+		return cartemain.toString() ;
 	}
 	public boolean isEmpty(){
 		return cartemain.isEmpty();

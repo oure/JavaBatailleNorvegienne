@@ -8,7 +8,7 @@ public class CartesFacesCachees {
 
 	@Override
 	public String toString() {
-		return "CartesFacesCachees [hs=" + hs + "]";
+		return hs.toString();
 	}
 
 	public void addAll(HashSet<Carte> s) {

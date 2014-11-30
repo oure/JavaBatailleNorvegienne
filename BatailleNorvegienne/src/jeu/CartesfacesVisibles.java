@@ -32,7 +32,7 @@ public void afficherCarteVisibles(){
 }
 	@Override
 	public String toString() {
-		return "CartesfacesVisibles [hs=" + hs + "]";
+		return hs.toString();
 	}
 	public boolean isEmpty(){
 		return hs.isEmpty();

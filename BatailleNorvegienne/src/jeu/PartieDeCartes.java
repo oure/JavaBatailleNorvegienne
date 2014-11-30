@@ -93,20 +93,8 @@ public class PartieDeCartes {
 		} 
 		for (Iterator<Joueur> iterator = llJoueur.iterator(); iterator.hasNext();) {
 			Joueur joueur = (Joueur) iterator.next();
-			System.out.println();
-			System.out.print(joueur.getNom()+"  cartesMain :");
-            System.out.print("(");
-			joueur.afficheMain();
-            System.out.print(") ");
-			System.out.print("cartesVisible :");
-            System.out.print("(");
-			joueur.afficheVisibles();
-            System.out.print(") ");
-			System.out.print("cartesRetournees :");
-            System.out.print("(");
-			joueur.afficheCarteRetournees();
-            System.out.print(") ");
-            System.out.println();
+			System.out.println(joueur);
+           
 		}
 		System.out.println(pioche);
 	}

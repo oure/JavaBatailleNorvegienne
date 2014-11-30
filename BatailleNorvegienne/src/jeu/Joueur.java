@@ -122,7 +122,7 @@ public class Joueur {
 	public void piocher(int i, Pioche pioche) {
 		while (pioche.isEmpty() == false) {
 			for (int j = 0; j < i; j++) {
-				cartesEnMain.add(pioche.pop());
+				cartesEnMain.add(pioche.prendreCarte());
 			}
 		}
 
@@ -139,10 +139,8 @@ public class Joueur {
 		Scanner reader = new Scanner(System.in);
 		System.out.print("Saisissez le numero  de la carte main a changer avec les cartes visibles:");
 		int n = reader.nextInt();
-		cartefaceVisibles.ajouterCarteVisible(Carte(n,Couleur c));
-		cartesEnMain.supCarteMain(m);	
-	    cartesEnMain.ajouterCarteMain(v);
-	    cartefaceVisibles.supCarteVisible(v);
+		cartesEnMain.toString();
+		cartefaceVisibles.toString();
 	}
 
 	
