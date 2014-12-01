@@ -83,14 +83,22 @@ public class Joueur {
 		this.nom = nom;
 	}
 
+	public void jouerLibrement(int k, Couleur c, int i) {
+    for (int j = 0; j <i; j++) { 
+    	Carte ca=new Carte(k,c);
+    	cartesEnMain.supCarteMain(ca);
+    	}
+	}
+	
 	public void jouer(Carte c, int i) {
 		// TODO Auto-generated method stub
 
 	}
 
 	public Boolean envoyerTasSurJoueur(Joueur j, Table tas) {
-		j.cartesEnMain.add 
-		return null;
+	 j.cartesEnMain.addAll(tas);
+	 tas.viderTas();
+	 
 	}
 
 	// public String toString() {
@@ -119,7 +127,7 @@ public class Joueur {
 	public void piocher(int i, Pioche pioche) {
 		while (pioche.isEmpty() == false) {
 			for (int j = 0; j < i; j++) {
-				cartesEnMain.add(pioche.pop());
+				cartesEnMain.add(pioche.prendreCarte());
 			}
 		}
 
@@ -132,7 +140,7 @@ public class Joueur {
 				+ ", carteFacesCachees=" + carteFacesCachees + "]";
 	}
 
-	public void echangerCarte() {
+	/*public void echangerCarte() {
 		Scanner reader = new Scanner(System.in);
 		System.out.print("Saisissez le numero  de la carte main à changer:");
 		int n = reader.nextInt();
@@ -140,7 +148,7 @@ public class Joueur {
 		cartesEnMain.supCarteMain(m);	
 	    cartesEnMain.ajouterCarteMain(v);
 	    cartefaceVisibles.supCarteVisible(v);
-	}
+	}*/
 
 	
 }

@@ -8,16 +8,18 @@ public class Pioche {
 
 	private static  LinkedList<Carte> listeDeCarte = null;
 	
-	/** Constructeur privé */
-	private Pioche()
+	/** Constructeur prive */
+	public Pioche()
 	{}
 	
 	/** Point d'accès pour l'instance unique du singleton */
 
-	private static  LinkedList<Carte> getPioche() {
+	public static  LinkedList<Carte> getPioche() {
 				
 			if (listeDeCarte == null)
 			{ 	listeDeCarte = new LinkedList<Carte>();
+			}
+			else{System.out.println("la pioche est déja creer");
 			}
 			return  listeDeCarte;
 		
@@ -48,7 +50,7 @@ public class Pioche {
 
 	}
 
-	public Carte prendre_carte() { //récupérer et supprimer le dernier élément de la liste
+	public Carte prendreCarte() { //récupérer et supprimer le dernier élément de la liste
 		return listeDeCarte.pollLast();
 	}
 
@@ -57,9 +59,19 @@ public class Pioche {
 		  
 	}
 
-	public Carte remove(int j) { //Cette méthode supprime et retourne le dernier élément de cette liste 
+	public Carte remove(int j) { //Cette methode supprime et retourne le dernier élément de cette liste 
 	      listeDeCarte.removeLast();
 		return null;
+	}
+	public static void main(String[] args) {
+		
+		Pioche  pio = new Pioche();
+		Pioche che =new Pioche();
+		System.out.println(pio);
+		System.out.println(che);
+
+		
+		
 	}
 	  
 }

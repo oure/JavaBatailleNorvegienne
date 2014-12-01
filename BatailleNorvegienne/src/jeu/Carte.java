@@ -7,27 +7,23 @@ public class Carte {
 	Couleur  couleur;
 	private boolean estVisible;
 
-	public Carte(int v, Couleur c) {
+	public Carte(int v, String c) {
 		if (v >= 1 && v <= 13) {
 			valeur = v; 
 		} else {
-			System.out.println("Erreur: problème de valeurs !");
-			System.exit(0);
-		}
-		if (c==Couleur.Pique ||c==Couleur.Coeur||c==Couleur.Carreau||c==Couleur.Trefle) {
-			couleur = c;
-		}
-		 else {
 			System.out.println("Erreur: probleme de valeurs !");
 			System.exit(0);
 		}
+		if (c== Couleur.Pique ||c==Couleur.Coeur||c==Couleur.Carreau||c==Couleur.Trefle) {
+			couleur = c;
+		}
+		 else {
+			System.out.println("Erreur: probleme de couleurs !");
+			System.exit(0);
+		}
 	}
-	
-	public Carte(int v) {
-	
-		valeur = v; 
-		} 
-
+	   
+	 
 	public int getValeur() {
 		return valeur;
 	}
@@ -46,6 +42,9 @@ public class Carte {
 
 	public void setValeur(int valeur) {
 		this.valeur = valeur;
+	}
+	public void setCouleur(Couleur couleur) {
+		this.couleur = couleur;
 	}
 
 	@Override

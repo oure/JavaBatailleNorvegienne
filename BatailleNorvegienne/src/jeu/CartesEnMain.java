@@ -8,8 +8,12 @@ import java.util.Iterator;
 public class CartesEnMain {
 	private HashSet<Carte> cartemain = new HashSet<Carte>();
 
-	public void addAll(HashSet<Carte> s) {
-		cartemain.addAll(s);
+	public void addAll(Table tas) {
+		for (Iterator it = tas.get.iterator(); it.hasNext();) {
+			Carte carte = (Carte) it.next();
+			
+		}
+		cartemain.addAll(tas);
 	}
 	public void remplacer(Carte c){
 		

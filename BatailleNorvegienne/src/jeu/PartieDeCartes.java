@@ -5,11 +5,15 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+import jeu.Carte.Couleur;
+
 public class PartieDeCartes {
 	private Pioche pioche = new Pioche(); 
 	private HashSet<JeuDeCartes> setJeuDeCartes = new HashSet<JeuDeCartes>();
 	private Table tas = new Table();
 	private LinkedList<Joueur> llJoueur = new LinkedList<Joueur>();
+	int nbrCarte;
+	Carte carte;
 
 	/*
 	 * Mise en place de la liste des joueurs.
@@ -45,8 +49,7 @@ public class PartieDeCartes {
 			setJeuDeCartes.add(new JeuDeCartes());
 			setJeuDeCartes.add(new JeuDeCartes());
 		} else {
-			System.out
-					.println("Veuillez renseigner le bon nombre d'utilisateur ! ");
+			System.out.println("Veuillez renseigner le bon nombre d'utilisateur ! ");
 			System.exit(0);
 		}	System.out.println();
 		System.out.println("jeu de carte non melanger");
@@ -63,12 +66,33 @@ public class PartieDeCartes {
 		}
 	}		          
 	
+	@SuppressWarnings("resource")
 	private void deroulementDujeu() {
 		Joueur gagnant = null;
 		boolean cond=true;
 		while (cond) {
+	
 			for (Iterator<Joueur> iterator = llJoueur.iterator(); iterator.hasNext();) {
 				Joueur joueur = (Joueur) iterator.next();
+				Scanner ka = new Scanner(System.in);
+				Scanner c = new Scanner(System.in);
+				Scanner ri = new Scanner(System.in);		
+				System.out.print("valeur de la carte à jouer");
+				int k = ka.nextInt();
+				System.out.print("nbr de carte à jouer");
+				int i=ri.nextInt();
+				System.out.print("couleur de la carte à jouer");
+				String ca=c.nextLine();
+				Couleur co;
+				if(ca=="pique"||ca=="pique")
+					co=Couleur.Pique;
+				if(ca=="coeur"||ca=="Coeur")
+					co=Couleur.Coeur;
+				if(ca=="carreau"||ca=="Carreau")
+						co=Couleur.Carreau;
+				if(ca=="trefle"||ca=="Trefle")
+					co=Couleur.Trefle;
+				joueur.jouerLibrement(k,co, i);
 				if (joueur.avoirAucuneCarte()) {
 					gagnant=joueur;
 					cond = false;
