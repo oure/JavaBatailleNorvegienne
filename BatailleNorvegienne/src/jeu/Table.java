@@ -6,7 +6,7 @@ import java.util.*;
  * 
  */
 public class Table {
-private	HashSet<Carte> liste = new HashSet<Carte>();
+private	LinkedList<Carte> liste = new LinkedList<Carte>();
 
     /**
      * @return
@@ -21,13 +21,16 @@ private	HashSet<Carte> liste = new HashSet<Carte>();
     public Carte afficherDerniereCarteDuTas() {
         return liste.getLast();
     }
-    
+    public void ajouterCarteALaTable(Carte ca){
+    	liste.add(ca);
+    }
 
-    public HashSet<Carte> getListe() {
+  
+	public LinkedList<Carte> getListe() {
 		return liste;
 	}
 
-	public void setListe(HashSet<Carte> liste) {
+	public void setListe(LinkedList<Carte> liste) {
 		this.liste = liste;
 	}
 
