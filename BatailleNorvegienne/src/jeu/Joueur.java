@@ -97,6 +97,8 @@ public class Joueur {
 		}
 		System.out.print("Saisissez le nombre de joueur :");
 		Scanner reader = new Scanner(System.in);
+		if (string == "pic")
+			
 		int numeroDuJoueur  = reader.nextInt();
 //		reader.close();
 //		Joueur j=lj.get(numeroDuJoueur);
