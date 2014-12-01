@@ -95,7 +95,7 @@ public class Joueur {
 
 	}
 
-	public Boolean envoyerTasSurJoueur(Joueur j, Table tas) {
+	public void envoyerTasSurJoueur(Joueur j, Table tas) {
 	 j.cartesEnMain.addAll(tas);
 	 tas.viderTas();
 	 

@@ -9,11 +9,11 @@ public class CartesEnMain {
 	private HashSet<Carte> cartemain = new HashSet<Carte>();
 
 	public void addAll(Table tas) {
-		for (Iterator it = tas.get.iterator(); it.hasNext();) {
+		for (Iterator it = tas.getListe().iterator(); it.hasNext();) {
 			Carte carte = (Carte) it.next();
-			
+			ajouterCarteMain(carte);
+
 		}
-		cartemain.addAll(tas);
 	}
 	public void remplacer(Carte c){
 		

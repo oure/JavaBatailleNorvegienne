@@ -3,11 +3,11 @@ package jeu;
 public class Carte {
 	enum Couleur { Pique, Coeur, Carreau, Trefle };
 	
-	int valeur;
-	Couleur  couleur;
+	private int valeur;
+	private Couleur  couleur;
 	private boolean estVisible;
 
-	public Carte(int v, String c) {
+	public Carte(int v, Couleur c) {
 		if (v >= 1 && v <= 13) {
 			valeur = v; 
 		} else {

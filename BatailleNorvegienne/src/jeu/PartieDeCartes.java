@@ -66,7 +66,6 @@ public class PartieDeCartes {
 		}
 	}		          
 	
-	@SuppressWarnings("resource")
 	private void deroulementDujeu() {
 		Joueur gagnant = null;
 		boolean cond=true;
@@ -74,7 +73,7 @@ public class PartieDeCartes {
 	
 			for (Iterator<Joueur> iterator = llJoueur.iterator(); iterator.hasNext();) {
 				Joueur joueur = (Joueur) iterator.next();
-				Scanner ka = new Scanner(System.in);
+			/*	Scanner ka = new Scanner(System.in);
 				Scanner c = new Scanner(System.in);
 				Scanner ri = new Scanner(System.in);		
 				System.out.print("valeur de la carte à jouer");
@@ -92,7 +91,7 @@ public class PartieDeCartes {
 						co=Couleur.Carreau;
 				if(ca=="trefle"||ca=="Trefle")
 					co=Couleur.Trefle;
-				joueur.jouerLibrement(k,co, i);
+				joueur.jouerLibrement(k,co, i);*/
 				if (joueur.avoirAucuneCarte()) {
 					gagnant=joueur;
 					cond = false;
