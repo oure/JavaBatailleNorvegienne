@@ -5,11 +5,15 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+import jeu.Carte.Couleur;
+
 public class PartieDeCartes {
 	private Pioche pioche = new Pioche();
 	private HashSet<JeuDeCartes> setJeuDeCartes = new HashSet<JeuDeCartes>();
 	private Table tas = new Table();
 	private LinkedList<Joueur> llJoueur = new LinkedList<Joueur>();
+	int nbrCarte;
+	Carte carte;
 
 	/*
 	 * Mise en place de la liste des joueurs.
@@ -53,8 +57,7 @@ public class PartieDeCartes {
 			setJeuDeCartes.add(new JeuDeCartes());
 			setJeuDeCartes.add(new JeuDeCartes());
 		} else {
-			System.out
-					.println("Veuillez renseigner le bon nombre d'utilisateur ! ");
+			System.out.println("Veuillez renseigner le bon nombre d'utilisateur ! ");
 			System.exit(0);
 		}
 		System.out.println("jeu de carte non melanger");
@@ -77,25 +80,53 @@ public class PartieDeCartes {
 		boolean cond = true;
 		/*
 		while (cond) {
+<<<<<<< HEAD
 			for (Iterator<Joueur> iterator = llJoueur.iterator(); iterator
 					.hasNext();) {
+=======
+	
+			for (Iterator<Joueur> iterator = llJoueur.iterator(); iterator.hasNext();) {
+>>>>>>> refs/remotes/oure/master
 				Joueur joueur = (Joueur) iterator.next();
 				joueur.envoyerTasSurJoueur(llJoueur,tas);
 				if (joueur.avoirAucuneCarte()) {
 					gagnant = joueur;
 					cond = false;
 					break;
-				}
+				} 
 			}
 
 		}
-				System.out.println("Felicitation " + gagnant.getNom()
-				+ " vous avez vaincu !");
 		*/
-		new Joueur("bhsribgi").envoyerTasSurJoueur(llJoueur,tas);
+
+	
+		System.out.println("Felicitation "+gagnant.getNom()+" vous avez vaincu !");
+	
+	} 
+	
+	private void test()
+	{			System.out.println("tttt");
+
+		tas.ajouterCarteALaTable( new Carte(1, Couleur.Pique));
+     	tas.ajouterCarteALaTable(new Carte(8,  Couleur.Pique));
+	    tas.ajouterCarteALaTable(new Carte(10,  Couleur.Pique));
+	    tas.ajouterCarteALaTable(new Carte(10,  Couleur.Pique));
+	    tas.ajouterCarteALaTable(new Carte(10,  Couleur.Pique));
+	    tas.ajouterCarteALaTable(new Carte(10,  Couleur.Pique));
+	    tas.ajouterCarteALaTable(new Carte(10,  Couleur.Pique));
+	    tas.ajouterCarteALaTable(new Carte(10,  Couleur.Pique));
+	    tas.ajouterCarteALaTable(new Carte(10,  Couleur.Pique));
+	    tas.ajouterCarteALaTable(new Carte(10,  Couleur.Pique));
+
+		Joueur j1= new Joueur("ta");
+		j1.envoyerTasSurJoueur(llJoueur.get(1), tas);
+		System.out.println(llJoueur.get(1));
+		System.out.println(tas);
+		llJoueur.get(1).jouerLibrement(tas);
+
 
 	}
-
+	
 	private void distribuer() {
 		for (Iterator<Joueur> it = llJoueur.iterator(); it.hasNext();) {
 			Joueur joueur = (Joueur) it.next();
@@ -120,8 +151,8 @@ public class PartieDeCartes {
 		miseEnPlaceDeLaListeDesJoueurs();
 		miseEnPlaceDesJeuxdeCartes();
 		distribuer();
-		deroulementDujeu();
-		
+	//	deroulementDujeu();
+		test();
 	}
 
 	public static void main(String[] args) {

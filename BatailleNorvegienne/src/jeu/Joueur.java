@@ -4,7 +4,6 @@ import java.util.*;
 
 import jeu.Carte.Couleur;
 
-
 public class Joueur {
 	private String nom;
 	private CartesEnMain cartesEnMain = new CartesEnMain();
@@ -14,14 +13,18 @@ public class Joueur {
 	public void ajouterCarteEnMain(Carte c) {
 		cartesEnMain.ajouterCarteMain(c);
 	}
-	public boolean avoirAucuneCarte(){
-		return (getCarteFacesCachees().isEmpty() && getCartefaceVisibles().isEmpty() && getCartesEnMain().isEmpty());
+
+	public boolean avoirAucuneCarte() {
+		return (getCarteFacesCachees().isEmpty()
+				&& getCartefaceVisibles().isEmpty() && getCartesEnMain()
+				.isEmpty());
 	}
-	public void ajouterCartefacsVisible(Carte c){
+
+	public void ajouterCartefacsVisible(Carte c) {
 		cartefaceVisibles.ajouterCarteVisible(c);
 	}
 
-	public void ajouterCarteFaceCachee(Carte c){
+	public void ajouterCarteFaceCachee(Carte c) {
 		carteFacesCachees.ajouterUnecarteFaceCachee(c);
 	}
 
@@ -31,22 +34,24 @@ public class Joueur {
 
 	public CartesEnMain getCartesEnMain() {
 		return cartesEnMain;
-		
+
 	}
+
 	public void afficheMain() {
 		cartesEnMain.afficherCarteMain();
-		
+
 	}
+
 	public void afficheCarteRetournees() {
 		carteFacesCachees.afficherCarteRetournees();
-		
+
 	}
+
 	public void afficheVisibles() {
 		cartefaceVisibles.afficherCarteVisibles();
-		
+
 	}
- 
-	
+
 	public void setCartesEnMain(CartesEnMain cartesEnMain) {
 		this.cartesEnMain = cartesEnMain;
 	}
@@ -83,30 +88,57 @@ public class Joueur {
 		this.nom = nom;
 	}
 
+	public boolean jouerLibrement(Table tas) {
+			Scanner c = new Scanner(System.in);
+			c.nextLine();
+			System.out.print("nbr de carte � jouer");
+			int i=0;
+			if (c.hasNextInt())
+				i=c.nextInt();
+			else 
+				return false;
+			
+			for (int j = 0; j <i; j++) { 
+  	
+			System.out.print("valeur de la carte � jouer");
+			int k = c.nextInt();
+			System.out.print("couleur de la carte � jouer");
+			String ca=c.nextLine();
+			ca=ca.toLowerCase();
+			Couleur co;
+			if(ca=="pique")
+				co=Couleur.Pique;
+			else if(ca=="coeur")
+				co=Couleur.Coeur;
+			else if(ca=="carreau")
+					co=Couleur.Carreau;
+			else if(ca=="trefle")
+				co=Couleur.Trefle;
+			else{
+				System.out.println("Erreur de saisie");
+				c.close();
+				return false;
+				
+			}
+			cartesEnMain.supCarteMain(new Carte(k,co));
+			tas.ajouterCarteALaTable(new Carte(k,co));
+
+			}
+			c.close();
+			return true;
+	
+	
+	}
+
 	public void jouer(Carte c, int i) {
 		// TODO Auto-generated method stub
 
 	}
 
-	public void envoyerTasSurJoueur(LinkedList<Joueur> lj,Table table) {
-//		int i = 1;
-//		for (Iterator<Joueur> iterator = lj.iterator(); iterator.hasNext();) {
-//			Joueur joueur = (Joueur) iterator.next();
-//			System.out.println("Joueur numero "+i+" : " + joueur.getNom());
-//			i++;
-//		}
-//		System.out.print("Saisissez le numero du joueur :");
-		Scanner reader = new Scanner(System.in);
-		reader.nextLine();
-		int numeroDuJoueur  = reader.nextInt();
-		System.out.println("numero du joueur : "+numeroDuJoueur);
-		reader.close();
-//		Joueur j=lj.get(numeroDuJoueur);
-//		for (Iterator<Carte> iterator = table.getListe().iterator(); iterator.hasNext();) {
-//			Carte carte =  iterator.next();
-//			j.ajouterCarteEnMain(carte);			
-//		}
-//		table.viderTable();
+	public void envoyerTasSurJoueur(Joueur j, Table tas) {
+		j.cartesEnMain.addAll(tas);
+		tas.viderTas();
+
 	}
 
 	// public String toString() {
@@ -135,7 +167,8 @@ public class Joueur {
 	public void piocher(int i, Pioche pioche) {
 		while (pioche.isEmpty() == false) {
 			for (int j = 0; j < i; j++) {
-				cartesEnMain.add(pioche.prendreCarte());
+
+				cartesEnMain.ajouterCarteMain(pioche.prendreCarte());
 			}
 		}
 
@@ -156,5 +189,5 @@ public class Joueur {
 		cartefaceVisibles.toString();
 	}
 
-	
+
 }

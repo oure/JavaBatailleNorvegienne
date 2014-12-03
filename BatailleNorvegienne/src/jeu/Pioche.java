@@ -6,12 +6,12 @@ public class Pioche {
 
 	/** Instance unique non preinitialisee */
 
-	private static  LinkedList<Carte> listeDeCarte = null;
-	
+	private static LinkedList<Carte> listeDeCarte = null;
+
 	/** Constructeur prive */
-	public Pioche()
-	{}
-	
+	public Pioche() {
+	}
+
 	public static LinkedList<Carte> getListeDeCarte() {
 		return listeDeCarte;
 	}
@@ -22,9 +22,15 @@ public class Pioche {
 
 	/** Point d'acc�s pour l'instance unique du singleton */
 
-	private  LinkedList<Carte> getPioche() {
-			return  listeDeCarte;
-		
+	public static LinkedList<Carte> getPioche() {
+
+		if (listeDeCarte == null) {
+			listeDeCarte = new LinkedList<Carte>();
+		} else {
+			System.out.println("la pioche est d�ja creer");
+		}
+		return listeDeCarte;
+
 	}
 
 	public String toString() {
@@ -44,12 +50,17 @@ public class Pioche {
 		listeDeCarte.clear();
 	}
 
-	/*
-	 * recuperer et supprimer le dernier element de la liste
-	 */
-	public Carte prendreCarte() {
+	public void vider_pioche() { // Cette m�thode supprime tous les �l�ments de
+									// cette liste .
+		listeDeCarte.clear();
+
+	}
+
+	public Carte prendreCarte() { // r�cup�rer et supprimer le dernier �l�ment
+									// de la liste
 		return listeDeCarte.pollLast();
 	}
+
 	/*
 	 * Retourne vrai si la liste est vide
 	 */
