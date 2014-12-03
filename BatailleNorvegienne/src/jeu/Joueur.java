@@ -89,18 +89,18 @@ public class Joueur {
 	}
 
 	public void envoyerTasSurJoueur(LinkedList<Joueur> lj,Table table) {
-		int i = 1;
-		for (Iterator iterator = lj.iterator(); iterator.hasNext();) {
-			Joueur joueur = (Joueur) iterator.next();
-			System.out.println("Joueur numero "+i+" : " + joueur.getNom());
-			i++;
-		}
-		System.out.print("Saisissez le nombre de joueur :");
+//		int i = 1;
+//		for (Iterator<Joueur> iterator = lj.iterator(); iterator.hasNext();) {
+//			Joueur joueur = (Joueur) iterator.next();
+//			System.out.println("Joueur numero "+i+" : " + joueur.getNom());
+//			i++;
+//		}
+//		System.out.print("Saisissez le numero du joueur :");
 		Scanner reader = new Scanner(System.in);
-		if (string == "pic")
-			
+		reader.nextLine();
 		int numeroDuJoueur  = reader.nextInt();
-//		reader.close();
+		System.out.println("numero du joueur : "+numeroDuJoueur);
+		reader.close();
 //		Joueur j=lj.get(numeroDuJoueur);
 //		for (Iterator<Carte> iterator = table.getListe().iterator(); iterator.hasNext();) {
 //			Carte carte =  iterator.next();

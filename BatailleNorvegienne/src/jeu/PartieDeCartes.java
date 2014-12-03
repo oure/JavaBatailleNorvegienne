@@ -7,14 +7,6 @@ import java.util.Scanner;
 
 public class PartieDeCartes {
 	private Pioche pioche = new Pioche();
-	public Pioche getPioche() {
-		return pioche;
-	}
-
-	public void setPioche(Pioche pioche) {
-		this.pioche = pioche;
-	}
-
 	private HashSet<JeuDeCartes> setJeuDeCartes = new HashSet<JeuDeCartes>();
 	private Table tas = new Table();
 	private LinkedList<Joueur> llJoueur = new LinkedList<Joueur>();
@@ -22,7 +14,13 @@ public class PartieDeCartes {
 	/*
 	 * Mise en place de la liste des joueurs.
 	 */
+	public Pioche getPioche() {
+		return pioche;
+	}
 
+	public void setPioche(Pioche pioche) {
+		this.pioche = pioche;
+	}
 
 	private void miseEnPlaceDeLaListeDesJoueurs() {
 		System.out.println("Mise en place de la liste des joueurs :");

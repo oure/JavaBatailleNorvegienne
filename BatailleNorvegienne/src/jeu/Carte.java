@@ -1,41 +1,43 @@
 package jeu;
 
 public class Carte {
-	enum Couleur { Pique, Coeur, Carreau, Trefle };
-	
+	enum Couleur {
+		Pique, Coeur, Carreau, Trefle
+	};
+
 	int valeur;
-	Couleur  couleur;
+	Couleur couleur;
 	private boolean estVisible;
 
 	public Carte(int v, Couleur c) {
 		if (v >= 1 && v <= 13) {
-			valeur = v; 
+			valeur = v;
 		} else {
 			System.out.println("Erreur: problème de valeurs !");
 			System.exit(0);
 		}
-		if (c==Couleur.Pique ||c==Couleur.Coeur||c==Couleur.Carreau||c==Couleur.Trefle) {
+		if (c == Couleur.Pique || c == Couleur.Coeur || c == Couleur.Carreau
+				|| c == Couleur.Trefle) {
 			couleur = c;
-		}
-		 else {
+		} else {
 			System.out.println("Erreur: probleme de valeurs !");
 			System.exit(0);
 		}
 	}
-	
+
 	public Carte(int v) {
-	
-		valeur = v; 
-		} 
+
+		valeur = v;
+	}
 
 	public int getValeur() {
 		return valeur;
 	}
-	
+
 	public Couleur getCouleur() {
 		return couleur;
 	}
-	
+
 	public boolean isEstVisible() {
 		return estVisible;
 	}
@@ -50,7 +52,7 @@ public class Carte {
 
 	@Override
 	public String toString() {
-		return  valeur + " " + couleur;
+		return valeur + " " + couleur;
 	}
-	
+
 }
