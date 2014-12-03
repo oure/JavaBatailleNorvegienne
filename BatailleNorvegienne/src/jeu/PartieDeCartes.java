@@ -73,36 +73,41 @@ public class PartieDeCartes {
 	
 			for (Iterator<Joueur> iterator = llJoueur.iterator(); iterator.hasNext();) {
 				Joueur joueur = (Joueur) iterator.next();
-			/*	Scanner ka = new Scanner(System.in);
-				Scanner c = new Scanner(System.in);
-				Scanner ri = new Scanner(System.in);		
-				System.out.print("valeur de la carte à jouer");
-				int k = ka.nextInt();
-				System.out.print("nbr de carte à jouer");
-				int i=ri.nextInt();
-				System.out.print("couleur de la carte à jouer");
-				String ca=c.nextLine();
-				Couleur co;
-				if(ca=="pique"||ca=="pique")
-					co=Couleur.Pique;
-				if(ca=="coeur"||ca=="Coeur")
-					co=Couleur.Coeur;
-				if(ca=="carreau"||ca=="Carreau")
-						co=Couleur.Carreau;
-				if(ca=="trefle"||ca=="Trefle")
-					co=Couleur.Trefle;
-				joueur.jouerLibrement(k,co, i);*/
 				if (joueur.avoirAucuneCarte()) {
 					gagnant=joueur;
 					cond = false;
 					break;
-				}
+				} 
 			}
 
 		}
 		System.out.println("Felicitation "+gagnant.getNom()+" vous avez vaincu !");
-	}
+	
+	} 
+	
+	private void test()
+	{			System.out.println("tttt");
 
+		tas.ajouterCarteALaTable( new Carte(1, Couleur.Pique));
+     	tas.ajouterCarteALaTable(new Carte(8,  Couleur.Pique));
+	    tas.ajouterCarteALaTable(new Carte(10,  Couleur.Pique));
+	    tas.ajouterCarteALaTable(new Carte(10,  Couleur.Pique));
+	    tas.ajouterCarteALaTable(new Carte(10,  Couleur.Pique));
+	    tas.ajouterCarteALaTable(new Carte(10,  Couleur.Pique));
+	    tas.ajouterCarteALaTable(new Carte(10,  Couleur.Pique));
+	    tas.ajouterCarteALaTable(new Carte(10,  Couleur.Pique));
+	    tas.ajouterCarteALaTable(new Carte(10,  Couleur.Pique));
+	    tas.ajouterCarteALaTable(new Carte(10,  Couleur.Pique));
+
+		Joueur j1= new Joueur("ta");
+		j1.envoyerTasSurJoueur(llJoueur.get(1), tas);
+		System.out.println(llJoueur.get(1));
+		System.out.println(tas);
+		llJoueur.get(1).jouerLibrement(tas);
+
+
+	}
+	
 	private void distribuer() {
 		for (Iterator<Joueur> it = llJoueur.iterator(); it.hasNext();) {
 			Joueur joueur = (Joueur) it.next();
@@ -138,7 +143,8 @@ public class PartieDeCartes {
 		miseEnPlaceDeLaListeDesJoueurs();
 		miseEnPlaceDesJeuxdeCartes();
 		distribuer();
-		deroulementDujeu();
+	//	deroulementDujeu();
+		test();
 	}
 
 	

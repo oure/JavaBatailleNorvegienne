@@ -4,7 +4,6 @@ import java.util.*;
 
 import jeu.Carte.Couleur;
 
-
 public class Joueur {
 	private String nom;
 	private CartesEnMain cartesEnMain = new CartesEnMain();
@@ -14,14 +13,18 @@ public class Joueur {
 	public void ajouterCarteEnMain(Carte c) {
 		cartesEnMain.ajouterCarteMain(c);
 	}
-	public boolean avoirAucuneCarte(){
-		return (getCarteFacesCachees().isEmpty() && getCartefaceVisibles().isEmpty() && getCartesEnMain().isEmpty());
+
+	public boolean avoirAucuneCarte() {
+		return (getCarteFacesCachees().isEmpty()
+				&& getCartefaceVisibles().isEmpty() && getCartesEnMain()
+				.isEmpty());
 	}
-	public void ajouterCartefacsVisible(Carte c){
+
+	public void ajouterCartefacsVisible(Carte c) {
 		cartefaceVisibles.ajouterCarteVisible(c);
 	}
 
-	public void ajouterCarteFaceCachee(Carte c){
+	public void ajouterCarteFaceCachee(Carte c) {
 		carteFacesCachees.ajouterUnecarteFaceCachee(c);
 	}
 
@@ -31,22 +34,24 @@ public class Joueur {
 
 	public CartesEnMain getCartesEnMain() {
 		return cartesEnMain;
-		
+
 	}
+
 	public void afficheMain() {
 		cartesEnMain.afficherCarteMain();
-		
+
 	}
+
 	public void afficheCarteRetournees() {
 		carteFacesCachees.afficherCarteRetournees();
-		
+
 	}
+
 	public void afficheVisibles() {
 		cartefaceVisibles.afficherCarteVisibles();
-		
+
 	}
- 
-	
+
 	public void setCartesEnMain(CartesEnMain cartesEnMain) {
 		this.cartesEnMain = cartesEnMain;
 	}
@@ -83,22 +88,57 @@ public class Joueur {
 		this.nom = nom;
 	}
 
-	public void jouerLibrement(int k, Couleur c, int i) {
-    for (int j = 0; j <i; j++) { 
-    	Carte ca=new Carte(k,c);
-    	cartesEnMain.supCarteMain(ca);
-    	}
-	}
+	public boolean jouerLibrement(Table tas) {
+			Scanner c = new Scanner(System.in);
+			c.nextLine();
+			System.out.print("nbr de carte à jouer");
+			int i=0;
+			if (c.hasNextInt())
+				i=c.nextInt();
+			else 
+				return false;
+			
+			for (int j = 0; j <i; j++) { 
+  	
+			System.out.print("valeur de la carte à jouer");
+			int k = c.nextInt();
+			System.out.print("couleur de la carte à jouer");
+			String ca=c.nextLine();
+			ca=ca.toLowerCase();
+			Couleur co;
+			if(ca=="pique")
+				co=Couleur.Pique;
+			else if(ca=="coeur")
+				co=Couleur.Coeur;
+			else if(ca=="carreau")
+					co=Couleur.Carreau;
+			else if(ca=="trefle")
+				co=Couleur.Trefle;
+			else{
+				System.out.println("Erreur de saisie");
+				c.close();
+				return false;
+				
+			}
+			cartesEnMain.supCarteMain(new Carte(k,co));
+			tas.ajouterCarteALaTable(new Carte(k,co));
+
+			}
+			c.close();
+			return true;
 	
+	
+	}
+
 	public void jouer(Carte c, int i) {
 		// TODO Auto-generated method stub
 
 	}
 
 	public void envoyerTasSurJoueur(Joueur j, Table tas) {
-	 j.cartesEnMain.addAll(tas);
-	 tas.viderTas();
-	 
+		j.cartesEnMain.addAll(tas);
+		tas.viderTas();
+
 	}
 
 	// public String toString() {
@@ -127,7 +167,7 @@ public class Joueur {
 	public void piocher(int i, Pioche pioche) {
 		while (pioche.isEmpty() == false) {
 			for (int j = 0; j < i; j++) {
-				cartesEnMain.add(pioche.prendreCarte());
+				cartesEnMain.ajouterCarteMain(pioche.prendreCarte());
 			}
 		}
 
@@ -140,15 +180,13 @@ public class Joueur {
 				+ ", carteFacesCachees=" + carteFacesCachees + "]";
 	}
 
-	/*public void echangerCarte() {
-		Scanner reader = new Scanner(System.in);
-		System.out.print("Saisissez le numero  de la carte main à changer:");
-		int n = reader.nextInt();
-		cartefaceVisibles.ajouterCarteVisible(Carte(n,Couleur c));
-		cartesEnMain.supCarteMain(m);	
-	    cartesEnMain.ajouterCarteMain(v);
-	    cartefaceVisibles.supCarteVisible(v);
-	}*/
+	/*
+	 * public void echangerCarte() { Scanner reader = new Scanner(System.in);
+	 * System.out.print("Saisissez le numero  de la carte main à changer:"); int
+	 * n = reader.nextInt();
+	 * cartefaceVisibles.ajouterCarteVisible(Carte(n,Couleur c));
+	 * cartesEnMain.supCarteMain(m); cartesEnMain.ajouterCarteMain(v);
+	 * cartefaceVisibles.supCarteVisible(v); }
+	 */
 
-	
 }

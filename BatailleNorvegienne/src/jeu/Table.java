@@ -10,7 +10,7 @@ private	LinkedList<Carte> liste = new LinkedList<Carte>();
 
     /**
      * @return
-     */
+     */ 
     public void viderTas() {
     	  liste.clear();  
     }
@@ -44,5 +44,10 @@ private	LinkedList<Carte> liste = new LinkedList<Carte>();
 		ca.remove(carte);
     }
     }
+
+	@Override
+	public String toString() {
+		return "Table [liste=" + liste + "]";
+	}
 
 }
