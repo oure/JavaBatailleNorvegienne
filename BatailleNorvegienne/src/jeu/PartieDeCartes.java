@@ -3,6 +3,7 @@ package jeu;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Random;
 import java.util.Scanner;
 
 import jeu.Carte.Couleur;
@@ -34,18 +35,19 @@ public class PartieDeCartes {
 		int nbJoueur = reader.nextInt();
 		String name=null;
 		reader.nextLine();
+		Random r = new Random();
 		for (int i = 1; i <= nbJoueur; i++) {
 			if (i == 1) {
 				System.out.print("Entrer votre nom :");
 				name = reader.nextLine();
 			}
 			if (i == 1)
-				llJoueur.add(new Distributeur(1));
+				llJoueur.add(new Distributeur(r.nextInt((2 + 1) - 1) + 1));
 			else if (i == 2)
 				llJoueur.add(new Joueur(name));
-			else
-				llJoueur.add(new JoueurIA(1));
-
+			else{
+				llJoueur.add(new JoueurIA(r.nextInt((2 + 1) - 1) + 1));
+			}
 		}
 	}
 
@@ -105,8 +107,8 @@ public class PartieDeCartes {
 	private void test() {
 		System.out.println("Voulez vous echanger des cartes ? N/o");
 		reader = new Scanner(System.in);
-		String s=reader.nextLine();
-		if(s.length()==1 && s.charAt(0)=='o')
+		String s = reader.nextLine();
+		if (s.length() == 1 && s.charAt(0) == 'o')
 			llJoueur.get(1).echangerCarte();
 		System.out.println(llJoueur.get(1).getCartesEnMain());
 		System.out.println(llJoueur.get(1).getCartefaceVisibles());

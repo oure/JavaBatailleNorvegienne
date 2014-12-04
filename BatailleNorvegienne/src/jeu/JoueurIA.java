@@ -13,7 +13,6 @@ public class JoueurIA extends Joueur {
 
 	public JoueurIA(int degreeStrat) {
 		String nom = null;
-		System.out.println(collectionNomDeJoueur.size());
 		if (collectionNomDeJoueur.size() > 0) {
 			Collections.shuffle(collectionNomDeJoueur);
 			nom = collectionNomDeJoueur.get(0);
