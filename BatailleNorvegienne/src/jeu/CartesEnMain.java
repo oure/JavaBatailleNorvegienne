@@ -29,17 +29,18 @@ public class CartesEnMain {
 
 	public HashSet<Carte> supCarteMain(int valeur, int nombreOccurence) {
 		int i = 0;
+		System.out.println("supCarteMain : "+valeur+"  "+nombreOccurence);
 		HashSet<Carte> hc=new HashSet<Carte>();
-		for (Iterator<Carte> iterator = cartemain.iterator(); iterator
-				.hasNext();) {
-			if (i==nombreOccurence) return null;
+		for (Iterator<Carte> iterator = cartemain.iterator(); iterator.hasNext();) {
 			Carte carte = (Carte) iterator.next();
+			if (i>=nombreOccurence) break;
 			if (carte.getValeur() == valeur) {
 				i++;
-				hc.add(carte);
-				cartemain.remove(carte);
+			hc.add(carte);
 			}
 		}
+		cartemain.removeAll(hc);
+		System.out.println(hc);
 		return hc;
 	}
 

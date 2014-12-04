@@ -87,24 +87,30 @@ public class Joueur {
 	public Joueur(String nom) {
 		this.nom = nom;
 	}
-	public boolean estPossedeDansLamain(int valeur,int nombreOccurence){
-		int i=0;
-		for (Iterator<Carte> it = cartesEnMain.getCartemain().iterator(); it.hasNext();) {
+
+	public boolean estPossedeDansLamain(int valeur, int nombreOccurence) {
+		int i = 0;
+		for (Iterator<Carte> it = cartesEnMain.getCartemain().iterator(); it
+				.hasNext();) {
 			Carte carte = (Carte) it.next();
-			if (valeur==carte.getValeur())
+			if (valeur == carte.getValeur())
 				i++;
 		}
-		return (nombreOccurence==i);
+		return (nombreOccurence <= i);
 	}
+
 	public boolean jouerLibrement(Table tas) {
 		System.out.print("Entrez le nombre de carte à jouer :");
 		int nombreDeCarteAjouer = PartieDeCartes.reader.nextInt();
 		System.out.print("Entrez la valeur de la carte a jouer (de 1 a 13) :");
-			int valeur = PartieDeCartes.reader.nextInt();
-			if (estPossedeDansLamain(valeur,nombreDeCarteAjouer))
-				tas.ajouterCarteTable(cartesEnMain.supCarteMain(valeur, nombreDeCarteAjouer));
-			else
-				System.out.println("Impossible vous ne posseder pas cette carte.");
+		int valeur = PartieDeCartes.reader.nextInt();
+		if (estPossedeDansLamain(valeur, nombreDeCarteAjouer)){
+			HashSet<Carte> hc=new HashSet<Carte>();
+			hc=cartesEnMain.supCarteMain(valeur,nombreDeCarteAjouer);
+			tas.ajouterCarteTable(hc);
+		}
+		else
+			System.out.println("Impossible vous ne posseder pas cette carte.");
 		return true;
 	}
 

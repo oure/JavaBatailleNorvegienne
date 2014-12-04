@@ -123,8 +123,8 @@ public class PartieDeCartes {
 		System.out.println(llJoueur.get(1));
 		System.out.println(tas);
 		llJoueur.get(1).jouerLibrement(tas);
-
-
+		System.out.println(tas);
+		System.out.println(llJoueur.get(1));
 	}
 	
 	private void distribuer() {

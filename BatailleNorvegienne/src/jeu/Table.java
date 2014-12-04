@@ -30,12 +30,13 @@ public class Table {
 	/**
 	 * @param Carte
 	 */
-	public void ajouterCarteTable(HashSet<Carte> ca) {
-		for (Iterator<Carte> iterator = ca.iterator(); iterator.hasNext();) {
+	public void ajouterCarteTable(HashSet<Carte> hashSetCartes) {
+		for (Iterator<Carte> iterator = hashSetCartes.iterator(); iterator.hasNext();) {
 			Carte carte = (Carte) iterator.next();
 			liste.add(carte);
-			ca.remove(carte);
 		}
+		hashSetCartes.removeAll(liste);
+
 	}
 
 	public void setListe(LinkedList<Carte> liste) {
