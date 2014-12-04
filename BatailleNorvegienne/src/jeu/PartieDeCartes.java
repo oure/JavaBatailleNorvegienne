@@ -103,26 +103,13 @@ public class PartieDeCartes {
 	}
 
 	private void test() {
-		System.out.println("tttt");
-		tas.ajouterCarteALaTable(new Carte(1, Couleur.Pique));
-		tas.ajouterCarteALaTable(new Carte(8, Couleur.Pique));
-		tas.ajouterCarteALaTable(new Carte(10, Couleur.Pique));
-		tas.ajouterCarteALaTable(new Carte(10, Couleur.Pique));
-		tas.ajouterCarteALaTable(new Carte(10, Couleur.Pique));
-		tas.ajouterCarteALaTable(new Carte(10, Couleur.Pique));
-		tas.ajouterCarteALaTable(new Carte(10, Couleur.Pique));
-		tas.ajouterCarteALaTable(new Carte(10, Couleur.Pique));
-		tas.ajouterCarteALaTable(new Carte(10, Couleur.Pique));
-		tas.ajouterCarteALaTable(new Carte(10, Couleur.Pique));
-		System.out.println(tas);
-
-		Joueur j1 = new Joueur("tatata");
-		j1.envoyerTasSurJoueur(llJoueur.get(1), tas);
-		System.out.println(llJoueur.get(1));
-		System.out.println(tas);
-		llJoueur.get(1).jouerLibrement(tas);
-		System.out.println(tas);
-		System.out.println(llJoueur.get(1));
+		System.out.println("Voulez vous echanger des cartes ? N/o");
+		reader = new Scanner(System.in);
+		String s=reader.nextLine();
+		if(s.length()==1 && s.charAt(0)=='o')
+			llJoueur.get(1).echangerCarte();
+		System.out.println(llJoueur.get(1).getCartesEnMain());
+		System.out.println(llJoueur.get(1).getCartefaceVisibles());
 	}
 
 	private void distribuer() {

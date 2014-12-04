@@ -42,11 +42,6 @@ public class Joueur {
 
 	}
 
-	public void afficheMain() {
-		cartesEnMain.afficherCarteMain();
-
-	}
-
 	public void afficheCarteRetournees() {
 		carteFacesCachees.afficherCarteRetournees();
 
@@ -94,8 +89,9 @@ public class Joueur {
 		for (Iterator<Carte> it = cartesEnMain.getCartemain().iterator(); it
 				.hasNext();) {
 			Carte carte = (Carte) it.next();
-			if (valeur == carte.getValeur())
+			if (valeur == carte.getValeur()){
 				i++;
+			}
 		}
 		return (nombreOccurence <= i);
 	}
@@ -195,14 +191,14 @@ public class Joueur {
 			}
 			for (Iterator<Carte> it = cartefaceVisibles.getHs().iterator(); it.hasNext();) {
 				Carte c = (Carte) it.next();
-				if (c.getValeur()==vCarte1){
+				if (c.getValeur()==vCarte2){
 					c2=c;
 					break;
 				}
 			}
 			cartefaceVisibles.getHs().add(c1);
-			cartesEnMain.getCartemain().remove(c1);
 			cartesEnMain.getCartemain().add(c2);
+			cartesEnMain.getCartemain().remove(c1);
 			cartefaceVisibles.getHs().remove(c2);
 		}
 		else

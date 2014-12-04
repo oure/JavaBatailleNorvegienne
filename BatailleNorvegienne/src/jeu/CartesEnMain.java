@@ -52,16 +52,6 @@ public class CartesEnMain {
 		this.cartemain = cartemain;
 	}
 
-	public void afficherCarteMain() {
-		for (Iterator<Carte> iterator = cartemain.iterator(); iterator
-				.hasNext();) {
-			Carte carte = (Carte) iterator.next();
-			System.out.print(carte.getValeur() + " " + carte.getCouleur()
-					+ "  ");
-
-		}
-	}
-
 	@Override
 	public String toString() {
 		return cartemain.toString();
