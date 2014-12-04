@@ -114,7 +114,6 @@ public class Joueur {
 		if (estPossedeDansLamain(valeur, nombreDeCarteAjouer)){
 			HashSet<Carte> hc=new HashSet<Carte>();
 			hc=cartesEnMain.supCarteMain(valeur,nombreDeCarteAjouer);
-			
 			tas.ajouterCarteTable(hc);
 		}
 		else
