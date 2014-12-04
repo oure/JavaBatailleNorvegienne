@@ -87,43 +87,25 @@ public class Joueur {
 	public Joueur(String nom) {
 		this.nom = nom;
 	}
-
+	public boolean estPossedeDansLamain(int valeur,int nombreOccurence){
+		int i=0;
+		for (Iterator<Carte> it = cartesEnMain.getCartemain().iterator(); it.hasNext();) {
+			Carte carte = (Carte) it.next();
+			if (valeur==carte.getValeur())
+				i++;
+		}
+		return (nombreOccurence==i);
+	}
 	public boolean jouerLibrement(Table tas) {
-			System.out.print("nbr de carte à jouer");
-			int i=0;
-			//if (c.hasNextInt())
-				i=PartieDeCartes.reader.nextInt();
-			//else 
-				//return false;
-			
-			for (int j = 0; j <i; j++) { 
-  	
-			System.out.print("valeur de la carte � jouer");
-			int k = PartieDeCartes.reader.nextInt();
-			System.out.print("couleur de la carte � jouer");
-			String ca=PartieDeCartes.reader.nextLine();
-			ca=ca.toLowerCase();
-			Couleur co;
-			if(ca=="pique")
-				co=Couleur.Pique;
-			else if(ca=="coeur")
-				co=Couleur.Coeur;
-			else if(ca=="carreau")
-					co=Couleur.Carreau;
-			else if(ca=="trefle")
-				co=Couleur.Trefle;
-			else{
-				System.out.println("Erreur de saisie");
-				return false;
-				
-			}
-			cartesEnMain.supCarteMain(new Carte(k,co));
-			tas.ajouterCarteALaTable(new Carte(k,co));
-
-			}
-			return true;
-	
-	
+		System.out.print("Entrez le nombre de carte à jouer :");
+		int nombreDeCarteAjouer = PartieDeCartes.reader.nextInt();
+		System.out.print("Entrez la valeur de la carte a jouer (de 1 a 13) :");
+			int valeur = PartieDeCartes.reader.nextInt();
+			if (estPossedeDansLamain(valeur,nombreDeCarteAjouer))
+				tas.ajouterCarteTable(cartesEnMain.supCarteMain(valeur, nombreDeCarteAjouer));
+			else
+				System.out.println("Impossible vous ne posseder pas cette carte.");
+		return true;
 	}
 
 	public void jouer(Carte c, int i) {
@@ -132,7 +114,7 @@ public class Joueur {
 	}
 
 	public void envoyerTasSurJoueur(Joueur j, Table tas) {
-		
+
 		j.cartesEnMain.addAll(tas);
 		tas.viderTas();
 	}
@@ -163,7 +145,6 @@ public class Joueur {
 	public void piocher(int i, Pioche pioche) {
 		while (pioche.isEmpty() == false) {
 			for (int j = 0; j < i; j++) {
-
 				cartesEnMain.ajouterCarteMain(pioche.prendreCarte());
 			}
 		}
@@ -178,12 +159,11 @@ public class Joueur {
 	}
 
 	public void echangerCarte() {
-		Scanner reader = new Scanner(System.in);
-		System.out.print("Saisissez le numero  de la carte main a changer avec les cartes visibles:");
-		int n = reader.nextInt();
+		System.out
+				.print("Saisissez le numero  de la carte main a changer avec les cartes visibles:");
+		int n = PartieDeCartes.reader.nextInt();
 		cartesEnMain.toString();
 		cartefaceVisibles.toString();
 	}
-
 
 }
