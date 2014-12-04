@@ -89,20 +89,19 @@ public class Joueur {
 	}
 
 	public boolean jouerLibrement(Table tas) {
-			Scanner c = new Scanner(System.in);
 			System.out.print("nbr de carte à jouer");
 			int i=0;
-			if (c.hasNextInt())
-				i=c.nextInt();
-			else 
-				return false;
+			//if (c.hasNextInt())
+				i=PartieDeCartes.reader.nextInt();
+			//else 
+				//return false;
 			
 			for (int j = 0; j <i; j++) { 
   	
 			System.out.print("valeur de la carte � jouer");
-			int k = c.nextInt();
+			int k = PartieDeCartes.reader.nextInt();
 			System.out.print("couleur de la carte � jouer");
-			String ca=c.nextLine();
+			String ca=PartieDeCartes.reader.nextLine();
 			ca=ca.toLowerCase();
 			Couleur co;
 			if(ca=="pique")
@@ -115,7 +114,6 @@ public class Joueur {
 				co=Couleur.Trefle;
 			else{
 				System.out.println("Erreur de saisie");
-				c.close();
 				return false;
 				
 			}
@@ -123,7 +121,6 @@ public class Joueur {
 			tas.ajouterCarteALaTable(new Carte(k,co));
 
 			}
-			c.close();
 			return true;
 	
 	
@@ -135,6 +132,7 @@ public class Joueur {
 	}
 
 	public void envoyerTasSurJoueur(Joueur j, Table tas) {
+		
 		j.cartesEnMain.addAll(tas);
 		tas.viderTas();
 	}

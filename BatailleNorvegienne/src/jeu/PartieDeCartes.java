@@ -8,6 +8,7 @@ import java.util.Scanner;
 import jeu.Carte.Couleur;
 
 public class PartieDeCartes {
+	public static Scanner reader;
 	private Pioche pioche = new Pioche();
 	private HashSet<JeuDeCartes> setJeuDeCartes = new HashSet<JeuDeCartes>();
 	private Table tas = new Table();
@@ -28,7 +29,7 @@ public class PartieDeCartes {
 
 	private void miseEnPlaceDeLaListeDesJoueurs() {
 		System.out.println("Mise en place de la liste des joueurs :");
-		Scanner reader = new Scanner(System.in);
+		reader = new Scanner(System.in);
 		System.out.print("Saisissez le nombre de joueur :");
 		int nbJoueur = reader.nextInt();
 		String name;
@@ -43,7 +44,6 @@ public class PartieDeCartes {
 				llJoueur.add(new Distributeur(name, 1));
 
 		}
-		reader.close();
 	}
 
 	/*
@@ -88,13 +88,7 @@ public class PartieDeCartes {
 		boolean cond = true;
 		/*
 		while (cond) {
-<<<<<<< HEAD
-			for (Iterator<Joueur> iterator = llJoueur.iterator(); iterator
-					.hasNext();) {
-=======
-	
 			for (Iterator<Joueur> iterator = llJoueur.iterator(); iterator.hasNext();) {
->>>>>>> refs/remotes/oure/master
 				Joueur joueur = (Joueur) iterator.next();
 				joueur.envoyerTasSurJoueur(llJoueur,tas);
 				if (joueur.avoirAucuneCarte()) {
@@ -103,11 +97,8 @@ public class PartieDeCartes {
 					break;
 				} 
 			}
-
 		}
 		*/
-
-	
 		System.out.println("Felicitation "+gagnant.getNom()+" vous avez vaincu !");
 	
 	} 
