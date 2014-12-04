@@ -8,8 +8,8 @@ public class Distributeur extends JoueurIA {
 
 	private LinkedList<Carte> ListeDeCarte = new LinkedList<Carte>();
 
-	public Distributeur(String nom, int degreeStrat) {
-		super(nom, degreeStrat);
+	public Distributeur(int degreeStrat) {
+		super(degreeStrat);
 		// TODO Auto-generated constructor stub
 	}
 

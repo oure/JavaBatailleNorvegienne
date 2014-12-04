@@ -10,6 +10,11 @@ public class Joueur {
 	private CartesfacesVisibles cartefaceVisibles = new CartesfacesVisibles();
 	private CartesFacesCachees carteFacesCachees = new CartesFacesCachees();
 
+	public Joueur(String nom) {
+		this.nom = nom;
+	}
+	public Joueur(){}
+	
 	public void ajouterCarteEnMain(Carte c) {
 		cartesEnMain.ajouterCarteMain(c);
 	}
@@ -84,10 +89,6 @@ public class Joueur {
 		this.nom = nom;
 	}
 
-	public Joueur(String nom) {
-		this.nom = nom;
-	}
-
 	public boolean estPossedeDansLamain(int valeur, int nombreOccurence) {
 		int i = 0;
 		for (Iterator<Carte> it = cartesEnMain.getCartemain().iterator(); it
@@ -107,6 +108,7 @@ public class Joueur {
 		if (estPossedeDansLamain(valeur, nombreDeCarteAjouer)){
 			HashSet<Carte> hc=new HashSet<Carte>();
 			hc=cartesEnMain.supCarteMain(valeur,nombreDeCarteAjouer);
+			
 			tas.ajouterCarteTable(hc);
 		}
 		else
