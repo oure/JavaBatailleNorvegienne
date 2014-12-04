@@ -9,7 +9,7 @@ public class CartesEnMain {
 	private HashSet<Carte> cartemain = new HashSet<Carte>();
 
 	public void addAll(Table tas) {
-		for (Iterator it = tas.getListe().iterator(); it.hasNext();) {
+		for (Iterator<Carte> it = tas.getListe().iterator(); it.hasNext();) {
 			Carte carte = (Carte) it.next();
 			ajouterCarteMain(carte);
 

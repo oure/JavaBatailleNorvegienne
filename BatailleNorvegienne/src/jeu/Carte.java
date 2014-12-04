@@ -50,7 +50,5 @@ public class Carte {
 
 	@Override
 	public String toString() {
-		return valeur + " " + couleur;
-	}
-
-}
+		return valeur +""+ couleur.toString().toLowerCase().charAt(0);
+	}}

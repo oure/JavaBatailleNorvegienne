@@ -90,8 +90,7 @@ public class Joueur {
 
 	public boolean jouerLibrement(Table tas) {
 			Scanner c = new Scanner(System.in);
-			c.nextLine();
-			System.out.print("nbr de carte � jouer");
+			System.out.print("nbr de carte à jouer");
 			int i=0;
 			if (c.hasNextInt())
 				i=c.nextInt();
@@ -138,7 +137,6 @@ public class Joueur {
 	public void envoyerTasSurJoueur(Joueur j, Table tas) {
 		j.cartesEnMain.addAll(tas);
 		tas.viderTas();
-
 	}
 
 	// public String toString() {

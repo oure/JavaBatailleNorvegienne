@@ -38,7 +38,7 @@ public class Pioche {
 		for (Iterator<Carte> iterator = listeDeCarte.iterator(); iterator
 				.hasNext();) {
 			Carte carte = (Carte) iterator.next();
-			s += " " + carte.getValeur();
+			s += " " +carte;
 		}
 		return "Pioche : " + s;
 	}

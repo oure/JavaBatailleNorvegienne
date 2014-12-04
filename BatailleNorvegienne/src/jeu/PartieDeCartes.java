@@ -63,7 +63,11 @@ public class PartieDeCartes {
 		System.out.println("jeu de carte non melanger");
 		for (Iterator<JeuDeCartes> it = setJeuDeCartes.iterator(); it.hasNext();) {
 			JeuDeCartes jdc = it.next();
-			System.out.println(jdc);
+			for (Iterator<Carte> it2 = jdc.getLs().iterator(); it2.hasNext();) {
+				Carte carte = (Carte) it2.next();
+				System.out.print(carte+" ");
+				
+			}
 			jdc.melanger();
 		}
 		System.out.println();
@@ -71,7 +75,11 @@ public class PartieDeCartes {
 		System.out.println("jeu de carte melanger");
 		for (Iterator<JeuDeCartes> it = setJeuDeCartes.iterator(); it.hasNext();) {
 			JeuDeCartes jdc = it.next();
-			// System.out.println();
+			for (Iterator<Carte> it2 = jdc.getLs().iterator(); it2.hasNext();) {
+				Carte carte = (Carte) it2.next();
+				System.out.print(carte+" ");
+				
+			}
 		}
 	}
 
@@ -105,8 +113,8 @@ public class PartieDeCartes {
 	} 
 	
 	private void test()
-	{			System.out.println("tttt");
-
+	{			
+		System.out.println("tttt");
 		tas.ajouterCarteALaTable( new Carte(1, Couleur.Pique));
      	tas.ajouterCarteALaTable(new Carte(8,  Couleur.Pique));
 	    tas.ajouterCarteALaTable(new Carte(10,  Couleur.Pique));
@@ -117,8 +125,9 @@ public class PartieDeCartes {
 	    tas.ajouterCarteALaTable(new Carte(10,  Couleur.Pique));
 	    tas.ajouterCarteALaTable(new Carte(10,  Couleur.Pique));
 	    tas.ajouterCarteALaTable(new Carte(10,  Couleur.Pique));
+		System.out.println(tas);
 
-		Joueur j1= new Joueur("ta");
+		Joueur j1= new Joueur("tatata");
 		j1.envoyerTasSurJoueur(llJoueur.get(1), tas);
 		System.out.println(llJoueur.get(1));
 		System.out.println(tas);
