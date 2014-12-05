@@ -88,30 +88,32 @@ public class PartieDeCartes {
 			}
 		}
 	}
-	public int PositionJoueurDansLaListe(Joueur joueur){
+
+	public int PositionJoueurDansLaListe(Joueur joueur) {
 		return (llJoueur.indexOf(joueur));
 	}
 
 	private void deroulementDujeu() {
-//		Joueur gagnant = null;
-//		boolean cond = true;
-//		//EchangerLesCartes();
-//		while (cond) {
-//			for (Iterator<Joueur> iterator = llJoueur.iterator(); iterator
-//					.hasNext();) {
-//				Joueur joueur = (Joueur) iterator.next();
-//				if (1==PositionJoueurDansLaListe(joueur)){
-//					System.out.println("Vous possedez : \n"+joueur);
-//					joueur.jouerLibrement(tas);
-//				}
-//				if (joueur.avoirAucuneCarte()) {
-//					cond = false;
-//					break;
-//				}
-//			}
-//		}
-//
-//		System.out.println("Felicitation " + gagnant.getNom()+ " vous avez vaincu !");
+		Joueur gagnant = null;
+		boolean cond = true;
+		// EchangerLesCartes();
+		while (cond) {
+			for (Iterator<Joueur> iterator = llJoueur.iterator(); iterator
+					.hasNext();) {
+				Joueur joueur = (Joueur) iterator.next();
+				if (1 == PositionJoueurDansLaListe(joueur)) {
+					System.out.println(tas);
+					joueur.jouerLibrement(tas);
+				}
+				if (joueur.avoirAucuneCarte()) {
+					gagnant = joueur;
+					cond = false;
+					break;
+				}
+			}
+		}
+		System.out.println("Felicitation " + gagnant.getNom()
+				+ " vous avez vaincu !");
 	}
 
 	private void test() {
@@ -155,7 +157,7 @@ public class PartieDeCartes {
 		miseEnPlaceDesJeuxdeCartes();
 		distribuer();
 		deroulementDujeu();
-		//test();
+		// test();
 	}
 
 	public static void main(String[] args) {
