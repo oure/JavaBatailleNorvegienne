@@ -33,7 +33,7 @@ public class PartieDeCartes {
 		reader = new Scanner(System.in);
 		System.out.print("Saisissez le nombre de joueur :");
 		int nbJoueur = reader.nextInt();
-		String name=null;
+		String name = null;
 		reader.nextLine();
 		Random r = new Random();
 		for (int i = 1; i <= nbJoueur; i++) {
@@ -45,7 +45,7 @@ public class PartieDeCartes {
 				llJoueur.add(new Distributeur(r.nextInt((2 + 1) - 1) + 1));
 			else if (i == 2)
 				llJoueur.add(new Joueur(name));
-			else{
+			else {
 				llJoueur.add(new JoueurIA(r.nextInt((2 + 1) - 1) + 1));
 			}
 		}
@@ -88,30 +88,45 @@ public class PartieDeCartes {
 			}
 		}
 	}
+	public int PositionJoueurDansLaListe(Joueur joueur){
+		return (llJoueur.indexOf(joueur));
+	}
 
 	private void deroulementDujeu() {
-		Joueur gagnant = null;
-		boolean cond = true;
-		/*
-		 * while (cond) { for (Iterator<Joueur> iterator = llJoueur.iterator();
-		 * iterator.hasNext();) { Joueur joueur = (Joueur) iterator.next();
-		 * joueur.envoyerTasSurJoueur(llJoueur,tas); if
-		 * (joueur.avoirAucuneCarte()) { gagnant = joueur; cond = false; break;
-		 * } } }
-		 */
-		System.out.println("Felicitation " + gagnant.getNom()
-				+ " vous avez vaincu !");
-
+//		Joueur gagnant = null;
+//		boolean cond = true;
+//		//EchangerLesCartes();
+//		while (cond) {
+//			for (Iterator<Joueur> iterator = llJoueur.iterator(); iterator
+//					.hasNext();) {
+//				Joueur joueur = (Joueur) iterator.next();
+//				if (1==PositionJoueurDansLaListe(joueur)){
+//					System.out.println("Vous possedez : \n"+joueur);
+//					joueur.jouerLibrement(tas);
+//				}
+//				if (joueur.avoirAucuneCarte()) {
+//					cond = false;
+//					break;
+//				}
+//			}
+//		}
+//
+//		System.out.println("Felicitation " + gagnant.getNom()+ " vous avez vaincu !");
 	}
 
 	private void test() {
+		System.out.println(llJoueur.get(1).getCartesEnMain());
+		System.out.println(llJoueur.get(1).getCartefaceVisibles());
+		llJoueur.get(1).getCarteFacesCachees().prendreAuhasard();
+		System.out.println(llJoueur.get(1));
+	}
+
+	private void EchangerLesCartes() {
 		System.out.println("Voulez vous echanger des cartes ? N/o");
 		reader = new Scanner(System.in);
 		String s = reader.nextLine();
 		if (s.length() == 1 && s.charAt(0) == 'o')
 			llJoueur.get(1).echangerCarte();
-		System.out.println(llJoueur.get(1).getCartesEnMain());
-		System.out.println(llJoueur.get(1).getCartefaceVisibles());
 	}
 
 	private void distribuer() {
@@ -138,7 +153,7 @@ public class PartieDeCartes {
 		miseEnPlaceDeLaListeDesJoueurs();
 		miseEnPlaceDesJeuxdeCartes();
 		distribuer();
-		// deroulementDujeu();
+		deroulementDujeu();
 		test();
 	}
 

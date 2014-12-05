@@ -107,17 +107,19 @@ public class Joueur {
 	}
 	
 	public boolean jouerLibrement(Table tas) {
+		HashSet<Carte> hc=new HashSet<Carte>();
 		System.out.print("Entrez le nombre de carte à jouer :");
 		int nombreDeCarteAjouer = PartieDeCartes.reader.nextInt();
 		System.out.print("Entrez la valeur de la carte a jouer (de 1 a 13) :");
 		int valeur = PartieDeCartes.reader.nextInt();
 		if (estPossedeDansLamain(valeur, nombreDeCarteAjouer)){
-			HashSet<Carte> hc=new HashSet<Carte>();
 			hc=cartesEnMain.supCarteMain(valeur,nombreDeCarteAjouer);
 			tas.ajouterCarteTable(hc);
 		}
 		else
 			System.out.println("Impossible vous ne posseder pas cette carte.");
+		if(cartefaceVisibles.isEmpty()&&cartesEnMain.isEmpty())
+			tas.ajouterCarteALaTable(carteFacesCachees.prendreAuhasard());
 		return true;
 	}
 
