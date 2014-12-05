@@ -101,10 +101,8 @@ public class PartieDeCartes {
 			for (Iterator<Joueur> iterator = llJoueur.iterator(); iterator
 					.hasNext();) {
 				Joueur joueur = (Joueur) iterator.next();
-				if (1 == PositionJoueurDansLaListe(joueur)) {
 					System.out.println(tas);
-					joueur.jouerLibrement(tas);
-				}
+					joueur.jouerLibrement(tas);		
 				if (joueur.avoirAucuneCarte()) {
 					gagnant = joueur;
 					cond = false;

@@ -24,7 +24,13 @@ public class JoueurIA extends Joueur {
 		setNom(nom);
 		this.degreeStrat = degreeStrat;
 	}
-
+	@Override
+	public boolean jouerLibrement(Table tas) {
+		// TODO Auto-generated method stub
+		System.out.println("Bonjour je suis la méthode de joueur IA");
+		//return super.jouerLibrement(tas);
+		return false;
+	}
 	public void jouer(Carte c, int i) {
 		super.jouer(c, i);
 	}
