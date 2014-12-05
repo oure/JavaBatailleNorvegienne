@@ -118,6 +118,7 @@ public class PartieDeCartes {
 		System.out.println(llJoueur.get(1).getCartesEnMain());
 		System.out.println(llJoueur.get(1).getCartefaceVisibles());
 		llJoueur.get(1).getCarteFacesCachees().prendreAuhasard();
+		llJoueur.get(1).getCarteFacesCachees().prendreAuhasard();
 		System.out.println(llJoueur.get(1));
 	}
 
@@ -154,7 +155,7 @@ public class PartieDeCartes {
 		miseEnPlaceDesJeuxdeCartes();
 		distribuer();
 		deroulementDujeu();
-		test();
+		//test();
 	}
 
 	public static void main(String[] args) {

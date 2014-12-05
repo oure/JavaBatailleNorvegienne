@@ -13,17 +13,19 @@ public class CartesFacesCachees {
 	}
 	public Carte prendreAuhasard(){
 		int compteur=1;
-		Carte carteQueLonApris;
 		Random r=new Random();
 		int occurenceCiblee=1 + r.nextInt(hs.size() - 1);
+		System.out.println("occurenceCiblee :"+occurenceCiblee);
 		for (Iterator<Carte> iterator = hs.iterator(); iterator.hasNext();) {
 			Carte carte = (Carte) iterator.next();
+			System.out.println(" \t " + carte);
 			if (compteur==occurenceCiblee){
-				carteQueLonApris= carte;
-				hs.remove(carteQueLonApris);
-				return carteQueLonApris;
+				hs.remove(carte);
+				return carte;
 			}
+			compteur++;
 		}
+		System.out.println("non");
 		return null;
 	}
 	public void addAll(HashSet<Carte> s) {
