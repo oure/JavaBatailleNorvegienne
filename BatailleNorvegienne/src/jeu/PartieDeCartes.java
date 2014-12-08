@@ -96,17 +96,23 @@ public class PartieDeCartes {
 	private void deroulementDujeu() {
 		Joueur gagnant = null;
 		boolean cond = true;
+		int nombreDetour = 0;
 		// EchangerLesCartes();
 		while (cond) {
 			for (Iterator<Joueur> iterator = llJoueur.iterator(); iterator
 					.hasNext();) {
+				nombreDetour++;
 				Joueur joueur = (Joueur) iterator.next();
-					System.out.println(tas);
-					joueur.jouerLibrement(tas);		
-				if (joueur.avoirAucuneCarte()) {
-					gagnant = joueur;
-					cond = false;
-					break;
+				if (nombreDetour == 1)
+					iterator.next();
+				else {
+					System.out.println("A vous de jouer "+joueur.getNom());
+					joueur.jouerLibrement(tas, pioche);
+					if (joueur.avoirAucuneCarte()) {
+						gagnant = joueur;
+						cond = false;
+						break;
+					}
 				}
 			}
 		}
@@ -115,11 +121,15 @@ public class PartieDeCartes {
 	}
 
 	private void test() {
+		System.out.println("éedgyhujéé");
+		llJoueur.get(1).ajouterCarteEnMain(new Carte(1, Couleur.Carreau));
+		llJoueur.get(1).ajouterCarteEnMain(new Carte(1, Couleur.Pique));
+		llJoueur.get(1).ajouterCarteEnMain(new Carte(1, Couleur.Trefle));
 		System.out.println(llJoueur.get(1).getCartesEnMain());
-		System.out.println(llJoueur.get(1).getCartefaceVisibles());
-		llJoueur.get(1).getCarteFacesCachees().prendreAuhasard();
-		llJoueur.get(1).getCarteFacesCachees().prendreAuhasard();
+		llJoueur.get(1).jouerLibrement(tas, pioche);
 		System.out.println(llJoueur.get(1));
+		System.out.println(pioche);
+		System.out.println(tas);
 	}
 
 	private void EchangerLesCartes() {

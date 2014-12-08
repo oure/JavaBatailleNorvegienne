@@ -3,6 +3,7 @@ package jeu;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 
 public class JoueurIA extends Joueur {
 	int degreeStrat;
@@ -25,11 +26,10 @@ public class JoueurIA extends Joueur {
 		this.degreeStrat = degreeStrat;
 	}
 	@Override
-	public boolean jouerLibrement(Table tas) {
-		// TODO Auto-generated method stub
-		System.out.println("Bonjour je suis la méthode de joueur IA");
-		//return super.jouerLibrement(tas);
+	public boolean jouerLibrement(Table tas,Pioche pioche) {
+		HashSet<Carte> hc = new HashSet<Carte>();
 		return false;
+		
 	}
 	public void jouer(Carte c, int i) {
 		super.jouer(c, i);

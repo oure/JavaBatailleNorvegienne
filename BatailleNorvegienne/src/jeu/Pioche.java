@@ -27,7 +27,7 @@ public class Pioche {
 		if (listeDeCarte == null) {
 			listeDeCarte = new LinkedList<Carte>();
 		} else {
-			System.out.println("la pioche est d�ja creer");
+			System.out.println("la pioche est deja creer");
 		}
 		return listeDeCarte;
 
@@ -48,12 +48,6 @@ public class Pioche {
 	 */
 	public void viderPioche() {
 		listeDeCarte.clear();
-	}
-
-	public void vider_pioche() { // Cette m�thode supprime tous les �l�ments de
-									// cette liste .
-		listeDeCarte.clear();
-
 	}
 
 	public Carte prendreCarte() { // r�cup�rer et supprimer le dernier �l�ment

@@ -110,7 +110,7 @@ public class Joueur {
 		return (nombreOccurence <= i);
 	}
 
-	public boolean jouerLibrement(Table tas) {
+	public boolean jouerLibrement(Table tas,Pioche pioche) {
 		HashSet<Carte> hc = new HashSet<Carte>();
 		if (!cartesEnMain.getCartemain().isEmpty()
 				|| !cartefaceVisibles.getHs().isEmpty()) {
@@ -122,6 +122,9 @@ public class Joueur {
 			if (estPossedeDansLamain(valeur, nombreDeCarteAjouer)) {
 				hc = cartesEnMain.supCarteMain(valeur, nombreDeCarteAjouer);
 				tas.ajouterCarteTable(hc);
+				for (int i = 0; i <= hc.size(); i++) {
+					ajouterCarteEnMain(pioche.prendreCarte());
+				}
 				return true;
 			}
 			else if (cartesEnMain.getCartemain().isEmpty() ){
