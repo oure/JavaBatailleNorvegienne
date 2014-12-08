@@ -6,9 +6,9 @@ import jeu.Carte.Couleur;
 
 public class Joueur {
 	private String nom;
-	private CartesEnMain cartesEnMain = new CartesEnMain();
-	private CartesfacesVisibles cartefaceVisibles = new CartesfacesVisibles();
-	private CartesFacesCachees carteFacesCachees = new CartesFacesCachees();
+	protected CartesEnMain cartesEnMain = new CartesEnMain();
+	protected CartesfacesVisibles cartefaceVisibles = new CartesfacesVisibles();
+	protected CartesFacesCachees carteFacesCachees = new CartesFacesCachees();
 
 	public Joueur(String nom) {
 		this.nom = nom;
@@ -85,7 +85,53 @@ public class Joueur {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-
+	public void PoserUnDix(HashSet<Carte> hs,Table table){
+		for (Iterator<Carte> iterator = hs.iterator(); iterator.hasNext();) {
+			Carte carte = (Carte) iterator.next();
+			if (carte.getValeur()==10){
+				table.viderTas();
+				break;
+			}
+		}
+	}
+	/*
+	 * renvoie le nombre de personne qui vont passer leur tour,
+	 * il y a autant de 8 poses que de joueurs qui passent leur tour
+	 */
+	public int PoserUnHuit(HashSet<Carte> derniereCartesJouees,Table table){
+		int nombreDeHuit=0;
+		for (Iterator<Carte> iterator = derniereCartesJouees.iterator(); iterator.hasNext();) {
+			Carte carte = (Carte) iterator.next();
+			if (carte.getValeur()==8){
+				nombreDeHuit++;
+			}
+		}
+		return nombreDeHuit;
+	}
+	public void PoserUnAs(HashSet<Carte> derniereCartesJouees,Table table,LinkedList<Joueur> lj){
+		for (Iterator<Carte> iterator = derniereCartesJouees.iterator(); iterator.hasNext();) {
+			Carte carte = (Carte) iterator.next();
+			if (carte.getValeur()==1){
+				Joueur j=choixDuJoueurCibleePourEnvoyerLetas(lj);
+				envoyerTasSurJoueur(j, table);
+			}
+		}
+	}
+	
+	public Joueur choixDuJoueurCibleePourEnvoyerLetas(LinkedList<Joueur> lj){
+		System.out.println("Entrez le nom du joueur sur qui vous voulez envoyer le tas :");
+		String nomDuJoueurCible=PartieDeCartes.reader.nextLine();
+		nomDuJoueurCible.toLowerCase();
+		for (Iterator iterator = lj.iterator(); iterator.hasNext();) {
+			Joueur joueur = (Joueur) iterator.next();
+			if (nomDuJoueurCible==joueur.getNom()) {
+				return joueur;
+			}
+		}
+		System.out.println("Vous avez specifier un nom incorrect monsieur (Essayez sans accent!)");
+		return choixDuJoueurCibleePourEnvoyerLetas(lj);
+		
+	}
 	public boolean estPossedeDansLamain(int valeur, int nombreOccurence) {
 		int i = 0;
 		for (Iterator<Carte> it = cartesEnMain.getCartemain().iterator(); it
@@ -97,7 +143,10 @@ public class Joueur {
 		}
 		return (nombreOccurence <= i);
 	}
-
+	public boolean estCeQueLeJoueurPeutJouer(Table table,int valeur,int nombreOccurence){
+		boolean b=true;
+		return b;
+	}
 	public boolean estPossedeDansDansLesCartesVisibles(int valeur,
 			int nombreOccurence) {
 		int i = 0;
@@ -110,7 +159,7 @@ public class Joueur {
 		return (nombreOccurence <= i);
 	}
 
-	public boolean jouerLibrement(Table tas,Pioche pioche) {
+	public HashSet<Carte> jouerLibrement(Table tas,Pioche pioche) {
 		HashSet<Carte> hc = new HashSet<Carte>();
 		if (!cartesEnMain.getCartemain().isEmpty()
 				|| !cartefaceVisibles.getHs().isEmpty()) {
@@ -125,13 +174,13 @@ public class Joueur {
 				for (int i = 0; i <= hc.size(); i++) {
 					ajouterCarteEnMain(pioche.prendreCarte());
 				}
-				return true;
+				return hc;
 			}
 			else if (cartesEnMain.getCartemain().isEmpty() ){
 				if ( estPossedeDansDansLesCartesVisibles(valeur,nombreDeCarteAjouer)){
 				hc = cartefaceVisibles.supCarteVisible(valeur, nombreDeCarteAjouer);
 				tas.ajouterCarteTable(hc);
-				return true;
+				return hc;
 				}
 				else
 					System.out.println("Impossible vous ne posseder pas cette cartes dans vos cartes visibles !");
@@ -146,9 +195,9 @@ public class Joueur {
 				&& cartefaceVisibles.getHs().isEmpty())
 			 {
 			 tas.ajouterCarteALaTable(carteFacesCachees.prendreAuhasard());
-			 return true;
+			 return hc;
 			 }
-			return false;
+			return hc;
 	}
 
 	public void jouer(Carte c, int i) {
@@ -157,10 +206,10 @@ public class Joueur {
 	}
 
 	public void envoyerTasSurJoueur(Joueur j, Table tas) {
-
 		j.cartesEnMain.addAll(tas);
 		tas.viderTas();
 	}
+	
 
 	// public String toString() {
 	// String ss = "";

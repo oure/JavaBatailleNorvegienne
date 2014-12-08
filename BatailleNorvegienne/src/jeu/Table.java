@@ -7,9 +7,18 @@ import java.util.*;
  */
 public class Table {
 	private LinkedList<Carte> liste = new LinkedList<Carte>();
-
+	private HashSet<Carte> derniereCartesPoses=new HashSet<Carte>();
+	
 	public void viderTas() {
 		liste.clear();
+	}
+
+	public HashSet<Carte> getDerniereCartesPoses() {
+		return derniereCartesPoses;
+	}
+
+	public void setDerniereCartesPoses(HashSet<Carte> derniereCartesPoses) {
+		this.derniereCartesPoses = derniereCartesPoses;
 	}
 
 	/**

@@ -96,18 +96,19 @@ public class PartieDeCartes {
 	private void deroulementDujeu() {
 		Joueur gagnant = null;
 		boolean cond = true;
-		int nombreDetour = 0;
+		int compteur = 0;
 		// EchangerLesCartes();
+		HashSet<Carte> derniereCartesPosees=new HashSet<Carte>();
 		while (cond) {
 			for (Iterator<Joueur> iterator = llJoueur.iterator(); iterator
 					.hasNext();) {
-				nombreDetour++;
+				compteur++;
 				Joueur joueur = (Joueur) iterator.next();
-				if (nombreDetour == 1)
+				if (compteur == 1)
 					iterator.next();
 				else {
 					System.out.println("A vous de jouer "+joueur.getNom());
-					joueur.jouerLibrement(tas, pioche);
+					 = joueur.jouerLibrement(tas, pioche);
 					if (joueur.avoirAucuneCarte()) {
 						gagnant = joueur;
 						cond = false;
