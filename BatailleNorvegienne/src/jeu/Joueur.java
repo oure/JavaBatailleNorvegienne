@@ -123,11 +123,11 @@ public class Joueur {
 		nomDuJoueurCible.toLowerCase();
 		for (Iterator<Joueur> iterator = lj.iterator(); iterator.hasNext();) {
 			Joueur joueur = (Joueur) iterator.next();
-			if (nomDuJoueurCible==joueur.getNom()) {
+			if ( nomDuJoueurCible.equals(joueur.getNom() )) {
 				return joueur;
 			}
 		}
-		System.out.println("Vous avez specifier un nom incorrect monsieur (Essayez sans accent!)");
+		System.out.println("Vous avez specifier un nom incorrect monsieur !");
 		return choixDuJoueurCibleePourEnvoyerLetas(lj);
 		
 	}

@@ -13,7 +13,7 @@ public class PartieDeCartes {
 	public static Scanner reader;
 	private Pioche pioche = new Pioche();
 	private HashSet<JeuDeCartes> setJeuDeCartes = new HashSet<JeuDeCartes>();
-	private Table tas = new Table();
+	private Table table = new Table();
 	private LinkedList<Joueur> llJoueur = new LinkedList<Joueur>();
 	int nbrCarte;
 	Carte carte;
@@ -107,7 +107,7 @@ public class PartieDeCartes {
 		Joueur gagnant = null;
 		boolean cond = true;
 		int compteur = 0;
-		decalerListedesJoueurs();
+		decalerListedesJoueurs(); //Le distributeur joue en dernier c'est la regle
 		// EchangerLesCartes();
 		HashSet<Carte> derniereCartesPosees = new HashSet<Carte>();
 		while (cond) {
@@ -118,10 +118,10 @@ public class PartieDeCartes {
 					System.out.println(joueur);
 				}
 				System.out.println("A vous de jouer " + joueur.getNom());
-				derniereCartesPosees = joueur.jouerLibrement(tas, pioche,
+				derniereCartesPosees = joueur.jouerLibrement(table, pioche,
 						derniereCartesPosees);
-				joueur.PoserUnDix(derniereCartesPosees,tas);
-				//joueur.PoserUnAs(derniereCartesPosees, tas, llJoueur);
+				joueur.PoserUnDix(derniereCartesPosees,table);
+				joueur.PoserUnAs(derniereCartesPosees, table, llJoueur);
 				//int nombreDejoueurQuiPasseLeurTour=joueur.PoserUnHuit(derniereCartesPosees, tas);
 				System.out.println("derniere carte :"+derniereCartesPosees);
 				if (joueur.avoirAucuneCarte()) {
@@ -138,10 +138,18 @@ public class PartieDeCartes {
 
 	private void test() {
 		HashSet<Carte> derniereCartesPosees = new HashSet<Carte>();
-		llJoueur.get(1).ajouterCarteEnMain(new Carte(10, Couleur.Pique));
-		System.out.println(tas);
-		llJoueur.get(1).jouerLibrement(tas, pioche, derniereCartesPosees);
-		llJoueur.get(1).PoserUnDix(derniereCartesPosees,tas);
+		for (Iterator it = llJoueur.iterator(); it
+				.hasNext();) {
+			Joueur j = (Joueur) it.next();
+			System.out.println(j.getNom());
+		}
+		llJoueur.get(1).ajouterCarteEnMain(new Carte(8, Couleur.Pique));
+		llJoueur.get(1).ajouterCarteEnMain(new Carte(8, Couleur.Coeur));
+		llJoueur.get(1).ajouterCarteEnMain(new Carte(8, Couleur.Trefle));
+		derniereCartesPosees=llJoueur.get(1).jouerLibrement(table, pioche, derniereCartesPosees);
+		llJoueur.get(1).PoserUnHuit(derniereCartesPosees, table);
+		System.out.println(table);
+
 	}
 
 	private void EchangerLesCartes() {
