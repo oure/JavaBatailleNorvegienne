@@ -2,8 +2,6 @@ package jeu;
 
 import java.util.*;
 
-import jeu.Carte.Couleur;
-
 public class Joueur {
 	private String nom;
 	protected CartesEnMain cartesEnMain = new CartesEnMain();
@@ -122,7 +120,7 @@ public class Joueur {
 		System.out.println("Entrez le nom du joueur sur qui vous voulez envoyer le tas :");
 		String nomDuJoueurCible=PartieDeCartes.reader.nextLine();
 		nomDuJoueurCible.toLowerCase();
-		for (Iterator iterator = lj.iterator(); iterator.hasNext();) {
+		for (Iterator<Joueur> iterator = lj.iterator(); iterator.hasNext();) {
 			Joueur joueur = (Joueur) iterator.next();
 			if (nomDuJoueurCible==joueur.getNom()) {
 				return joueur;
@@ -143,10 +141,23 @@ public class Joueur {
 		}
 		return (nombreOccurence <= i);
 	}
-	public boolean estCeQueLeJoueurPeutJouer(Table table,int valeur,int nombreOccurence){
-		boolean b=true;
+	
+	public boolean estCeQueLeJoueurPeutJouer(HashSet<Carte> derniereCartesPosees,int valeur,int nombreOccurence){
+		boolean b=false;
+		if (derniereCartesPosees.isEmpty())
+			b=true;
+		for (Iterator<Carte> iterator = derniereCartesPosees.iterator(); iterator
+				.hasNext();) {
+			Carte carte = (Carte) iterator.next();
+			if (carte.getValeur()>valeur) {
+				b=false;
+			}
+		}
+		if(valeur==2)
+			b=true;
 		return b;
 	}
+	
 	public boolean estPossedeDansDansLesCartesVisibles(int valeur,
 			int nombreOccurence) {
 		int i = 0;
@@ -159,7 +170,7 @@ public class Joueur {
 		return (nombreOccurence <= i);
 	}
 
-	public HashSet<Carte> jouerLibrement(Table tas,Pioche pioche) {
+	public HashSet<Carte> jouerLibrement(Table tas,Pioche pioche, HashSet<Carte> derniereCartesPosees) {
 		HashSet<Carte> hc = new HashSet<Carte>();
 		if (!cartesEnMain.getCartemain().isEmpty()
 				|| !cartefaceVisibles.getHs().isEmpty()) {

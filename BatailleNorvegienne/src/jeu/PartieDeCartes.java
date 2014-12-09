@@ -108,7 +108,7 @@ public class PartieDeCartes {
 					iterator.next();
 				else {
 					System.out.println("A vous de jouer "+joueur.getNom());
-					 = joueur.jouerLibrement(tas, pioche);
+					 derniereCartesPosees = joueur.jouerLibrement(tas, pioche,derniereCartesPosees);
 					if (joueur.avoirAucuneCarte()) {
 						gagnant = joueur;
 						cond = false;
@@ -122,15 +122,10 @@ public class PartieDeCartes {
 	}
 
 	private void test() {
-		System.out.println("éedgyhujéé");
-		llJoueur.get(1).ajouterCarteEnMain(new Carte(1, Couleur.Carreau));
-		llJoueur.get(1).ajouterCarteEnMain(new Carte(1, Couleur.Pique));
-		llJoueur.get(1).ajouterCarteEnMain(new Carte(1, Couleur.Trefle));
-		System.out.println(llJoueur.get(1).getCartesEnMain());
-		llJoueur.get(1).jouerLibrement(tas, pioche);
-		System.out.println(llJoueur.get(1));
-		System.out.println(pioche);
-		System.out.println(tas);
+		System.out.println(llJoueur.get(0));
+		int []tab=((JoueurIA) llJoueur.get(0)).choixDesCartesAJouer();
+		System.out.println(tab[0]);
+		System.out.println(tab[1]);
 	}
 
 	private void EchangerLesCartes() {
@@ -166,7 +161,7 @@ public class PartieDeCartes {
 		miseEnPlaceDesJeuxdeCartes();
 		distribuer();
 		deroulementDujeu();
-		// test();
+		//test();
 	}
 
 	public static void main(String[] args) {

@@ -51,25 +51,24 @@ public class JoueurIA extends Joueur {
 	    return randomNum;
 	}
 	
-	private int[] choixDesCartesAJouer(){
+	public int[] choixDesCartesAJouer(){
 		/*
 		 * Dans la premiere case tu tableau nous mettons le nombre de carte a jouer 
 		 * et dans la deuxieme nous mettons la valeur de la carte
 		 */
-		int[] choix=null;
+		int []choix=new int[2];
 
 		if (!cartesEnMain.getCartemain().isEmpty()){
 			Object [] tableauObjets=cartesEnMain.getCartemain().toArray();
-			Carte c=(Carte) tableauObjets[randInt(0, tableauObjets.length)];
-			for (Iterator<Carte> iterator = cartesEnMain.getCartemain().iterator(); iterator
-					.hasNext();) {
-				Carte c = (Carte) iterator.next();
-				
-			}
+			Carte c=(Carte) tableauObjets[randInt(0, tableauObjets.length-1)];
+			choix[0]=1;
+			choix[1]=c.getValeur();
 		}
 		else if (!cartefaceVisibles.getHs().isEmpty()){
 			Object [] jk=cartefaceVisibles.getHs().toArray();
 			Carte c=(Carte) jk[randInt(0, jk.length)];
+			choix[0]=1;
+			choix[1]=c.getValeur();
 			}
 		else{
 			choix[0]=1;
@@ -83,36 +82,36 @@ public class JoueurIA extends Joueur {
 	 * Le joueur IA va jouer aleatoirement des cartes pour l'instant
 	 */
 	@Override
-	public boolean jouerLibrement(Table tas, Pioche pioche) {
+	public HashSet<Carte> jouerLibrement(Table tas,Pioche pioche, HashSet<Carte> derniereCartesPosees) {
 		HashSet<Carte> hc = new HashSet<Carte>();
-
+		int []tab=choixDesCartesAJouer();
+		int valeur = tab[1];
+		int nombreDeCarteAjouer = tab [0];
 		if (!cartesEnMain.getCartemain().isEmpty()
 				|| !cartefaceVisibles.getHs().isEmpty()) {
-			int valeur = 0;
-			int nombreDeCarteAjouer = 0;
 			if (estPossedeDansLamain(valeur, nombreDeCarteAjouer)) {
 				hc = cartesEnMain.supCarteMain(valeur, nombreDeCarteAjouer);
 				tas.ajouterCarteTable(hc);
 				for (int i = 0; i <= hc.size(); i++) {
 					ajouterCarteEnMain(pioche.prendreCarte());
 				}
-				return true;
+				return hc;
 			} else if (cartesEnMain.getCartemain().isEmpty()) {
 				if (estPossedeDansDansLesCartesVisibles(valeur,
 						nombreDeCarteAjouer)) {
 					hc = cartefaceVisibles.supCarteVisible(valeur,
 							nombreDeCarteAjouer);
 					tas.ajouterCarteTable(hc);
-					return true;
+					return hc;
 				}
 			}
 		}
 		if (cartesEnMain.getCartemain().isEmpty()
 				&& cartefaceVisibles.getHs().isEmpty()) {
 			tas.ajouterCarteALaTable(carteFacesCachees.prendreAuhasard());
-			return true;
+			return hc;
 		}
-		return false;
+	return hc;
 	}
 
 	public void jouer(Carte c, int i) {
