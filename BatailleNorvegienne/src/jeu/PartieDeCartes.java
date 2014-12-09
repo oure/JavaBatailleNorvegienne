@@ -1,5 +1,6 @@
 package jeu;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -51,11 +52,20 @@ public class PartieDeCartes {
 		}
 	}
 
+	private void decalerListedesJoueurs() {
+		Joueur j = llJoueur.getFirst();
+		llJoueur.remove();
+		llJoueur.addLast(j);
+	}
+
+	private void inverserListedesJoueurs() {
+		Collections.reverse(llJoueur);
+	}
+
 	/*
 	 * Creation d'un ou plusieurs jeu de carte en fonction du nombre de joueur.
 	 */
 	private void miseEnPlaceDesJeuxdeCartes() {
-		// System.out.println("llJoueur.size()" + llJoueur.size());
 		if (llJoueur.size() <= 5 && llJoueur.size() > 1) {
 			setJeuDeCartes.add(new JeuDeCartes());
 		} else if (llJoueur.size() > 5 && llJoueur.size() <= 11) {
@@ -97,24 +107,29 @@ public class PartieDeCartes {
 		Joueur gagnant = null;
 		boolean cond = true;
 		int compteur = 0;
+		decalerListedesJoueurs();
 		// EchangerLesCartes();
-		HashSet<Carte> derniereCartesPosees=new HashSet<Carte>();
+		HashSet<Carte> derniereCartesPosees = new HashSet<Carte>();
 		while (cond) {
 			for (Iterator<Joueur> iterator = llJoueur.iterator(); iterator
 					.hasNext();) {
-				compteur++;
 				Joueur joueur = (Joueur) iterator.next();
-				if (compteur == 1)
-					iterator.next();
-				else {
-					System.out.println("A vous de jouer "+joueur.getNom());
-					 derniereCartesPosees = joueur.jouerLibrement(tas, pioche,derniereCartesPosees);
-					if (joueur.avoirAucuneCarte()) {
-						gagnant = joueur;
-						cond = false;
-						break;
-					}
+				if (llJoueur.get(0)==joueur) {
+					System.out.println(joueur);
 				}
+				System.out.println("A vous de jouer " + joueur.getNom());
+				derniereCartesPosees = joueur.jouerLibrement(tas, pioche,
+						derniereCartesPosees);
+				joueur.PoserUnDix(derniereCartesPosees,tas);
+				//joueur.PoserUnAs(derniereCartesPosees, tas, llJoueur);
+				//int nombreDejoueurQuiPasseLeurTour=joueur.PoserUnHuit(derniereCartesPosees, tas);
+				System.out.println("derniere carte :"+derniereCartesPosees);
+				if (joueur.avoirAucuneCarte()) {
+					gagnant = joueur;
+					cond = false;
+					break;
+				}
+
 			}
 		}
 		System.out.println("Felicitation " + gagnant.getNom()
@@ -122,10 +137,11 @@ public class PartieDeCartes {
 	}
 
 	private void test() {
-		System.out.println(llJoueur.get(0));
-		int []tab=((JoueurIA) llJoueur.get(0)).choixDesCartesAJouer();
-		System.out.println(tab[0]);
-		System.out.println(tab[1]);
+		HashSet<Carte> derniereCartesPosees = new HashSet<Carte>();
+		llJoueur.get(1).ajouterCarteEnMain(new Carte(10, Couleur.Pique));
+		System.out.println(tas);
+		llJoueur.get(1).jouerLibrement(tas, pioche, derniereCartesPosees);
+		llJoueur.get(1).PoserUnDix(derniereCartesPosees,tas);
 	}
 
 	private void EchangerLesCartes() {
@@ -150,8 +166,6 @@ public class PartieDeCartes {
 		for (Iterator<Joueur> iterator = llJoueur.iterator(); iterator
 				.hasNext();) {
 			Joueur joueur = (Joueur) iterator.next();
-			System.out.println(joueur);
-
 		}
 		System.out.println(pioche);
 	}
@@ -160,8 +174,8 @@ public class PartieDeCartes {
 		miseEnPlaceDeLaListeDesJoueurs();
 		miseEnPlaceDesJeuxdeCartes();
 		distribuer();
-		deroulementDujeu();
-		//test();
+		//deroulementDujeu();
+		test();
 	}
 
 	public static void main(String[] args) {

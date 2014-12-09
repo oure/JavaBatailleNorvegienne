@@ -44,8 +44,6 @@ public class Table {
 			Carte carte = (Carte) iterator.next();
 			liste.add(carte);
 		}
-		hashSetCartes.removeAll(liste);
-
 	}
 
 	public void setListe(LinkedList<Carte> liste) {

@@ -83,8 +83,9 @@ public class Joueur {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	public void PoserUnDix(HashSet<Carte> hs,Table table){
-		for (Iterator<Carte> iterator = hs.iterator(); iterator.hasNext();) {
+
+	public void PoserUnDix(HashSet<Carte> derniereCartesPosees,Table table){
+		for (Iterator<Carte> iterator = derniereCartesPosees.iterator(); iterator.hasNext();) {
 			Carte carte = (Carte) iterator.next();
 			if (carte.getValeur()==10){
 				table.viderTas();
@@ -96,9 +97,9 @@ public class Joueur {
 	 * renvoie le nombre de personne qui vont passer leur tour,
 	 * il y a autant de 8 poses que de joueurs qui passent leur tour
 	 */
-	public int PoserUnHuit(HashSet<Carte> derniereCartesJouees,Table table){
+	public int PoserUnHuit(HashSet<Carte> derniereCartesPosees,Table table){
 		int nombreDeHuit=0;
-		for (Iterator<Carte> iterator = derniereCartesJouees.iterator(); iterator.hasNext();) {
+		for (Iterator<Carte> iterator = derniereCartesPosees.iterator(); iterator.hasNext();) {
 			Carte carte = (Carte) iterator.next();
 			if (carte.getValeur()==8){
 				nombreDeHuit++;
@@ -106,8 +107,8 @@ public class Joueur {
 		}
 		return nombreDeHuit;
 	}
-	public void PoserUnAs(HashSet<Carte> derniereCartesJouees,Table table,LinkedList<Joueur> lj){
-		for (Iterator<Carte> iterator = derniereCartesJouees.iterator(); iterator.hasNext();) {
+	public void PoserUnAs(HashSet<Carte> derniereCartesPosees,Table table,LinkedList<Joueur> lj){
+		for (Iterator<Carte> iterator = derniereCartesPosees.iterator(); iterator.hasNext();) {
 			Carte carte = (Carte) iterator.next();
 			if (carte.getValeur()==1){
 				Joueur j=choixDuJoueurCibleePourEnvoyerLetas(lj);
@@ -185,6 +186,7 @@ public class Joueur {
 				for (int i = 0; i <= hc.size(); i++) {
 					ajouterCarteEnMain(pioche.prendreCarte());
 				}
+				
 				return hc;
 			}
 			else if (cartesEnMain.getCartemain().isEmpty() ){
