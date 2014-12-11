@@ -108,8 +108,8 @@ public class PartieDeCartes {
 		boolean cond = true;
 		int compteurPourPasserLesTours = 0;
 		boolean passerLeTour = false;
-		int nombreDejoueurQuiPasseLeurTour=0;
-		decalerListedesJoueurs(); // Le distributeur joue en dernier 
+		int nombreDejoueurQuiPasseLeurTour = 0;
+		decalerListedesJoueurs(); // Le distributeur joue en dernier
 		// EchangerLesCartes();
 		HashSet<Carte> derniereCartesPosees = new HashSet<Carte>();
 		while (cond) {
@@ -118,17 +118,25 @@ public class PartieDeCartes {
 				Joueur joueur = (Joueur) iterator.next();
 				if (!passerLeTour) {
 					if (llJoueur.get(0) == joueur) {
-						System.out.println(joueur);
+						//System.out.println(joueur);
 					}
+					System.out.println(joueur);
 					System.out.println("A vous de jouer " + joueur.getNom());
-					derniereCartesPosees = joueur.jouerLibrement(table, pioche,
-							derniereCartesPosees);
-					joueur.PoserUnDix(derniereCartesPosees, table);
-					joueur.PoserUnAs(derniereCartesPosees, table, llJoueur);
-					nombreDejoueurQuiPasseLeurTour = joueur.PoserUnHuit(
-							derniereCartesPosees, table);
+					if (joueur.estCeQueLeJoueurPeutJouer(derniereCartesPosees,
+							table)) {
+						derniereCartesPosees = joueur.jouerLibrement(table,
+								pioche, derniereCartesPosees);
+						joueur.PoserUnDix(derniereCartesPosees, table);
+						joueur.PoserUnAs(derniereCartesPosees, table, llJoueur);
+						nombreDejoueurQuiPasseLeurTour = joueur.PoserUnHuit(
+								derniereCartesPosees, table);
+					}
+					else{
+						joueur.piocher(1, pioche);
+						System.out.println("JE PIOCHE");
+					}
 					if (nombreDejoueurQuiPasseLeurTour != 0) {
-						passerLeTour=true;
+						passerLeTour = true;
 					}
 					System.out.println("derniere carte :"
 							+ derniereCartesPosees);
@@ -137,15 +145,12 @@ public class PartieDeCartes {
 						cond = false;
 						break;
 					}
-				}
-				else
-				{
-					System.out.println("JE PASSE MON TOUR "+joueur.getNom());
-					if (compteurPourPasserLesTours+1>=nombreDejoueurQuiPasseLeurTour){
-						passerLeTour=false;
-						nombreDejoueurQuiPasseLeurTour=0;
-					}
-					else
+				} else {
+					System.out.println("JE PASSE MON TOUR " + joueur.getNom());
+					if (compteurPourPasserLesTours + 1 >= nombreDejoueurQuiPasseLeurTour) {
+						passerLeTour = false;
+						nombreDejoueurQuiPasseLeurTour = 0;
+					} else
 						compteurPourPasserLesTours++;
 				}
 
@@ -162,7 +167,8 @@ public class PartieDeCartes {
 		table.ajouterCarteALaTable(new Carte(1, Couleur.Pique));
 		table.ajouterCarteALaTable(new Carte(3, Couleur.Pique));
 		table.ajouterCarteALaTable(new Carte(2, Couleur.Pique));
-		System.out.println("DERNIER CARTE"+table.afficherDerniereCarteDuTas());
+		System.out
+				.println("DERNIER CARTE" + table.afficherDerniereCarteDuTas());
 		llJoueur.get(2).getCartesEnMain().supprimerToutesLesCartesEnmain();
 		llJoueur.get(2).ajouterCarteEnMain(new Carte(3, Couleur.Pique));
 		llJoueur.get(2).ajouterCarteEnMain(new Carte(3, Couleur.Coeur));
@@ -171,11 +177,13 @@ public class PartieDeCartes {
 		System.out.println(llJoueur.get(2).getCartesEnMain());
 		System.out.println(table);
 
-		System.out.println("EST CE QUE LE JOUEUR PEUX JOUER "+llJoueur.get(2).estCeQueLeJoueurPeutJouer(
-				derniereCartesPosees,table));
-		//derniereCartesPosees = llJoueur.get(2).jouerLibrement(table, pioche,
-		//		derniereCartesPosees);
-		//System.out.println(llJoueur.get(2).estCeQueLeJoueurPeutJouerDesCartes(derniereCartesPosees, 7, 1, table));
+		System.out.println("EST CE QUE LE JOUEUR PEUX JOUER "
+				+ llJoueur.get(2).estCeQueLeJoueurPeutJouer(
+						derniereCartesPosees, table));
+		// derniereCartesPosees = llJoueur.get(2).jouerLibrement(table, pioche,
+		// derniereCartesPosees);
+		// System.out.println(llJoueur.get(2).estCeQueLeJoueurPeutJouerDesCartes(derniereCartesPosees,
+		// 7, 1, table));
 
 	}
 
@@ -209,8 +217,8 @@ public class PartieDeCartes {
 		miseEnPlaceDeLaListeDesJoueurs();
 		miseEnPlaceDesJeuxdeCartes();
 		distribuer();
-		//deroulementDujeu();
-		test();
+		deroulementDujeu();
+		// test();
 	}
 
 	public static void main(String[] args) {

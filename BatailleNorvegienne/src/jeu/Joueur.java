@@ -167,7 +167,7 @@ public class Joueur {
 	}
 
 	public boolean estSuperieureOuEgal(int valeur, Table tas) {
-		if (tas.getListe().getLast().getValeur() <= valeur)
+		if (tas.getListe().isEmpty() || tas.getListe().getLast().getValeur() <= valeur)
 			return true;
 		else
 			return false;
@@ -181,15 +181,13 @@ public class Joueur {
 	}
 
 	public boolean estCeQueLeJoueurPeutJouer(
-			HashSet<Carte> derniereCartesPosees, Table tas) {
+			HashSet<Carte> derniereCartesPosees, Table table) {
 		if (!cartesEnMain.isEmpty())
-			System.out.println("TEST ");
 			for (Iterator<Carte> it = cartesEnMain.getCartemain().iterator(); it
 					.hasNext();) {
 				Carte c = (Carte) it.next();
 				if (estCeQueLeJoueurPeutJouerDesCartes(derniereCartesPosees,
-						c.getValeur(), 1, tas)){
-					System.out.println("derniereCartesPosees : "+derniereCartesPosees+" +valeur carte : "+c.getValeur());
+						c.getValeur(), 1, table)){
 					return true;
 				}
 			}
@@ -198,9 +196,11 @@ public class Joueur {
 					.hasNext();) {
 				Carte carte = (Carte) iterator.next();
 				if (estCeQueLeJoueurPeutJouerDesCartes(derniereCartesPosees,
-						carte.getValeur(), 1, tas))
+						carte.getValeur(), 1, table))
 					return true;
 			}
+		if (cartesEnMain.isEmpty() && cartefaceVisibles.isEmpty() && !carteFacesCachees.isEmpty() )
+			return true;
 		return false;
 	}
 
@@ -218,7 +218,6 @@ public class Joueur {
 		}
 		if (derniereCartesPosees==null
 				|| estSuperieureOuEgal(valeur, table)){
-			System.out.println("jzsbghirjnrsg");
 			return true;
 		}
 		else
@@ -250,7 +249,7 @@ public class Joueur {
 			if (estPossedeDansLamain(valeur, nombreDeCarteAjouer)) {
 				hc = cartesEnMain.supCarteMain(valeur, nombreDeCarteAjouer);
 				tas.ajouterCarteTable(hc);
-				for (int i = 0; i <= hc.size(); i++) {
+				for (int i = 0; i < hc.size(); i++) {
 					ajouterCarteEnMain(pioche.prendreCarte());
 				}
 
@@ -269,6 +268,7 @@ public class Joueur {
 			} else {
 				System.out
 						.println("Impossible vous ne posseder pas cette carte.");
+				jouerLibrement(tas, pioche,derniereCartesPosees);
 			}
 		}
 		if (cartesEnMain.getCartemain().isEmpty()
