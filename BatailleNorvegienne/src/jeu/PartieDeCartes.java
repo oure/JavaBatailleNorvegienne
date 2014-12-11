@@ -110,9 +110,6 @@ public class PartieDeCartes {
 		boolean passerLeTour = false;
 		int nombreDejoueurQuiPasseLeurTour=0;
 		decalerListedesJoueurs(); // Le distributeur joue en dernier 
-		llJoueur.get(0).ajouterCarteEnMain(new Carte(8, Couleur.Pique));
-		llJoueur.get(0).ajouterCarteEnMain(new Carte(8, Couleur.Coeur));
-		llJoueur.get(0).ajouterCarteEnMain(new Carte(8, Couleur.Carreau));
 		// EchangerLesCartes();
 		HashSet<Carte> derniereCartesPosees = new HashSet<Carte>();
 		while (cond) {
@@ -130,7 +127,6 @@ public class PartieDeCartes {
 					joueur.PoserUnAs(derniereCartesPosees, table, llJoueur);
 					nombreDejoueurQuiPasseLeurTour = joueur.PoserUnHuit(
 							derniereCartesPosees, table);
-					System.out.println("nombreDejoueurQuiPasseLeurTour : "+nombreDejoueurQuiPasseLeurTour);
 					if (nombreDejoueurQuiPasseLeurTour != 0) {
 						passerLeTour=true;
 					}
@@ -161,17 +157,23 @@ public class PartieDeCartes {
 
 	private void test() {
 		HashSet<Carte> derniereCartesPosees = new HashSet<Carte>();
-		for (Iterator it = llJoueur.iterator(); it.hasNext();) {
+		for (Iterator<Joueur> it = llJoueur.iterator(); it.hasNext();) {
 			Joueur j = (Joueur) it.next();
 			System.out.println(j.getNom());
 		}
-		llJoueur.get(1).ajouterCarteEnMain(new Carte(8, Couleur.Pique));
-		llJoueur.get(1).ajouterCarteEnMain(new Carte(8, Couleur.Coeur));
-		llJoueur.get(1).ajouterCarteEnMain(new Carte(8, Couleur.Trefle));
-		derniereCartesPosees = llJoueur.get(1).jouerLibrement(table, pioche,
+		table.ajouterCarteALaTable(new Carte(3, Couleur.Pique));
+		table.ajouterCarteALaTable(new Carte(1, Couleur.Pique));
+		table.ajouterCarteALaTable(new Carte(3, Couleur.Pique));
+		llJoueur.get(1).getCartesEnMain().supprimerToutesLesCartesEnmain();
+		llJoueur.get(1).ajouterCarteEnMain(new Carte(2, Couleur.Pique));
+		llJoueur.get(2).ajouterCarteEnMain(new Carte(3, Couleur.Coeur));
+		llJoueur.get(2).ajouterCarteEnMain(new Carte(4, Couleur.Trefle));
+		
+		derniereCartesPosees = llJoueur.get(2).jouerLibrement(table, pioche,
 				derniereCartesPosees);
-		int nbDe8 = llJoueur.get(1).PoserUnHuit(derniereCartesPosees, table);
-		System.out.println(nbDe8);
+		table.ajouterCarteALaTable(new Carte(7,Couleur.Coeur));
+		System.out.println(table);
+		System.out.println(llJoueur.get(2).estCeQueLeJoueurPeutJouerDesCartes(derniereCartesPosees, 1, 1, table));
 
 	}
 
@@ -205,8 +207,8 @@ public class PartieDeCartes {
 		miseEnPlaceDeLaListeDesJoueurs();
 		miseEnPlaceDesJeuxdeCartes();
 		distribuer();
-		deroulementDujeu();
-		// test();
+		//deroulementDujeu();
+		test();
 	}
 
 	public static void main(String[] args) {

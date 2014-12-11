@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Random;
 
 public class JoueurIA extends Joueur {
@@ -77,7 +78,17 @@ public class JoueurIA extends Joueur {
 		}
 		return choix;
 	}
-
+	
+	public Joueur choixDuJoueurCibleePourEnvoyerLetas(LinkedList<Joueur> lj){
+		System.out.println("CHOIX DU JOUEUR CIBLE MAGUEULE");
+		int num=getNumeroduJoueurDansLaListeDeJoueur(lj,this);
+		int numeroDuJoueurDesigne = randInt(0,lj.size()-1);
+		if(numeroDuJoueurDesigne!=num) //Il serait idiot qu'un joueurIA se lance le tas à lui même.
+			return lj.get(numeroDuJoueurDesigne);
+		else
+			choixDuJoueurCibleePourEnvoyerLetas(lj);
+		return null;
+	}
 	/*
 	 * Le joueur IA va jouer aleatoirement des cartes pour l'instant
 	 */
@@ -112,9 +123,5 @@ public class JoueurIA extends Joueur {
 			return hc;
 		}
 	return hc;
-	}
-
-	public void jouer(Carte c, int i) {
-		super.jouer(c, i);
 	}
 }

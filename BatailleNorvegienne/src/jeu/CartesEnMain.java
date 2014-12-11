@@ -41,7 +41,9 @@ public class CartesEnMain {
 		cartemain.removeAll(hc);
 		return hc;
 	}
-
+	public void supprimerToutesLesCartesEnmain(){
+		cartemain.clear();
+	}
 	public HashSet<Carte> getCartemain() {
 		return cartemain;
 	}

@@ -84,53 +84,76 @@ public class Joueur {
 		this.nom = nom;
 	}
 
-	public void PoserUnDix(HashSet<Carte> derniereCartesPosees,Table table){
-		for (Iterator<Carte> iterator = derniereCartesPosees.iterator(); iterator.hasNext();) {
+	public void PoserUnDix(HashSet<Carte> derniereCartesPosees, Table table) {
+		for (Iterator<Carte> iterator = derniereCartesPosees.iterator(); iterator
+				.hasNext();) {
 			Carte carte = (Carte) iterator.next();
-			if (carte.getValeur()==10){
+			if (carte.getValeur() == 10) {
 				table.viderTas();
 				break;
 			}
 		}
 	}
+
 	/*
-	 * renvoie le nombre de personne qui vont passer leur tour,
-	 * il y a autant de 8 poses que de joueurs qui passent leur tour
+	 * renvoie le nombre de personne qui vont passer leur tour, il y a autant de
+	 * 8 poses que de joueurs qui passent leur tour
 	 */
-	public int PoserUnHuit(HashSet<Carte> derniereCartesPosees,Table table){
-		int nombreDeHuit=0;
-		for (Iterator<Carte> iterator = derniereCartesPosees.iterator(); iterator.hasNext();) {
+	public int PoserUnHuit(HashSet<Carte> derniereCartesPosees, Table table) {
+		int nombreDeHuit = 0;
+		for (Iterator<Carte> iterator = derniereCartesPosees.iterator(); iterator
+				.hasNext();) {
 			Carte carte = (Carte) iterator.next();
-			if (carte.getValeur()==8){
+			if (carte.getValeur() == 8) {
 				nombreDeHuit++;
 			}
 		}
 		return nombreDeHuit;
 	}
-	public void PoserUnAs(HashSet<Carte> derniereCartesPosees,Table table,LinkedList<Joueur> lj){
-		for (Iterator<Carte> iterator = derniereCartesPosees.iterator(); iterator.hasNext();) {
+
+	public int getNumeroduJoueurDansLaListeDeJoueur(LinkedList<Joueur> lj,
+			Joueur j) {
+		for (int i = 0; i < lj.size() - 1; i++) {
+			if (lj.get(i) == j)
+				return i;
+		}
+		return -1;
+	}
+
+	public void PoserUnAs(HashSet<Carte> derniereCartesPosees, Table table,
+			LinkedList<Joueur> lj) {
+		Joueur j = null;
+		for (Iterator<Carte> iterator = derniereCartesPosees.iterator(); iterator
+				.hasNext();) {
 			Carte carte = (Carte) iterator.next();
-			if (carte.getValeur()==1){
-				Joueur j=choixDuJoueurCibleePourEnvoyerLetas(lj);
+			if (carte.getValeur() == 1) {
+				if (this instanceof JoueurIA) {
+					System.out.println("OMG JE SUIS UN JOUEUR IA");
+					j = choixDuJoueurCibleePourEnvoyerLetas(lj);
+					System.out.println("VICTIME : " + j);
+				}
 				envoyerTasSurJoueur(j, table);
 			}
+
 		}
 	}
-	
-	public Joueur choixDuJoueurCibleePourEnvoyerLetas(LinkedList<Joueur> lj){
-		System.out.println("Entrez le nom du joueur sur qui vous voulez envoyer le tas :");
-		String nomDuJoueurCible=PartieDeCartes.reader.nextLine();
+
+	public Joueur choixDuJoueurCibleePourEnvoyerLetas(LinkedList<Joueur> lj) {
+		System.out
+				.println("Entrez le nom du joueur sur qui vous voulez envoyer le tas :");
+		String nomDuJoueurCible = PartieDeCartes.reader.nextLine();
 		nomDuJoueurCible.toLowerCase();
 		for (Iterator<Joueur> iterator = lj.iterator(); iterator.hasNext();) {
 			Joueur joueur = (Joueur) iterator.next();
-			if ( nomDuJoueurCible.equals(joueur.getNom() )) {
+			if (nomDuJoueurCible.equals(joueur.getNom())) {
 				return joueur;
 			}
 		}
 		System.out.println("Vous avez specifier un nom incorrect monsieur !");
 		return choixDuJoueurCibleePourEnvoyerLetas(lj);
-		
+
 	}
+
 	public boolean estPossedeDansLamain(int valeur, int nombreOccurence) {
 		int i = 0;
 		for (Iterator<Carte> it = cartesEnMain.getCartemain().iterator(); it
@@ -142,23 +165,61 @@ public class Joueur {
 		}
 		return (nombreOccurence <= i);
 	}
-	
-	public boolean estCeQueLeJoueurPeutJouer(HashSet<Carte> derniereCartesPosees,int valeur,int nombreOccurence){
-		boolean b=false;
-		if (derniereCartesPosees.isEmpty())
-			b=true;
-		for (Iterator<Carte> iterator = derniereCartesPosees.iterator(); iterator
-				.hasNext();) {
-			Carte carte = (Carte) iterator.next();
-			if (carte.getValeur()>valeur) {
-				b=false;
-			}
-		}
-		if(valeur==2)
-			b=true;
-		return b;
+
+	public boolean estSuperieureOuEgal(int valeur, Table tas) {
+		if (tas.getListe().getLast().getValeur() <= valeur)
+			return true;
+		else
+			return false;
 	}
-	
+
+	public boolean estCeQueJePeuxJouerUnHuit(Table table) {
+		if (table.afficherDerniereCarteDuTas().getValeur() < 8)
+			return true;
+		else
+			return false;
+	}
+
+	public boolean estCeQueLeJoueurPeutJouer(
+			HashSet<Carte> derniereCartesPosees, Table tas) {
+		if (!cartesEnMain.isEmpty())
+			for (Iterator<Carte> it = cartesEnMain.getCartemain().iterator(); it
+					.hasNext();) {
+				Carte c = (Carte) it.next();
+				if (estCeQueLeJoueurPeutJouerDesCartes(derniereCartesPosees,
+						c.getValeur(), 1, tas))
+					return true;
+			}
+		if (cartesEnMain.isEmpty() && !cartefaceVisibles.isEmpty())
+			for (Iterator<Carte> iterator = cartefaceVisibles.getHs().iterator(); iterator
+					.hasNext();) {
+				Carte carte = (Carte) iterator.next();
+				if (estCeQueLeJoueurPeutJouerDesCartes(derniereCartesPosees,
+						carte.getValeur(), 1, tas))
+					return true;
+			}
+		return false;
+	}
+
+	public boolean estCeQueLeJoueurPeutJouerDesCartes(
+			HashSet<Carte> derniereCartesPosees, int valeur,
+			int nombreOccurence, Table table) {
+		if (valeur == 2)
+			return true;
+		if (valeur == 8) {
+			System.out.println("JE VEUX JOUER UN 8");
+			if (estCeQueJePeuxJouerUnHuit(table))
+				return true;
+			else
+				return false;
+		}
+		if (derniereCartesPosees.isEmpty()
+				|| estSuperieureOuEgal(valeur, table))
+			return true;
+		else
+			return false;
+	}
+
 	public boolean estPossedeDansDansLesCartesVisibles(int valeur,
 			int nombreOccurence) {
 		int i = 0;
@@ -171,7 +232,8 @@ public class Joueur {
 		return (nombreOccurence <= i);
 	}
 
-	public HashSet<Carte> jouerLibrement(Table tas,Pioche pioche, HashSet<Carte> derniereCartesPosees) {
+	public HashSet<Carte> jouerLibrement(Table tas, Pioche pioche,
+			HashSet<Carte> derniereCartesPosees) {
 		HashSet<Carte> hc = new HashSet<Carte>();
 		if (!cartesEnMain.getCartemain().isEmpty()
 				|| !cartefaceVisibles.getHs().isEmpty()) {
@@ -186,61 +248,35 @@ public class Joueur {
 				for (int i = 0; i <= hc.size(); i++) {
 					ajouterCarteEnMain(pioche.prendreCarte());
 				}
-				
+
 				return hc;
-			}
-			else if (cartesEnMain.getCartemain().isEmpty() ){
-				if ( estPossedeDansDansLesCartesVisibles(valeur,nombreDeCarteAjouer)){
-				hc = cartefaceVisibles.supCarteVisible(valeur, nombreDeCarteAjouer);
-				tas.ajouterCarteTable(hc);
-				return hc;
-				}
-				else
-					System.out.println("Impossible vous ne posseder pas cette cartes dans vos cartes visibles !");
-					
-			}
-			else {
+			} else if (cartesEnMain.getCartemain().isEmpty()) {
+				if (estPossedeDansDansLesCartesVisibles(valeur,
+						nombreDeCarteAjouer)) {
+					hc = cartefaceVisibles.supCarteVisible(valeur,
+							nombreDeCarteAjouer);
+					tas.ajouterCarteTable(hc);
+					return hc;
+				} else
+					System.out
+							.println("Impossible vous ne posseder pas cette cartes dans vos cartes visibles !");
+
+			} else {
 				System.out
 						.println("Impossible vous ne posseder pas cette carte.");
 			}
 		}
 		if (cartesEnMain.getCartemain().isEmpty()
-				&& cartefaceVisibles.getHs().isEmpty())
-			 {
-			 tas.ajouterCarteALaTable(carteFacesCachees.prendreAuhasard());
-			 return hc;
-			 }
+				&& cartefaceVisibles.getHs().isEmpty()) {
+			tas.ajouterCarteALaTable(carteFacesCachees.prendreAuhasard());
 			return hc;
-	}
-
-	public void jouer(Carte c, int i) {
-		// TODO Auto-generated method stub
-
+		}
+		return hc;
 	}
 
 	public void envoyerTasSurJoueur(Joueur j, Table tas) {
 		j.cartesEnMain.addAll(tas);
 		tas.viderTas();
-	}
-	
-
-	// public String toString() {
-	// String ss = "";
-	// for (Iterator<Carte> iterator = cartesEnMain.iterator();
-	// iterator.hasNext();) {
-	// Carte carte = (Carte) iterator.next();
-	// ss += carte.getValeur() + " ";
-	// }
-	// if (ss != "")
-	// return "Nom : " + nom + ", Carte(s) : " + ss;
-	// else
-	// return "Nom : " + " pas de carte";
-	// }
-
-	public void recevoirCarte(Set<Carte> s) // les cartes envoyes par un autre
-											// joueur
-	{
-		// cartesEnMain.addAll(s);
 	}
 
 	public void recevoirUneCarte(Carte ca) {
@@ -253,7 +289,6 @@ public class Joueur {
 				cartesEnMain.ajouterCarteMain(pioche.prendreCarte());
 			}
 		}
-
 	}
 
 	@Override
