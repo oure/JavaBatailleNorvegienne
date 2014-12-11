@@ -183,12 +183,15 @@ public class Joueur {
 	public boolean estCeQueLeJoueurPeutJouer(
 			HashSet<Carte> derniereCartesPosees, Table tas) {
 		if (!cartesEnMain.isEmpty())
+			System.out.println("TEST ");
 			for (Iterator<Carte> it = cartesEnMain.getCartemain().iterator(); it
 					.hasNext();) {
 				Carte c = (Carte) it.next();
 				if (estCeQueLeJoueurPeutJouerDesCartes(derniereCartesPosees,
-						c.getValeur(), 1, tas))
+						c.getValeur(), 1, tas)){
+					System.out.println("derniereCartesPosees : "+derniereCartesPosees+" +valeur carte : "+c.getValeur());
 					return true;
+				}
 			}
 		if (cartesEnMain.isEmpty() && !cartefaceVisibles.isEmpty())
 			for (Iterator<Carte> iterator = cartefaceVisibles.getHs().iterator(); iterator
@@ -213,9 +216,11 @@ public class Joueur {
 			else
 				return false;
 		}
-		if (derniereCartesPosees.isEmpty()
-				|| estSuperieureOuEgal(valeur, table))
+		if (derniereCartesPosees==null
+				|| estSuperieureOuEgal(valeur, table)){
+			System.out.println("jzsbghirjnrsg");
 			return true;
+		}
 		else
 			return false;
 	}

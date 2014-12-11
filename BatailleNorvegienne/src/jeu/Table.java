@@ -30,6 +30,8 @@ public class Table {
 
 	public void ajouterCarteALaTable(Carte ca) {
 		liste.add(ca);
+		derniereCartesPoses.clear();
+		derniereCartesPoses.add(ca);
 	}
 
 	public LinkedList<Carte> getListe() {

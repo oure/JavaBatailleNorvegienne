@@ -157,23 +157,25 @@ public class PartieDeCartes {
 
 	private void test() {
 		HashSet<Carte> derniereCartesPosees = new HashSet<Carte>();
-		for (Iterator<Joueur> it = llJoueur.iterator(); it.hasNext();) {
-			Joueur j = (Joueur) it.next();
-			System.out.println(j.getNom());
-		}
+		table.getListe().clear();
 		table.ajouterCarteALaTable(new Carte(3, Couleur.Pique));
 		table.ajouterCarteALaTable(new Carte(1, Couleur.Pique));
 		table.ajouterCarteALaTable(new Carte(3, Couleur.Pique));
-		llJoueur.get(1).getCartesEnMain().supprimerToutesLesCartesEnmain();
-		llJoueur.get(1).ajouterCarteEnMain(new Carte(2, Couleur.Pique));
+		table.ajouterCarteALaTable(new Carte(2, Couleur.Pique));
+		System.out.println("DERNIER CARTE"+table.afficherDerniereCarteDuTas());
+		llJoueur.get(2).getCartesEnMain().supprimerToutesLesCartesEnmain();
+		llJoueur.get(2).ajouterCarteEnMain(new Carte(3, Couleur.Pique));
 		llJoueur.get(2).ajouterCarteEnMain(new Carte(3, Couleur.Coeur));
-		llJoueur.get(2).ajouterCarteEnMain(new Carte(4, Couleur.Trefle));
-		
-		derniereCartesPosees = llJoueur.get(2).jouerLibrement(table, pioche,
-				derniereCartesPosees);
-		table.ajouterCarteALaTable(new Carte(7,Couleur.Coeur));
+		llJoueur.get(2).ajouterCarteEnMain(new Carte(1, Couleur.Trefle));
+
+		System.out.println(llJoueur.get(2).getCartesEnMain());
 		System.out.println(table);
-		System.out.println(llJoueur.get(2).estCeQueLeJoueurPeutJouerDesCartes(derniereCartesPosees, 1, 1, table));
+
+		System.out.println("EST CE QUE LE JOUEUR PEUX JOUER "+llJoueur.get(2).estCeQueLeJoueurPeutJouer(
+				derniereCartesPosees,table));
+		//derniereCartesPosees = llJoueur.get(2).jouerLibrement(table, pioche,
+		//		derniereCartesPosees);
+		//System.out.println(llJoueur.get(2).estCeQueLeJoueurPeutJouerDesCartes(derniereCartesPosees, 7, 1, table));
 
 	}
 
