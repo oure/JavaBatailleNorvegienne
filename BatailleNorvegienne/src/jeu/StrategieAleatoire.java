@@ -1,6 +1,6 @@
 package jeu;
 
-public class StrategieDefensive implements Strategie{
+public class StrategieAleatoire implements Strategie{
 
 	@Override
 	public void algoStrat(int degreeStrat) {

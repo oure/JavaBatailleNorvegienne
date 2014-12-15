@@ -9,14 +9,15 @@ import java.util.LinkedList;
 import java.util.Random;
 
 public class JoueurIA extends Joueur {
-	int degreeStrat;
+	private Strategie strategie;
+	
 	static private ArrayList<String> collectionNomDeJoueur = new ArrayList<String>(
 			Arrays.asList("Nathan", "Lucas", "Enzo", "Leo", "Louis", "Hugo",
 					"Gabriel", "Ethan", "Mathis", "Jules", "Emma", "Lea",
 					"Chloé", "Manon", "Ines", "Lola", "Jade", "Camille",
 					"Sarah", "Louise"));
 
-	public JoueurIA(int degreeStrat) {
+	public JoueurIA(Strategie strat) {
 		String nom = null;
 		if (collectionNomDeJoueur.size() > 0) {
 			Collections.shuffle(collectionNomDeJoueur);
@@ -27,7 +28,7 @@ public class JoueurIA extends Joueur {
 			nom = PartieDeCartes.reader.nextLine();
 		}
 		setNom(nom);
-		this.degreeStrat = degreeStrat;
+		this.strategie = strat;
 	}
 
 	/**
