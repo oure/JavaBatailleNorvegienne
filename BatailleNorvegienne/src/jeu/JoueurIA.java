@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class JoueurIA extends Joueur {
 	private Strategie strategie;
-	
+
 	static private ArrayList<String> collectionNomDeJoueur = new ArrayList<String>(
 			Arrays.asList("Nathan", "Lucas", "Enzo", "Leo", "Louis", "Hugo",
 					"Gabriel", "Ethan", "Mathis", "Jules", "Emma", "Lea",
@@ -29,6 +29,20 @@ public class JoueurIA extends Joueur {
 		}
 		setNom(nom);
 		this.strategie = strat;
+	}
+
+	public Joueur quiAleMoinsDeCarte(LinkedList<Joueur> lj) {
+		int nombreDeCarteMin = 100;
+		Joueur j = null;
+		for (Iterator<Joueur> iterator = lj.iterator(); iterator.hasNext();) {
+			Joueur joueur = (Joueur) iterator.next();
+			if (joueur.nombreTotalDecarteQuePossedeUnJoueur() < nombreDeCarteMin && this!=joueur) {
+				j = joueur;
+				nombreDeCarteMin = joueur
+						.nombreTotalDecarteQuePossedeUnJoueur();
+			}
+		}
+		return j;
 	}
 
 	/**
@@ -57,7 +71,7 @@ public class JoueurIA extends Joueur {
 	}
 
 	public Carte retourneUneCarteNonSpecialDesCartesVisible() {
-		for (Iterator<Carte> iterator = cartefaceVisibles.getHs().iterator(); iterator
+		for (Iterator<Carte> iterator = cartefaceVisibles.getCartesVisibles().iterator(); iterator
 				.hasNext();) {
 			Carte c = iterator.next();
 			if (c.getValeur() == 3 || c.getValeur() == 4 || c.getValeur() == 5
@@ -77,18 +91,18 @@ public class JoueurIA extends Joueur {
 			for (Iterator<Carte> iterator = cartesEnMain.getCartemain()
 					.iterator(); iterator.hasNext();) {
 				c = iterator.next();
-				if (c.getValeur() == 2 || c.getValeur() == 8 || c.getValeur() == 7
-						|| c.getValeur() == 10 || c.getValeur() == 1) 
+				if (c.getValeur() == 2 || c.getValeur() == 8
+						|| c.getValeur() == 7 || c.getValeur() == 10
+						|| c.getValeur() == 1)
 					break;
 			}
 			int tab[] = new int[2];
 			tab[0] = c.getValeur();
 			if (retourneUneCarteNonSpecialDesCartesVisible() == null)
 				return null; // Il n'y a pas de carte a echanger
-			tab[1] = retourneUneCarteNonSpecialDesCartesVisible()
-					.getValeur();
+			tab[1] = retourneUneCarteNonSpecialDesCartesVisible().getValeur();
 			echangerCarte(tab);
-		
+
 		}
 		return null;
 	}
@@ -105,8 +119,8 @@ public class JoueurIA extends Joueur {
 			Carte c = (Carte) tableauObjets[randInt(0, tableauObjets.length - 1)];
 			choix[0] = 1;
 			choix[1] = c.getValeur();
-		} else if (!cartefaceVisibles.getHs().isEmpty()) {
-			Object[] jk = cartefaceVisibles.getHs().toArray();
+		} else if (!cartefaceVisibles.getCartesVisibles().isEmpty()) {
+			Object[] jk = cartefaceVisibles.getCartesVisibles().toArray();
 			Carte c = (Carte) jk[randInt(0, jk.length)];
 			choix[0] = 1;
 			choix[1] = c.getValeur();
@@ -116,18 +130,6 @@ public class JoueurIA extends Joueur {
 
 		}
 		return choix;
-	}
-
-	public Joueur choixDuJoueurCibleePourEnvoyerLetas(LinkedList<Joueur> lj) {
-		System.out.println("CHOIX DU JOUEUR CIBLE MAGUEULE");
-		int num = getNumeroduJoueurDansLaListeDeJoueur(lj, this);
-		int numeroDuJoueurDesigne = randInt(0, lj.size() - 1);
-		if (numeroDuJoueurDesigne != num) // Il serait idiot qu'un joueurIA se
-											// lance le tas à lui même.
-			return lj.get(numeroDuJoueurDesigne);
-		else
-			choixDuJoueurCibleePourEnvoyerLetas(lj);
-		return null;
 	}
 
 	/*
@@ -141,7 +143,7 @@ public class JoueurIA extends Joueur {
 		int valeur = tab[1];
 		int nombreDeCarteAjouer = tab[0];
 		if (!cartesEnMain.getCartemain().isEmpty()
-				|| !cartefaceVisibles.getHs().isEmpty()) {
+				|| !cartefaceVisibles.getCartesVisibles().isEmpty()) {
 			if (estPossedeDansLamain(valeur, nombreDeCarteAjouer)) {
 				hc = cartesEnMain.supCarteMain(valeur, nombreDeCarteAjouer);
 				tas.ajouterCarteTable(hc);
@@ -160,7 +162,7 @@ public class JoueurIA extends Joueur {
 			}
 		}
 		if (cartesEnMain.getCartemain().isEmpty()
-				&& cartefaceVisibles.getHs().isEmpty()) {
+				&& cartefaceVisibles.getCartesVisibles().isEmpty()) {
 			tas.ajouterCarteALaTable(carteFacesCachees.prendreAuhasard());
 			return hc;
 		}

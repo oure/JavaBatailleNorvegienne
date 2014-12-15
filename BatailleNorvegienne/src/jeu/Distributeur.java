@@ -6,12 +6,11 @@ import java.util.LinkedList;
 
 public class Distributeur extends JoueurIA {
 
-	private LinkedList<Carte> ListeDeCarte = new LinkedList<Carte>();
-
-	public Distributeur(int degreeStrat) {
-		super(degreeStrat);
-		// TODO Auto-generated constructor stub
+	public Distributeur(Strategie strat) {
+		super(strat);
 	}
+
+	private LinkedList<Carte> ListeDeCarte = new LinkedList<Carte>();
 
 	public Pioche distribuer(HashSet<JeuDeCartes> setJeuDeCartes,
 			LinkedList<Joueur> lj) {

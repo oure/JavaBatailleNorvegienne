@@ -2,7 +2,6 @@ package jeu;
 
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedList;
 
 public class CartesEnMain {
 	private HashSet<Carte> cartemain = new HashSet<Carte>();

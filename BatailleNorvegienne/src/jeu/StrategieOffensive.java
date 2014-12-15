@@ -1,10 +1,18 @@
 package jeu;
 
-public class StrategieOffensive implements Strategie{
+import java.util.LinkedList;
+
+public class StrategieOffensive implements Strategie {
 
 	@Override
-	public void algoStrat(int degreeStrat) {	
-		
+	public void algoStrat() {
+
+	}
+
+	@Override
+	public Joueur choixDuJoueurCibleePourEnvoyerLetas(JoueurIA j,
+			LinkedList<Joueur> lj) {
+		return j.quiAleMoinsDeCarte(lj);
 	}
 
 }

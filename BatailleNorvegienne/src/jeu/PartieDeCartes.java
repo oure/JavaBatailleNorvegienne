@@ -7,8 +7,6 @@ import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
 
-import jeu.Carte.Couleur;
-
 public class PartieDeCartes {
 	public static Scanner reader;
 	private Pioche pioche = new Pioche();
@@ -25,6 +23,13 @@ public class PartieDeCartes {
 		return pioche;
 	}
 
+	public Strategie choixDuneStrategie(Random r) {
+		if (r.nextBoolean())
+			return new StrategieAleatoire();
+		else
+			return new StrategieOffensive();
+	}
+
 	public void setPioche(Pioche pioche) {
 		this.pioche = pioche;
 	}
@@ -36,18 +41,18 @@ public class PartieDeCartes {
 		int nbJoueur = reader.nextInt();
 		String name = null;
 		reader.nextLine();
-		Random r = new Random();
 		for (int i = 1; i <= nbJoueur; i++) {
+			Random r = new Random();
 			if (i == 1) {
 				System.out.print("Entrer votre nom :");
 				name = reader.nextLine();
 			}
 			if (i == 1)
-				llJoueur.add(new Distributeur(r.nextInt((2 + 1) - 1) + 1));
+				llJoueur.add(new Distributeur(choixDuneStrategie(r)));
 			else if (i == 2)
 				llJoueur.add(new Joueur(name));
 			else {
-				llJoueur.add(new JoueurIA(r.nextInt((2 + 1) - 1) + 1));
+				llJoueur.add(new JoueurIA(choixDuneStrategie(r)));
 			}
 		}
 	}
@@ -118,7 +123,7 @@ public class PartieDeCartes {
 				Joueur joueur = (Joueur) iterator.next();
 				if (!passerLeTour) {
 					if (llJoueur.get(0) == joueur) {
-						//System.out.println(joueur);
+						// System.out.println(joueur);
 					}
 					System.out.println(joueur);
 					System.out.println("A vous de jouer " + joueur.getNom());
@@ -130,8 +135,7 @@ public class PartieDeCartes {
 						joueur.PoserUnAs(derniereCartesPosees, table, llJoueur);
 						nombreDejoueurQuiPasseLeurTour = joueur.PoserUnHuit(
 								derniereCartesPosees, table);
-					}
-					else{
+					} else {
 						joueur.piocher(1, pioche);
 						System.out.println("JE PIOCHE");
 					}
@@ -162,42 +166,40 @@ public class PartieDeCartes {
 
 	private void test() {
 		decalerListedesJoueurs();
-		JoueurIA ia=(JoueurIA) llJoueur.get(1);
-		table.getListe().clear();
-		ia.getCartesEnMain().supprimerToutesLesCartesEnmain();
-		ia.ajouterCarteEnMain(new Carte(1, Couleur.Coeur));
-		ia.ajouterCarteEnMain(new Carte(2, Couleur.Trefle));
-		ia.ajouterCarteEnMain(new Carte(10, Couleur.Trefle));
-
-		System.out.println(ia);
-		ia.choixDesCartesAEchanger();
-		System.out.println(ia);
-//		HashSet<Carte> derniereCartesPosees = new HashSet<Carte>();
-//		table.getListe().clear();
-//		table.ajouterCarteALaTable(new Carte(3, Couleur.Pique));
-//		table.ajouterCarteALaTable(new Carte(1, Couleur.Pique));
-//		table.ajouterCarteALaTable(new Carte(3, Couleur.Pique));
-//		table.ajouterCarteALaTable(new Carte(2, Couleur.Pique));
-//		System.out
-//				.println("DERNIER CARTE" + table.afficherDerniereCarteDuTas());
-//		llJoueur.get(2).getCartesEnMain().supprimerToutesLesCartesEnmain();
-//		llJoueur.get(2).ajouterCarteEnMain(new Carte(3, Couleur.Coeur));
-//		llJoueur.get(2).ajouterCarteEnMain(new Carte(1, Couleur.Trefle));
-//
-//		System.out.println(llJoueur.get(2).getCartesEnMain());
-//		System.out.println(table);
-//
-//		System.out.println("EST CE QUE LE JOUEUR PEUX JOUER "
-//				+ llJoueur.get(2).estCeQueLeJoueurPeutJouer(
-//						derniereCartesPosees, table));
+		llJoueur.getLast().getCartesEnMain().supprimerToutesLesCartesEnmain();
+		System.out.println(llJoueur.getLast());
+		for (Iterator<Joueur> iterator = llJoueur.iterator(); iterator.hasNext();) {
+			Joueur joueur = (Joueur) iterator.next();
+			System.out.println(joueur.nombreTotalDecarteQuePossedeUnJoueur());
+		}
+		System.out.println("c'est moi qui ai le moins de carte"+((JoueurIA) llJoueur.getLast()).quiAleMoinsDeCarte(llJoueur));
+		// HashSet<Carte> derniereCartesPosees = new HashSet<Carte>();
+		// table.getListe().clear();
+		// table.ajouterCarteALaTable(new Carte(3, Couleur.Pique));
+		// table.ajouterCarteALaTable(new Carte(1, Couleur.Pique));
+		// table.ajouterCarteALaTable(new Carte(3, Couleur.Pique));
+		// table.ajouterCarteALaTable(new Carte(2, Couleur.Pique));
+		// System.out
+		// .println("DERNIER CARTE" + table.afficherDerniereCarteDuTas());
+		// llJoueur.get(2).getCartesEnMain().supprimerToutesLesCartesEnmain();
+		// llJoueur.get(2).ajouterCarteEnMain(new Carte(3, Couleur.Coeur));
+		// llJoueur.get(2).ajouterCarteEnMain(new Carte(1, Couleur.Trefle));
+		//
+		// System.out.println(llJoueur.get(2).getCartesEnMain());
+		// System.out.println(table);
+		//
+		// System.out.println("EST CE QUE LE JOUEUR PEUX JOUER "
+		// + llJoueur.get(2).estCeQueLeJoueurPeutJouer(
+		// derniereCartesPosees, table));
 	}
 
 	private void EchangerLesCartes() {
 		System.out.println("Voulez vous echanger des cartes ? N/o");
 		reader = new Scanner(System.in);
 		String s = reader.nextLine();
-		if (s.length() == 1 && s.charAt(0) == 'o'){
-			llJoueur.get(1).echangerCarte(llJoueur.get(1).choixDesCartesAEchanger());
+		if (s.length() == 1 && s.charAt(0) == 'o') {
+			llJoueur.get(1).echangerCarte(
+					llJoueur.get(1).choixDesCartesAEchanger());
 		}
 	}
 
@@ -212,10 +214,6 @@ public class PartieDeCartes {
 				break;
 			}
 		}
-		for (Iterator<Joueur> iterator = llJoueur.iterator(); iterator
-				.hasNext();) {
-			Joueur joueur = (Joueur) iterator.next();
-		}
 		System.out.println(pioche);
 	}
 
@@ -223,7 +221,7 @@ public class PartieDeCartes {
 		miseEnPlaceDeLaListeDesJoueurs();
 		miseEnPlaceDesJeuxdeCartes();
 		distribuer();
-		//deroulementDujeu();
+		// deroulementDujeu();
 		test();
 	}
 

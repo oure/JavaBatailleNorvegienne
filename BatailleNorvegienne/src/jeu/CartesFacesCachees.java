@@ -5,27 +5,35 @@ import java.util.Iterator;
 import java.util.Random;
 
 public class CartesFacesCachees {
-	private HashSet<Carte> hs = new HashSet<Carte>();
+	private HashSet<Carte> cartesCachees = new HashSet<Carte>();
 
 	@Override
 	public String toString() {
-		return hs.toString();
+		return cartesCachees.toString();
+	}
+
+	public HashSet<Carte> getCartesCachees() {
+		return cartesCachees;
+	}
+
+	public void setCartesCachees(HashSet<Carte> cartesCachees) {
+		this.cartesCachees = cartesCachees;
 	}
 
 	public Carte prendreAuhasard(){
 		int compteur=1;
 		int occurenceCiblee;
-		if (hs.size()>1){
+		if (cartesCachees.size()>1){
 			Random r=new Random();
-			occurenceCiblee=1 + r.nextInt(hs.size() - 1);
+			occurenceCiblee=1 + r.nextInt(cartesCachees.size() - 1);
 		}
 		else 
 			occurenceCiblee=1;
-		for (Iterator<Carte> iterator = hs.iterator(); iterator.hasNext();) {
+		for (Iterator<Carte> iterator = cartesCachees.iterator(); iterator.hasNext();) {
 			Carte carte = (Carte) iterator.next();
 			System.out.println(" \t " + carte);
 			if (compteur==occurenceCiblee){
-				hs.remove(carte);
+				cartesCachees.remove(carte);
 				return carte;
 			}
 			compteur++;
@@ -34,15 +42,15 @@ public class CartesFacesCachees {
 	}
 
 	public void addAll(HashSet<Carte> s) {
-		hs.addAll(s);
+		cartesCachees.addAll(s);
 	}
 
 	public boolean isEmpty() {
-		return hs.isEmpty();
+		return cartesCachees.isEmpty();
 	}
 
 	public void afficherCarteRetournees() {
-		for (Iterator<Carte> iterator = hs.iterator(); iterator.hasNext();) {
+		for (Iterator<Carte> iterator = cartesCachees.iterator(); iterator.hasNext();) {
 			Carte carte = (Carte) iterator.next();
 			System.out.print(carte.getValeur() + " " + carte.getCouleur()
 					+ "  ");
@@ -50,6 +58,6 @@ public class CartesFacesCachees {
 	}
 
 	public void ajouterUnecarteFaceCachee(Carte car) {
-		hs.add(car);
+		cartesCachees.add(car);
 	}
 }

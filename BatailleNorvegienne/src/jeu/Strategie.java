@@ -1,5 +1,8 @@
 package jeu;
 
+import java.util.LinkedList;
+
 public interface Strategie {
-	void algoStrat(int degreeStrat);
+	public void algoStrat();
+	public Joueur choixDuJoueurCibleePourEnvoyerLetas(JoueurIA j, LinkedList<Joueur> lj);
 }

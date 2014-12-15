@@ -11,10 +11,14 @@ public class Joueur {
 	public Joueur(String nom) {
 		this.nom = nom;
 	}
-
+	
 	public Joueur() {
 	}
-
+	public int nombreTotalDecarteQuePossedeUnJoueur() {
+		return cartefaceVisibles.getCartesVisibles().size()
+				+ carteFacesCachees.getCartesCachees().size()
+				+ cartesEnMain.getCartemain().size();
+	}
 	public void ajouterCarteEnMain(Carte c) {
 		cartesEnMain.ajouterCarteMain(c);
 	}
@@ -193,7 +197,7 @@ public class Joueur {
 				}
 			}
 		if (cartesEnMain.isEmpty() && !cartefaceVisibles.isEmpty())
-			for (Iterator<Carte> iterator = cartefaceVisibles.getHs()
+			for (Iterator<Carte> iterator = cartefaceVisibles.getCartesVisibles()
 					.iterator(); iterator.hasNext();) {
 				Carte carte = (Carte) iterator.next();
 				if (estCeQueLeJoueurPeutJouerDesCartes(derniereCartesPosees,
@@ -227,7 +231,7 @@ public class Joueur {
 	public boolean estPossedeDansDansLesCartesVisibles(int valeur,
 			int nombreOccurence) {
 		int i = 0;
-		for (Iterator<Carte> it = cartefaceVisibles.getHs().iterator(); it
+		for (Iterator<Carte> it = cartefaceVisibles.getCartesVisibles().iterator(); it
 				.hasNext();) {
 			Carte carte = (Carte) it.next();
 			if (valeur == carte.getValeur())
@@ -240,7 +244,7 @@ public class Joueur {
 			HashSet<Carte> derniereCartesPosees) {
 		HashSet<Carte> hc = new HashSet<Carte>();
 		if (!cartesEnMain.getCartemain().isEmpty()
-				|| !cartefaceVisibles.getHs().isEmpty()) {
+				|| !cartefaceVisibles.getCartesVisibles().isEmpty()) {
 			System.out.print("Entrez le nombre de carte à jouer :");
 			int nombreDeCarteAjouer = PartieDeCartes.reader.nextInt();
 			System.out
@@ -272,7 +276,7 @@ public class Joueur {
 			}
 		}
 		if (cartesEnMain.getCartemain().isEmpty()
-				&& cartefaceVisibles.getHs().isEmpty()) {
+				&& cartefaceVisibles.getCartesVisibles().isEmpty()) {
 			tas.ajouterCarteALaTable(carteFacesCachees.prendreAuhasard());
 			return hc;
 		}
@@ -334,7 +338,7 @@ public class Joueur {
 					break;
 				}
 			}
-			for (Iterator<Carte> it = cartefaceVisibles.getHs().iterator(); it
+			for (Iterator<Carte> it = cartefaceVisibles.getCartesVisibles().iterator(); it
 					.hasNext();) {
 				Carte c = (Carte) it.next();
 				if (c.getValeur() == vCarte2) {
@@ -342,10 +346,10 @@ public class Joueur {
 					break;
 				}
 			}
-			cartefaceVisibles.getHs().add(c1);
+			cartefaceVisibles.getCartesVisibles().add(c1);
 			cartesEnMain.getCartemain().add(c2);
 			cartesEnMain.getCartemain().remove(c1);
-			cartefaceVisibles.getHs().remove(c2);
+			cartefaceVisibles.getCartesVisibles().remove(c2);
 		} else
 			System.out.println("Impossible vous ne posseder pas cette carte.");
 		return true;

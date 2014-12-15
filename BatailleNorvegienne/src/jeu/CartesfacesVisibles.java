@@ -4,28 +4,28 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 public class CartesfacesVisibles {
-	private HashSet<Carte> hs = new HashSet<Carte>();
+	private HashSet<Carte> cartesVisibles = new HashSet<Carte>();
 
 	public void addAll(HashSet<Carte> s) {
-		hs.addAll(s);
+		cartesVisibles.addAll(s);
 	}
 
-	public HashSet<Carte> getHs() {
-		return hs;
+	public HashSet<Carte> getCartesVisibles() {
+		return cartesVisibles;
 	}
 
 	public void setHs(HashSet<Carte> hs) {
-		this.hs = hs;
+		this.cartesVisibles = hs;
 	}
 
 	public void ajouterCarteVisible(Carte car) {
-		hs.add(car);
+		cartesVisibles.add(car);
 	}
 
 	public HashSet<Carte> supCarteVisible(int valeur, int nombreOccurence) {
 		int i = 0;
 		HashSet<Carte> hc = new HashSet<Carte>();
-		for (Iterator<Carte> iterator = hs.iterator(); iterator.hasNext();) {
+		for (Iterator<Carte> iterator = cartesVisibles.iterator(); iterator.hasNext();) {
 			Carte carte = (Carte) iterator.next();
 			if (i >= nombreOccurence)
 				break;
@@ -34,12 +34,12 @@ public class CartesfacesVisibles {
 				hc.add(carte);
 			}
 		}
-		hs.removeAll(hc);
+		cartesVisibles.removeAll(hc);
 		return hc;
 	}
 
 	public void afficherCarteVisibles() {
-		for (Iterator<Carte> iterator = hs.iterator(); iterator.hasNext();) {
+		for (Iterator<Carte> iterator = cartesVisibles.iterator(); iterator.hasNext();) {
 			Carte carte = (Carte) iterator.next();
 			System.out.print(carte.getValeur() + " " + carte.getCouleur()
 					+ "  ");
@@ -48,10 +48,10 @@ public class CartesfacesVisibles {
 
 	@Override
 	public String toString() {
-		return hs.toString();
+		return cartesVisibles.toString();
 	}
 
 	public boolean isEmpty() {
-		return hs.isEmpty();
+		return cartesVisibles.isEmpty();
 	}
 }
