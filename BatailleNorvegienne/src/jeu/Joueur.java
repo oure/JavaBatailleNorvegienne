@@ -167,7 +167,8 @@ public class Joueur {
 	}
 
 	public boolean estSuperieureOuEgal(int valeur, Table tas) {
-		if (tas.getListe().isEmpty() || tas.getListe().getLast().getValeur() <= valeur)
+		if (tas.getListe().isEmpty()
+				|| tas.getListe().getLast().getValeur() <= valeur)
 			return true;
 		else
 			return false;
@@ -187,19 +188,20 @@ public class Joueur {
 					.hasNext();) {
 				Carte c = (Carte) it.next();
 				if (estCeQueLeJoueurPeutJouerDesCartes(derniereCartesPosees,
-						c.getValeur(), 1, table)){
+						c.getValeur(), 1, table)) {
 					return true;
 				}
 			}
 		if (cartesEnMain.isEmpty() && !cartefaceVisibles.isEmpty())
-			for (Iterator<Carte> iterator = cartefaceVisibles.getHs().iterator(); iterator
-					.hasNext();) {
+			for (Iterator<Carte> iterator = cartefaceVisibles.getHs()
+					.iterator(); iterator.hasNext();) {
 				Carte carte = (Carte) iterator.next();
 				if (estCeQueLeJoueurPeutJouerDesCartes(derniereCartesPosees,
 						carte.getValeur(), 1, table))
 					return true;
 			}
-		if (cartesEnMain.isEmpty() && cartefaceVisibles.isEmpty() && !carteFacesCachees.isEmpty() )
+		if (cartesEnMain.isEmpty() && cartefaceVisibles.isEmpty()
+				&& !carteFacesCachees.isEmpty())
 			return true;
 		return false;
 	}
@@ -216,11 +218,9 @@ public class Joueur {
 			else
 				return false;
 		}
-		if (derniereCartesPosees==null
-				|| estSuperieureOuEgal(valeur, table)){
+		if (derniereCartesPosees == null || estSuperieureOuEgal(valeur, table)) {
 			return true;
-		}
-		else
+		} else
 			return false;
 	}
 
@@ -268,7 +268,7 @@ public class Joueur {
 			} else {
 				System.out
 						.println("Impossible vous ne posseder pas cette carte.");
-				jouerLibrement(tas, pioche,derniereCartesPosees);
+				jouerLibrement(tas, pioche, derniereCartesPosees);
 			}
 		}
 		if (cartesEnMain.getCartemain().isEmpty()
@@ -303,17 +303,26 @@ public class Joueur {
 				+ ", carteFacesCachees=" + carteFacesCachees + "]";
 	}
 
-	public boolean echangerCarte() {
-		Carte c1 = null;
-		Carte c2 = null;
-		cartesEnMain.toString();
-		cartefaceVisibles.toString();
+	public int[] choixDesCartesAEchanger() {
+		int tab[]= new int[2];
 		System.out
 				.print("Entrez la valeur de la carte en main a echanger (de 1 a 13) :");
 		int vCarte1 = PartieDeCartes.reader.nextInt();
 		System.out
 				.print("Entrez la valeur de la carte visible a echanger (de 1 a 13) :");
 		int vCarte2 = PartieDeCartes.reader.nextInt();
+		tab[0]=vCarte1;
+		tab[1]=vCarte2;
+		return tab;
+	}
+
+	public boolean echangerCarte(int tab[]) {
+		int vCarte1=tab[0];
+		int vCarte2=tab[1];
+		Carte c1 = null;
+		Carte c2 = null;
+		cartesEnMain.toString();
+		cartefaceVisibles.toString();
 		if (estPossedeDansLamain(vCarte1, 1)
 				&& estPossedeDansDansLesCartesVisibles(vCarte2, 1)) {
 			for (Iterator<Carte> it = cartesEnMain.getCartemain().iterator(); it

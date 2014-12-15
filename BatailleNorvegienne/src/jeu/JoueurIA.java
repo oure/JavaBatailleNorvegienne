@@ -29,75 +29,113 @@ public class JoueurIA extends Joueur {
 		setNom(nom);
 		this.degreeStrat = degreeStrat;
 	}
+
 	/**
-	 * Returns a pseudo-random number between min and max, inclusive.
-	 * The difference between min and max can be at most
+	 * Returns a pseudo-random number between min and max, inclusive. The
+	 * difference between min and max can be at most
 	 * <code>Integer.MAX_VALUE - 1</code>.
 	 *
-	 * @param min Minimum value
-	 * @param max Maximum value.  Must be greater than min.
+	 * @param min
+	 *            Minimum value
+	 * @param max
+	 *            Maximum value. Must be greater than min.
 	 * @return Integer between min and max, inclusive.
 	 * @see java.util.Random#nextInt(int)
 	 */
 	public static int randInt(int min, int max) {
 
-	    // NOTE: Usually this should be a field rather than a method
-	    // variable so that it is not re-seeded every call.
-	    Random rand = new Random();
+		// NOTE: Usually this should be a field rather than a method
+		// variable so that it is not re-seeded every call.
+		Random rand = new Random();
 
-	    // nextInt is normally exclusive of the top value,
-	    // so add 1 to make it inclusive
-	    int randomNum = rand.nextInt((max - min) + 1) + min;
+		// nextInt is normally exclusive of the top value,
+		// so add 1 to make it inclusive
+		int randomNum = rand.nextInt((max - min) + 1) + min;
 
-	    return randomNum;
+		return randomNum;
 	}
-	
-	public int[] choixDesCartesAJouer(){
-		/*
-		 * Dans la premiere case tu tableau nous mettons le nombre de carte a jouer 
-		 * et dans la deuxieme nous mettons la valeur de la carte
-		 */
-		int []choix=new int[2];
 
-		if (!cartesEnMain.getCartemain().isEmpty()){
-			Object [] tableauObjets=cartesEnMain.getCartemain().toArray();
-			Carte c=(Carte) tableauObjets[randInt(0, tableauObjets.length-1)];
-			choix[0]=1;
-			choix[1]=c.getValeur();
-		}
-		else if (!cartefaceVisibles.getHs().isEmpty()){
-			Object [] jk=cartefaceVisibles.getHs().toArray();
-			Carte c=(Carte) jk[randInt(0, jk.length)];
-			choix[0]=1;
-			choix[1]=c.getValeur();
+	public Carte retourneUneCarteNonSpecialDesCartesVisible() {
+		for (Iterator<Carte> iterator = cartefaceVisibles.getHs().iterator(); iterator
+				.hasNext();) {
+			Carte c = iterator.next();
+			if (c.getValeur() == 3 || c.getValeur() == 4 || c.getValeur() == 5
+					|| c.getValeur() == 6 || c.getValeur() == 9
+					|| c.getValeur() == 11 || c.getValeur() == 12
+					|| c.getValeur() == 13) {
+				return c;
 			}
-		else{
-			choix[0]=1;
-			choix[1]=carteFacesCachees.prendreAuhasard().getValeur();
+		}
+		return null;
+	}
+
+	public int[] choixDesCartesAEchanger() {
+		for (int i = 0; i < 3; i++) {
+			for (Iterator<Carte> iterator = cartesEnMain.getCartemain()
+					.iterator(); iterator.hasNext();) {
+				Carte c = iterator.next();
+				if (c.getValeur() == 2 || c.getValeur() == 8
+						|| c.getValeur() == 1) {
+					int tab[] = new int[2];
+					tab[0] = c.getValeur();
+					if (retourneUneCarteNonSpecialDesCartesVisible() == null)
+						return tab; // Il n'y a pas de carte a echanger
+					tab[1] = retourneUneCarteNonSpecialDesCartesVisible()
+							.getValeur();
+					echangerCarte(tab);
+				}
+			}
+		}
+		return null;
+	}
+
+	public int[] choixDesCartesAJouer() {
+		/*
+		 * Dans la premiere case tu tableau nous mettons le nombre de carte a
+		 * jouer et dans la deuxieme nous mettons la valeur de la carte
+		 */
+		int[] choix = new int[2];
+
+		if (!cartesEnMain.getCartemain().isEmpty()) {
+			Object[] tableauObjets = cartesEnMain.getCartemain().toArray();
+			Carte c = (Carte) tableauObjets[randInt(0, tableauObjets.length - 1)];
+			choix[0] = 1;
+			choix[1] = c.getValeur();
+		} else if (!cartefaceVisibles.getHs().isEmpty()) {
+			Object[] jk = cartefaceVisibles.getHs().toArray();
+			Carte c = (Carte) jk[randInt(0, jk.length)];
+			choix[0] = 1;
+			choix[1] = c.getValeur();
+		} else {
+			choix[0] = 1;
+			choix[1] = carteFacesCachees.prendreAuhasard().getValeur();
 
 		}
 		return choix;
 	}
-	
-	public Joueur choixDuJoueurCibleePourEnvoyerLetas(LinkedList<Joueur> lj){
+
+	public Joueur choixDuJoueurCibleePourEnvoyerLetas(LinkedList<Joueur> lj) {
 		System.out.println("CHOIX DU JOUEUR CIBLE MAGUEULE");
-		int num=getNumeroduJoueurDansLaListeDeJoueur(lj,this);
-		int numeroDuJoueurDesigne = randInt(0,lj.size()-1);
-		if(numeroDuJoueurDesigne!=num) //Il serait idiot qu'un joueurIA se lance le tas à lui même.
+		int num = getNumeroduJoueurDansLaListeDeJoueur(lj, this);
+		int numeroDuJoueurDesigne = randInt(0, lj.size() - 1);
+		if (numeroDuJoueurDesigne != num) // Il serait idiot qu'un joueurIA se
+											// lance le tas à lui même.
 			return lj.get(numeroDuJoueurDesigne);
 		else
 			choixDuJoueurCibleePourEnvoyerLetas(lj);
 		return null;
 	}
+
 	/*
 	 * Le joueur IA va jouer aleatoirement des cartes pour l'instant
 	 */
 	@Override
-	public HashSet<Carte> jouerLibrement(Table tas,Pioche pioche, HashSet<Carte> derniereCartesPosees) {
+	public HashSet<Carte> jouerLibrement(Table tas, Pioche pioche,
+			HashSet<Carte> derniereCartesPosees) {
 		HashSet<Carte> hc = new HashSet<Carte>();
-		int []tab=choixDesCartesAJouer();
+		int[] tab = choixDesCartesAJouer();
 		int valeur = tab[1];
-		int nombreDeCarteAjouer = tab [0];
+		int nombreDeCarteAjouer = tab[0];
 		if (!cartesEnMain.getCartemain().isEmpty()
 				|| !cartefaceVisibles.getHs().isEmpty()) {
 			if (estPossedeDansLamain(valeur, nombreDeCarteAjouer)) {
@@ -122,6 +160,6 @@ public class JoueurIA extends Joueur {
 			tas.ajouterCarteALaTable(carteFacesCachees.prendreAuhasard());
 			return hc;
 		}
-	return hc;
+		return hc;
 	}
 }

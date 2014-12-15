@@ -191,8 +191,9 @@ public class PartieDeCartes {
 		System.out.println("Voulez vous echanger des cartes ? N/o");
 		reader = new Scanner(System.in);
 		String s = reader.nextLine();
-		if (s.length() == 1 && s.charAt(0) == 'o')
-			llJoueur.get(1).echangerCarte();
+		if (s.length() == 1 && s.charAt(0) == 'o'){
+			llJoueur.get(1).echangerCarte(llJoueur.get(1).choixDesCartesAEchanger());
+		}
 	}
 
 	private void distribuer() {
