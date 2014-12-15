@@ -30,7 +30,6 @@ public class JoueurIA extends Joueur {
 		setNom(nom);
 		this.strategie = strat;
 	}
-
 	public Joueur quiAleMoinsDeCarte(LinkedList<Joueur> lj) {
 		int nombreDeCarteMin = 100;
 		Joueur j = null;
@@ -168,4 +167,15 @@ public class JoueurIA extends Joueur {
 		}
 		return hc;
 	}
+	public int test(JoueurIA ia,
+			LinkedList<Joueur> lj){
+		return strategie.nombreDeHuitQueIaDoitPoser(ia,lj);
+	}
+	public Strategie getStrategie() {
+		return strategie;
+	}
+	public void setStrategie(Strategie strategie) {
+		this.strategie = strategie;
+	}
+
 }

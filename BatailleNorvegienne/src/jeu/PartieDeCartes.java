@@ -7,6 +7,8 @@ import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
 
+import jeu.Carte.Couleur;
+
 public class PartieDeCartes {
 	public static Scanner reader;
 	private Pioche pioche = new Pioche();
@@ -166,13 +168,7 @@ public class PartieDeCartes {
 
 	private void test() {
 		decalerListedesJoueurs();
-		llJoueur.getLast().getCartesEnMain().supprimerToutesLesCartesEnmain();
-		System.out.println(llJoueur.getLast());
-		for (Iterator<Joueur> iterator = llJoueur.iterator(); iterator.hasNext();) {
-			Joueur joueur = (Joueur) iterator.next();
-			System.out.println(joueur.nombreTotalDecarteQuePossedeUnJoueur());
-		}
-		System.out.println("c'est moi qui ai le moins de carte"+((JoueurIA) llJoueur.getLast()).quiAleMoinsDeCarte(llJoueur));
+		System.out.println(llJoueur);
 		// HashSet<Carte> derniereCartesPosees = new HashSet<Carte>();
 		// table.getListe().clear();
 		// table.ajouterCarteALaTable(new Carte(3, Couleur.Pique));
@@ -180,13 +176,16 @@ public class PartieDeCartes {
 		// table.ajouterCarteALaTable(new Carte(3, Couleur.Pique));
 		// table.ajouterCarteALaTable(new Carte(2, Couleur.Pique));
 		// System.out
-		// .println("DERNIER CARTE" + table.afficherDerniereCarteDuTas());
-		// llJoueur.get(2).getCartesEnMain().supprimerToutesLesCartesEnmain();
-		// llJoueur.get(2).ajouterCarteEnMain(new Carte(3, Couleur.Coeur));
-		// llJoueur.get(2).ajouterCarteEnMain(new Carte(1, Couleur.Trefle));
-		//
-		// System.out.println(llJoueur.get(2).getCartesEnMain());
-		// System.out.println(table);
+		System.out.println(llJoueur.get(1).getNom());
+		 llJoueur.get(1).getCartesEnMain().supprimerToutesLesCartesEnmain();
+		 llJoueur.get(1).ajouterCarteEnMain(new Carte(8, Couleur.Coeur));
+		 llJoueur.get(1).ajouterCarteEnMain(new Carte(8, Couleur.Trefle));
+		 llJoueur.get(1).ajouterCarteEnMain(new Carte(8, Couleur.Carreau));
+		 llJoueur.get(2).ajouterCarteEnMain(new Carte(8, Couleur.Pique));
+
+		 int a=((JoueurIA) llJoueur.get(1)).test((JoueurIA) llJoueur.get(2), llJoueur);
+		 System.out.println(llJoueur.get(1).getCartesEnMain());
+		 System.out.println(a);
 		//
 		// System.out.println("EST CE QUE LE JOUEUR PEUX JOUER "
 		// + llJoueur.get(2).estCeQueLeJoueurPeutJouer(

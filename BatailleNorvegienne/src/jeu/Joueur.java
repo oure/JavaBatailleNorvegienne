@@ -114,7 +114,23 @@ public class Joueur {
 		}
 		return nombreDeHuit;
 	}
-
+	public int nombreDeHuitQueLeJoueurPossede(){
+		int i=0;
+		if (!cartesEnMain.getCartemain().isEmpty()) {
+			for (Iterator<Carte> iterator = cartesEnMain.getCartemain().iterator(); iterator.hasNext();) {
+				Carte c = iterator.next();
+				if (c.getValeur()==8)
+					i++;
+			}
+		}
+		else
+			for (Iterator<Carte> iterator = cartefaceVisibles.getCartesVisibles().iterator(); iterator.hasNext();) {
+				Carte c = (Carte) iterator.next();
+				if (c.getValeur()==8)
+					i++;
+			}
+		return i;
+	}
 	public int getNumeroduJoueurDansLaListeDeJoueur(LinkedList<Joueur> lj,
 			Joueur j) {
 		for (int i = 0; i < lj.size() - 1; i++) {
