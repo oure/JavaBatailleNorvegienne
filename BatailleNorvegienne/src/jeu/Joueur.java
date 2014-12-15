@@ -319,6 +319,7 @@ public class Joueur {
 	public boolean echangerCarte(int tab[]) {
 		int vCarte1=tab[0];
 		int vCarte2=tab[1];
+		System.out.println("vCarte1 : "+vCarte1+" - "+vCarte2+"vCarte2");
 		Carte c1 = null;
 		Carte c2 = null;
 		cartesEnMain.toString();

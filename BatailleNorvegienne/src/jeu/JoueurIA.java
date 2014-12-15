@@ -71,20 +71,23 @@ public class JoueurIA extends Joueur {
 
 	public int[] choixDesCartesAEchanger() {
 		for (int i = 0; i < 3; i++) {
+			Carte c = null;
+			System.out.println("OK");
 			for (Iterator<Carte> iterator = cartesEnMain.getCartemain()
 					.iterator(); iterator.hasNext();) {
-				Carte c = iterator.next();
-				if (c.getValeur() == 2 || c.getValeur() == 8
-						|| c.getValeur() == 1) {
-					int tab[] = new int[2];
-					tab[0] = c.getValeur();
-					if (retourneUneCarteNonSpecialDesCartesVisible() == null)
-						return tab; // Il n'y a pas de carte a echanger
-					tab[1] = retourneUneCarteNonSpecialDesCartesVisible()
-							.getValeur();
-					echangerCarte(tab);
-				}
+				c = iterator.next();
+				if (c.getValeur() == 2 || c.getValeur() == 8 || c.getValeur() == 7
+						|| c.getValeur() == 10 || c.getValeur() == 1) 
+					break;
 			}
+			int tab[] = new int[2];
+			tab[0] = c.getValeur();
+			if (retourneUneCarteNonSpecialDesCartesVisible() == null)
+				return null; // Il n'y a pas de carte a echanger
+			tab[1] = retourneUneCarteNonSpecialDesCartesVisible()
+					.getValeur();
+			echangerCarte(tab);
+		
 		}
 		return null;
 	}
