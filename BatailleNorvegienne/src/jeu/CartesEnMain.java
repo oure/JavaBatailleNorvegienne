@@ -14,11 +14,12 @@ public class CartesEnMain {
 	private HashSet<Carte> cartemain = new HashSet<Carte>();
 
 	/**cette methode permet d'ajouter  des cartes  sur les cartes en main
-	 * @ param tas : un hashset
+	 * @ param table : instance de la classe Table 
 	 */
 	
-	public void addAll(Table tas) {
-		for (Iterator<Carte> it = tas.getListe().iterator(); it.hasNext();) {
+	
+	public void addAll(Table table) {
+		for (Iterator<Carte> it = table.getListe().iterator(); it.hasNext();) {
 			Carte carte = (Carte) it.next();
 			ajouterCarteMain(carte);
 
@@ -48,6 +49,7 @@ public class CartesEnMain {
 	/**la methode  qui permet de supprimer des cartes  en main
 	 * @ param valeur : la valeur de la carte a supprimer
 	 * @ param nombreOccurence: le nombre de cartes a supprimer
+	 * @return une collection de cartes de type Hashset. ce sont les cartes que l'on vient de supprimer de la main
 	  */
 	
 
@@ -65,6 +67,7 @@ public class CartesEnMain {
 		cartemain.removeAll(hc);
 		return hc;
 	}
+	
 	/**la methode  qui permet de supprimer toutes les cartes  en main
 	 * 
 	  */
@@ -85,6 +88,10 @@ public class CartesEnMain {
 		return cartemain.toString();
 	}
 
+	/**
+	 * Cette methode renvoie  vrai si la main d'un joueur est vide et faux, sinon
+	 * @return un booleen
+	 */
 	public boolean isEmpty() {
 		return cartemain.isEmpty();
 	}
