@@ -1,5 +1,8 @@
 package jeu;
-
+/**
+ * La classe joueur Intelligence Artificielle
+ *Elle herite de la classe joueur 
+ */	
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -9,6 +12,9 @@ import java.util.LinkedList;
 import java.util.Random;
 
 public class JoueurIA extends Joueur {
+	/**
+	 * les attributs de la classe joueur IA
+	 */
 	private Strategie strategie;
 
 	static private ArrayList<String> collectionNomDeJoueur = new ArrayList<String>(
@@ -16,7 +22,10 @@ public class JoueurIA extends Joueur {
 					"Gabriel", "Ethan", "Mathis", "Jules", "Emma", "Lea",
 					"Chloé", "Manon", "Ines", "Lola", "Jade", "Camille",
 					"Sarah", "Louise"));
-
+/**
+ * Constructeur qui prend en parametre une strategie
+ * @param strat
+ */
 	public JoueurIA(Strategie strat) {
 		String nom = null;
 		if (collectionNomDeJoueur.size() > 0) {
@@ -30,6 +39,12 @@ public class JoueurIA extends Joueur {
 		setNom(nom);
 		this.strategie = strat;
 	}
+	/**
+	 * Methode qui envoie le joueur qui a le moin de carte
+	 * 
+	 * @param lj collection de joueurs
+	 * @return joueur
+	 */
 
 	public Joueur quiAleMoinsDeCarte(LinkedList<Joueur> lj) {
 		int nombreDeCarteMin = 100;
@@ -69,7 +84,10 @@ public class JoueurIA extends Joueur {
 
 		return randomNum;
 	}
-
+/**
+ * 
+ * @return une carte
+ */
 	public Carte retourneUneCarteNonSpecialDesCartesVisible() {
 		for (Iterator<Carte> iterator = cartefaceVisibles.getCartesVisibles().iterator(); iterator
 				.hasNext();) {
@@ -132,7 +150,7 @@ public class JoueurIA extends Joueur {
 		return choix;
 	}
 
-	/*
+	/**
 	 * Le joueur IA va jouer aleatoirement des cartes pour l'instant
 	 */
 	@Override

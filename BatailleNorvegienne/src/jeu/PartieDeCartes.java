@@ -1,5 +1,8 @@
 package jeu;
-
+/**
+ * La classe partie de carte
+ *Elle represente une partie de jeu avec des joueurs, une pioche,un tableet un paquet de carte 
+ */
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -8,13 +11,16 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class PartieDeCartes {
+	/**
+	 * attributs de la carte
+	 */
 	public static Scanner reader;
 	private Pioche pioche = new Pioche();
 	private HashSet<JeuDeCartes> setJeuDeCartes = new HashSet<JeuDeCartes>();
 	private Table table = new Table();
 	private LinkedList<Joueur> llJoueur = new LinkedList<Joueur>();
 	int nbrCarte;
-	Carte carte;
+	private Carte carte;
 
 	/*
 	 * Mise en place de la liste des joueurs.
@@ -22,7 +28,11 @@ public class PartieDeCartes {
 	public Pioche getPioche() {
 		return pioche;
 	}
-
+/**
+ * Methode pour un joueur IA de choisir une strategie
+ * @param r
+ * @return une strategie
+ */
 	public Strategie choixDuneStrategie(Random r) {
 		if (r.nextBoolean())
 			return new StrategieAleatoire();
@@ -33,7 +43,9 @@ public class PartieDeCartes {
 	public void setPioche(Pioche pioche) {
 		this.pioche = pioche;
 	}
-
+/**
+ * Methode de mise en place d'une partie de jeu
+ */
 	private void miseEnPlaceDeLaListeDesJoueurs() {
 		System.out.println("Mise en place de la liste des joueurs :");
 		reader = new Scanner(System.in);
@@ -56,6 +68,9 @@ public class PartieDeCartes {
 			}
 		}
 	}
+	/**
+	 * Cette methode permet au joueur qui est a gauche du distributeur de commencer
+	 */
 
 	private void decalerListedesJoueurs() {
 		Joueur j = llJoueur.getFirst();
@@ -67,7 +82,7 @@ public class PartieDeCartes {
 		Collections.reverse(llJoueur);
 	}
 
-	/*
+	/**
 	 * Creation d'un ou plusieurs jeu de carte en fonction du nombre de joueur.
 	 */
 	private void miseEnPlaceDesJeuxdeCartes() {
@@ -107,7 +122,9 @@ public class PartieDeCartes {
 	public int PositionJoueurDansLaListe(Joueur joueur) {
 		return (llJoueur.indexOf(joueur));
 	}
-
+/**
+ * deroulement du jeu 
+ */
 	private void deroulementDujeu() {
 		Joueur gagnant = null;
 		boolean cond = true;
@@ -192,7 +209,9 @@ public class PartieDeCartes {
 		// + llJoueur.get(2).estCeQueLeJoueurPeutJouer(
 		// derniereCartesPosees, table));
 	}
-
+/**
+ * Methode qui permet au joueur humain d echanger ses cartes
+ */
 	private void EchangerLesCartes() {
 		System.out.println("Voulez vous echanger des cartes ? N/o");
 		reader = new Scanner(System.in);
@@ -202,7 +221,9 @@ public class PartieDeCartes {
 					llJoueur.get(1).choixDesCartesAEchanger());
 		}
 	}
-
+/**
+ * choix du distributeur parmi les joueurs IA
+ */
 	private void distribuer() {
 		for (Iterator<Joueur> it = llJoueur.iterator(); it.hasNext();) {
 			Joueur joueur = (Joueur) it.next();
@@ -216,7 +237,9 @@ public class PartieDeCartes {
 		}
 		System.out.println(pioche);
 	}
-
+/**
+ * Methode qui demarre le jeu
+ */
 	private void demarrer() {
 		miseEnPlaceDeLaListeDesJoueurs();
 		miseEnPlaceDesJeuxdeCartes();

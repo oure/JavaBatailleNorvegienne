@@ -1,5 +1,8 @@
 package jeu;
-
+/**
+ * La classe pioche
+ *C'est la pile de cartes qui reste apres la distribution
+ */
 import java.util.*;
 
 public class Pioche {
@@ -20,7 +23,7 @@ public class Pioche {
 		Pioche.listeDeCarte = listeDeCarte;
 	}
 
-	/** Point d'acc�s pour l'instance unique du singleton */
+	/** Point d'acces pour l'instance unique du singleton */
 
 	public static LinkedList<Carte> getPioche() {
 
@@ -43,19 +46,21 @@ public class Pioche {
 		return "Pioche : " + s;
 	}
 
-	/*
+	/**
 	 * Cette methode supprime tous les elements de cette liste .
 	 */
 	public void viderPioche() {
 		listeDeCarte.clear();
 	}
-
-	public Carte prendreCarte() { // r�cup�rer et supprimer le dernier �l�ment
-									// de la liste
+/**
+ * recuperer et supprimer le dernier element  de la liste
+ * @return
+ */
+	public Carte prendreCarte() { 
 		return listeDeCarte.pollLast();
 	}
 
-	/*
+	/**
 	 * Retourne vrai si la liste est vide
 	 */
 	public boolean isEmpty() {
