@@ -1,24 +1,40 @@
 package jeu;
-
+/**
+ * La classe joueur
+ *Elle definit en general un joueur, quil soit humain ou virtuel
+ */	
 import java.util.*;
 
 public class Joueur {
+	/**
+	 * les attributs de la classe joueur
+	 */
 	private String nom;
 	protected CartesEnMain cartesEnMain = new CartesEnMain();
 	protected CartesfacesVisibles cartefaceVisibles = new CartesfacesVisibles();
 	protected CartesFacesCachees carteFacesCachees = new CartesFacesCachees();
 
+	/**
+	 * Constructeur d'un joueur avec paramètre
+	 * @param nom
+	 */
 	public Joueur(String nom) {
 		this.nom = nom;
 	}
 	
 	public Joueur() {
 	}
+	/**
+	 * Pour compter le nombre total de carte d'un joueur
+	 */
 	public int nombreTotalDecarteQuePossedeUnJoueur() {
 		return cartefaceVisibles.getCartesVisibles().size()
 				+ carteFacesCachees.getCartesCachees().size()
 				+ cartesEnMain.getCartemain().size();
 	}
+	/**cette methode permet au joueur  d'ajouter une seule carte  sur ses cartes  en main
+	 * @ param c : une carte
+	 */
 	public void ajouterCarteEnMain(Carte c) {
 		cartesEnMain.ajouterCarteMain(c);
 	}
@@ -29,9 +45,15 @@ public class Joueur {
 				.isEmpty());
 	}
 
+	/**cette methode permet au joueur  d'ajouter une seule carte  sur ses cartes de face visible
+	 * @ param c : une carte
+	 */
 	public void ajouterCartefacsVisible(Carte c) {
 		cartefaceVisibles.ajouterCarteVisible(c);
 	}
+	/**cette methode permet au joueur  d'ajouter une seule carte  sur ses cartes de face cachee
+	 * @ param c : une carte
+	 */
 
 	public void ajouterCarteFaceCachee(Carte c) {
 		carteFacesCachees.ajouterUnecarteFaceCachee(c);
@@ -87,7 +109,11 @@ public class Joueur {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-
+/**
+ * methode qui supprime la table si un 10 a ete pose
+ * @param derniereCartesPosees
+ * @param table
+ */
 	public void PoserUnDix(HashSet<Carte> derniereCartesPosees, Table table) {
 		for (Iterator<Carte> iterator = derniereCartesPosees.iterator(); iterator
 				.hasNext();) {
@@ -102,6 +128,12 @@ public class Joueur {
 	/*
 	 * renvoie le nombre de personne qui vont passer leur tour, il y a autant de
 	 * 8 poses que de joueurs qui passent leur tour
+	 */
+	/**
+	 * Cette methode renvoie le tas sur un joueur lorsqu'un 8 est joue
+	 * @param derniereCartesPosees
+	 * @param table
+	 * @return
 	 */
 	public int PoserUnHuit(HashSet<Carte> derniereCartesPosees, Table table) {
 		int nombreDeHuit = 0;
@@ -139,6 +171,12 @@ public class Joueur {
 		}
 		return -1;
 	}
+	/**
+	 * Envoi du  tas sur un joueur si un AS a ete joue
+	 * @param derniereCartesPosees
+	 * @param table
+	 * @param lj
+	 */
 
 	public void PoserUnAs(HashSet<Carte> derniereCartesPosees, Table table,
 			LinkedList<Joueur> lj) {
@@ -157,7 +195,11 @@ public class Joueur {
 
 		}
 	}
-
+/**
+ * Ceci permet au joueur qui a pose un As de choisir sur qui envoyer le tas
+ * @param lj
+ * @return
+ */
 	public Joueur choixDuJoueurCibleePourEnvoyerLetas(LinkedList<Joueur> lj) {
 		System.out
 				.println("Entrez le nom du joueur sur qui vous voulez envoyer le tas :");
@@ -173,7 +215,12 @@ public class Joueur {
 		return choixDuJoueurCibleePourEnvoyerLetas(lj);
 
 	}
-
+/**
+ * tester combien de fois une valeur de carte est possede dans la main d'un joueur
+ * @param valeur
+ * @param nombreOccurence
+ * @return un boolean
+ */
 	public boolean estPossedeDansLamain(int valeur, int nombreOccurence) {
 		int i = 0;
 		for (Iterator<Carte> it = cartesEnMain.getCartemain().iterator(); it
@@ -185,6 +232,12 @@ public class Joueur {
 		}
 		return (nombreOccurence <= i);
 	}
+	/**
+	 *Methode pour tester si un joueur peut joueur en sachant la derniere carte jouee
+	 * @param valeur
+	 * @param tas
+	 * @return
+	 */
 
 	public boolean estSuperieureOuEgal(int valeur, Table tas) {
 		if (tas.getListe().isEmpty()
@@ -193,6 +246,11 @@ public class Joueur {
 		else
 			return false;
 	}
+	/**
+	 * Methode pour tester si un joueur peut jouer un 8
+	 * @param table
+	 * @return
+	 */
 
 	public boolean estCeQueJePeuxJouerUnHuit(Table table) {
 		if (table.afficherDerniereCarteDuTas().getValeur() < 8)
@@ -200,6 +258,12 @@ public class Joueur {
 		else
 			return false;
 	}
+	/**
+	 *  methode qui teste la possibilite de jouer
+	 * @param derniereCartesPosees
+	 * @param table
+	 * @return
+	 */
 
 	public boolean estCeQueLeJoueurPeutJouer(
 			HashSet<Carte> derniereCartesPosees, Table table) {
@@ -256,6 +320,13 @@ public class Joueur {
 		return (nombreOccurence <= i);
 	}
 
+	/**
+	 * Methode qui permet au joueur de jouer une ou des cartes  
+	 * @param tas
+	 * @param pioche
+	 * @param derniereCartesPosees
+	 * @return
+	 */
 	public HashSet<Carte> jouerLibrement(Table tas, Pioche pioche,
 			HashSet<Carte> derniereCartesPosees) {
 		HashSet<Carte> hc = new HashSet<Carte>();
@@ -298,7 +369,11 @@ public class Joueur {
 		}
 		return hc;
 	}
-
+/**
+ * envoyer le as sur un joueur choisi
+ * @param j
+ * @param tas
+ */
 	public void envoyerTasSurJoueur(Joueur j, Table tas) {
 		j.cartesEnMain.addAll(tas);
 		tas.viderTas();
@@ -307,7 +382,11 @@ public class Joueur {
 	public void recevoirUneCarte(Carte ca) {
 		cartesEnMain.ajouterCarteMain(ca);
 	}
-
+/**
+ * piocher des cartes aprés avoir jouer
+ * @param i
+ * @param pioche
+ */
 	public void piocher(int i, Pioche pioche) {
 		while (pioche.isEmpty() == false) {
 			for (int j = 0; j < i; j++) {
@@ -335,6 +414,12 @@ public class Joueur {
 		tab[1]=vCarte2;
 		return tab;
 	}
+	
+	/**
+	 * Methode pour faire des echanges de cartes avant de commencer le jeu
+	 * @param tab
+	 * @return
+	 */
 
 	public boolean echangerCarte(int tab[]) {
 		int vCarte1=tab[0];

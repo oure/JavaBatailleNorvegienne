@@ -1,5 +1,9 @@
 package jeu;
 
+/**
+ * La classe partie de carte
+ *Elle represente une partie de jeu avec des joueurs, une pioche,un tableet un paquet de carte 
+ */
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -10,6 +14,9 @@ import java.util.Scanner;
 import jeu.Carte.Couleur;
 
 public class PartieDeCartes {
+	/**
+	 * attributs de la carte
+	 */
 	public static Scanner reader;
 	private Pioche pioche = new Pioche();
 	private HashSet<JeuDeCartes> setJeuDeCartes = new HashSet<JeuDeCartes>();
@@ -20,6 +27,12 @@ public class PartieDeCartes {
 		return pioche;
 	}
 
+	/**
+	 * Methode pour un joueur IA de choisir une strategie
+	 * 
+	 * @param r
+	 * @return une strategie
+	 */
 	public Strategie choixDuneStrategie(Random r) {
 		if (r.nextBoolean())
 			return new StrategieAleatoire();
@@ -31,6 +44,9 @@ public class PartieDeCartes {
 		this.pioche = pioche;
 	}
 
+	/**
+	 * Methode de mise en place d'une partie de jeu
+	 */
 	private void miseEnPlaceDeLaListeDesJoueurs() {
 		System.out.println("Mise en place de la liste des joueurs :");
 		reader = new Scanner(System.in);
@@ -54,6 +70,11 @@ public class PartieDeCartes {
 		}
 	}
 
+	/**
+	 * Cette methode permet au joueur qui est a gauche du distributeur de
+	 * commencer
+	 */
+
 	private void decalerListedesJoueurs() {
 		Joueur j = llJoueur.getFirst();
 		llJoueur.remove();
@@ -64,7 +85,7 @@ public class PartieDeCartes {
 		Collections.reverse(llJoueur);
 	}
 
-	/*
+	/**
 	 * Creation d'un ou plusieurs jeu de carte en fonction du nombre de joueur.
 	 */
 	private void miseEnPlaceDesJeuxdeCartes() {
@@ -105,6 +126,9 @@ public class PartieDeCartes {
 		return (llJoueur.indexOf(joueur));
 	}
 
+	/**
+	 * deroulement du jeu
+	 */
 	private void deroulementDujeu() {
 		Joueur gagnant = null;
 		boolean cond = true;
@@ -172,21 +196,25 @@ public class PartieDeCartes {
 		// table.ajouterCarteALaTable(new Carte(2, Couleur.Pique));
 		// System.out
 		System.out.println(llJoueur.get(1).getNom());
-		 llJoueur.get(1).getCartesEnMain().supprimerToutesLesCartesEnmain();
-		 llJoueur.get(1).ajouterCarteEnMain(new Carte(8, Couleur.Coeur));
-		 llJoueur.get(1).ajouterCarteEnMain(new Carte(8, Couleur.Trefle));
-		 llJoueur.get(1).ajouterCarteEnMain(new Carte(8, Couleur.Carreau));
-		 llJoueur.get(2).ajouterCarteEnMain(new Carte(8, Couleur.Pique));
+		llJoueur.get(1).getCartesEnMain().supprimerToutesLesCartesEnmain();
+		llJoueur.get(1).ajouterCarteEnMain(new Carte(8, Couleur.Coeur));
+		llJoueur.get(1).ajouterCarteEnMain(new Carte(8, Couleur.Trefle));
+		llJoueur.get(1).ajouterCarteEnMain(new Carte(8, Couleur.Carreau));
+		llJoueur.get(2).ajouterCarteEnMain(new Carte(8, Couleur.Pique));
 
-		 int a=((JoueurIA) llJoueur.get(1)).test((JoueurIA) llJoueur.get(2), llJoueur);
-		 System.out.println(llJoueur.get(1).getCartesEnMain());
-		 System.out.println(a);
+		int a = ((JoueurIA) llJoueur.get(1)).test((JoueurIA) llJoueur.get(2),
+				llJoueur);
+		System.out.println(llJoueur.get(1).getCartesEnMain());
+		System.out.println(a);
 		//
 		// System.out.println("EST CE QUE LE JOUEUR PEUX JOUER "
 		// + llJoueur.get(2).estCeQueLeJoueurPeutJouer(
 		// derniereCartesPosees, table));
 	}
 
+	/**
+	 * Methode qui permet au joueur humain d echanger ses cartes
+	 */
 	private void EchangerLesCartes() {
 		System.out.println("Voulez vous echanger des cartes ? N/o");
 		reader = new Scanner(System.in);
@@ -197,6 +225,9 @@ public class PartieDeCartes {
 		}
 	}
 
+	/**
+	 * choix du distributeur parmi les joueurs IA
+	 */
 	private void distribuer() {
 		for (Iterator<Joueur> it = llJoueur.iterator(); it.hasNext();) {
 			Joueur joueur = (Joueur) it.next();
@@ -211,13 +242,15 @@ public class PartieDeCartes {
 		System.out.println(pioche);
 	}
 
-
+	/**
+	 * Methode qui demarre le jeu
+	 */
 	private void demarrer() {
 		miseEnPlaceDeLaListeDesJoueurs();
 		miseEnPlaceDesJeuxdeCartes();
 		distribuer();
 		deroulementDujeu();
-		//test();
+		// test();
 	}
 
 	public static void main(String[] args) {

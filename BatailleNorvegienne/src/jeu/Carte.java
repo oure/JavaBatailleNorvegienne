@@ -1,5 +1,8 @@
 package jeu;
-
+/**
+ * La classe Carte 
+ * Elle definit une carte avec toutes ses caracteristiques 
+ */
 public class Carte {
 	enum Couleur {
 		Pique, Coeur, Carreau, Trefle
@@ -10,6 +13,12 @@ public class Carte {
 
 	private boolean estVisible;
 
+	/**
+	 * le constructeur de la classe 
+	 * @param v : une valeur
+	 * @param c : une couleur
+	 */
+	
 	public Carte(int v, Couleur c) {
 		if (v >= 1 && v <= 13) {
 			valeur = v;
@@ -24,6 +33,7 @@ public class Carte {
 	}
 	}
 
+	
 	public int getValeur() {
 		return valeur;
 	}

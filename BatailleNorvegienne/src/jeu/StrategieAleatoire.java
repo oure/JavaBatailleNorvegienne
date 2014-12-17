@@ -1,5 +1,8 @@
 package jeu;
-
+/**
+ * La classe Strategie aleatoire
+ * Elle herite de Strategie 
+ */
 import java.util.LinkedList;
 import java.util.Random;
 

@@ -1,5 +1,8 @@
 package jeu;
-
+/**
+ * La classe Strategie
+ *
+ */
 import java.util.LinkedList;
 
 public interface Strategie {

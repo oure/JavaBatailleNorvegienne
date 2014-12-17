@@ -1,14 +1,20 @@
 package jeu;
-
+/**
+ * La classe table
+ *C'est le tas constitue par les cartes jouees pas les joueurs 
+ */
 import java.util.*;
 
-/**
- * 
- */
+
 public class Table {
+	/**
+	 * attributs de la classe table
+	 */
 	private LinkedList<Carte> liste = new LinkedList<Carte>();
 	private HashSet<Carte> derniereCartesPoses=new HashSet<Carte>();
-	
+	/**
+	 * Vider la table de toute ses cartes
+	 */
 	public void viderTas() {
 		liste.clear();
 	}
@@ -22,12 +28,16 @@ public class Table {
 	}
 
 	/**
-	 * @return
+	 * affichage de la derniere carte jouee sur la table
+	 * @return une carte
 	 */
 	public Carte afficherDerniereCarteDuTas() {
 		return liste.getLast();
 	}
-
+/**
+ * Un joueur peut jouer sur la table grace  a cette methode
+ * @param ca
+ */
 	public void ajouterCarteALaTable(Carte ca) {
 		liste.add(ca);
 		derniereCartesPoses.clear();
@@ -40,6 +50,10 @@ public class Table {
 
 	/**
 	 * @param Carte
+	 */
+	/**
+	 * cette methode servira au joueur qui veut jouer plus d une carte
+	 * @param hashSetCartes
 	 */
 	public void ajouterCarteTable(HashSet<Carte> hashSetCartes) {
 		for (Iterator<Carte> iterator = hashSetCartes.iterator(); iterator.hasNext();) {

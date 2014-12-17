@@ -1,10 +1,17 @@
 package jeu;
-
+/**
+ * La classe Cartes de face visible 
+ * c'est l'ensemble des cartes  a face decouverte qu'un joueur dispose sur la table 
+ */
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Random;
 
 public class CartesFacesCachees {
+	/**
+	 * cette classe prend un seul attribut de type hashset
+	 */
+	
 	private HashSet<Carte> cartesCachees = new HashSet<Carte>();
 
 	@Override
@@ -19,6 +26,9 @@ public class CartesFacesCachees {
 	public void setCartesCachees(HashSet<Carte> cartesCachees) {
 		this.cartesCachees = cartesCachees;
 	}
+	/**la methode qui permet de prendre au hasard une carte de face cachée pour l'ajouter sur les cartes en main
+	 *
+	 */
 
 	public Carte prendreAuhasard(){
 		int compteur=1;
@@ -40,11 +50,15 @@ public class CartesFacesCachees {
 		}
 		return null;
 	}
-
+	
+	/**cette methode permet d'ajouter  des cartes  sur la classe carte visible
+	 * @ param s : un hashset
+	 */
 	public void addAll(HashSet<Carte> s) {
 		cartesCachees.addAll(s);
 	}
-
+	/**tester si la liste de cartes cachees ne sont pas vide
+	 */
 	public boolean isEmpty() {
 		return cartesCachees.isEmpty();
 	}
@@ -56,7 +70,9 @@ public class CartesFacesCachees {
 					+ "  ");
 		}
 	}
-
+	/**cette methode permet d'ajouter une seule carte  sur les cartes face cachée
+	 * @ param car : une carte
+	 */
 	public void ajouterUnecarteFaceCachee(Carte car) {
 		cartesCachees.add(car);
 	}
