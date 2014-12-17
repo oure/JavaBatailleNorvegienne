@@ -15,12 +15,7 @@ public class PartieDeCartes {
 	private HashSet<JeuDeCartes> setJeuDeCartes = new HashSet<JeuDeCartes>();
 	private Table table = new Table();
 	private LinkedList<Joueur> llJoueur = new LinkedList<Joueur>();
-	int nbrCarte;
-	Carte carte;
 
-	/*
-	 * Mise en place de la liste des joueurs.
-	 */
 	public Pioche getPioche() {
 		return pioche;
 	}
@@ -216,12 +211,13 @@ public class PartieDeCartes {
 		System.out.println(pioche);
 	}
 
+
 	private void demarrer() {
 		miseEnPlaceDeLaListeDesJoueurs();
 		miseEnPlaceDesJeuxdeCartes();
 		distribuer();
-		// deroulementDujeu();
-		test();
+		deroulementDujeu();
+		//test();
 	}
 
 	public static void main(String[] args) {

@@ -35,7 +35,7 @@ public class JoueurIA extends Joueur {
 		Joueur j = null;
 		for (Iterator<Joueur> iterator = lj.iterator(); iterator.hasNext();) {
 			Joueur joueur = (Joueur) iterator.next();
-			if (joueur.nombreTotalDecarteQuePossedeUnJoueur() < nombreDeCarteMin && this!=joueur) {
+			if (joueur.nombreTotalDecarteQuePossedeUnJoueur() < nombreDeCarteMin &&  this!=joueur) {
 				j = joueur;
 				nombreDeCarteMin = joueur
 						.nombreTotalDecarteQuePossedeUnJoueur();
@@ -150,7 +150,7 @@ public class JoueurIA extends Joueur {
 					ajouterCarteEnMain(pioche.prendreCarte());
 				}
 				return hc;
-			} else if (cartesEnMain.getCartemain().isEmpty()) {
+			} else if (cartesEnMain.getCartemain().isEmpty() ) {
 				if (estPossedeDansDansLesCartesVisibles(valeur,
 						nombreDeCarteAjouer)) {
 					hc = cartefaceVisibles.supCarteVisible(valeur,
@@ -166,6 +166,9 @@ public class JoueurIA extends Joueur {
 			return hc;
 		}
 		return hc;
+	}
+	public Joueur choixDuJoueurCibleePourEnvoyerLetas(LinkedList<Joueur> lj){
+		return strategie.choixDuJoueurCibleePourEnvoyerLetas(this, lj);
 	}
 	public int test(JoueurIA ia,
 			LinkedList<Joueur> lj){
