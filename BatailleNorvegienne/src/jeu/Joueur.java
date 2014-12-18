@@ -158,6 +158,49 @@ public class Joueur {
 		return nombreDeHuit;
 	}
 
+	public boolean apteAContrerUnAs(Carte carte) {
+		if (carte.getValeur() == 1 || carte.getValeur() == 2)
+			return true;
+		else
+			return false;
+	}
+
+	public void seDefendreContreUnAs(Table table) {
+		System.out.println("gzyyyyyyyg");
+		System.out.print("Defender vous ! Un joueur veux vous envoyer le tas ! Quelles cartes voulez vous poser ?");
+		int valeur = PartieDeCartes.reader.nextInt();
+		System.out.println(estPossedeDansLamain(valeur, 1));
+		if (estPossedeDansLamain(valeur, 1) && (valeur==2 || valeur==1))
+			table.ajouterCartesTable(cartesEnMain.supCarteMain(valeur, 1));
+		else {
+			System.out.println("Vous ne posseder pas cette carte ou elle ne peux pas contrer un as !");
+			seDefendreContreUnAs(table);
+		}
+	}
+
+	public boolean estCeQueJeSuisEnMesureDecontrerUnAs(Joueur j) {
+		if (!j.getCartesEnMain().isEmpty())
+			for (Iterator<Carte> iterator = j.getCartesEnMain().getCartemain()
+					.iterator(); iterator.hasNext();) {
+				Carte carte = iterator.next();
+				if (apteAContrerUnAs(carte))
+					return true;
+			}
+		else
+			return false;
+		if (!j.getCartefaceVisibles().isEmpty()
+				&& j.getCartesEnMain().isEmpty())
+			for (Iterator<Carte> iterator = j.getCartefaceVisibles()
+					.getCartesVisibles().iterator(); iterator.hasNext();) {
+				Carte carte = iterator.next();
+				if (apteAContrerUnAs(carte))
+					return true;
+			}
+		else
+			return false;
+		return false;
+	}
+
 	public int nombreDeHuitQueLeJoueurPossede() {
 		int i = 0;
 		if (!cartesEnMain.getCartemain().isEmpty()) {
@@ -179,7 +222,7 @@ public class Joueur {
 
 	public int getNumeroduJoueurDansLaListeDeJoueur(LinkedList<Joueur> lj,
 			Joueur j) {
-		for (int i = 0; i < lj.size() - 1; i++) {
+		for (int i = 0; i < lj.size(); i++) {
 			if (lj.get(i) == j)
 				return i;
 		}
@@ -193,7 +236,6 @@ public class Joueur {
 	 * @param table
 	 * @param lj
 	 */
-
 	public void PoserUnAs(HashSet<Carte> derniereCartesPosees, Table table,
 			LinkedList<Joueur> lj) {
 		Joueur j = null;
@@ -202,10 +244,19 @@ public class Joueur {
 			Carte carte = (Carte) iterator.next();
 			if (carte.getValeur() == 1) {
 				j = choixDuJoueurCibleePourEnvoyerLetas(lj);
-				envoyerTasSurJoueur(j, table);
-				System.out.println(j);
+				if (estCeQueJeSuisEnMesureDecontrerUnAs(j)) {
+					System.out.println(j.getNom()
+							+ " : \"Je suis en mesure de contrer l'as\"");
+					j.seDefendreContreUnAs(table);
+					return;
+				} else {
+					System.out
+							.println("Je suis suis pas en mesure de contrer l'as");
+					envoyerTasSurJoueur(j, table);
+					System.out.println(j);
+				}
+				return;
 			}
-
 		}
 	}
 
@@ -221,7 +272,7 @@ public class Joueur {
 				.println("Entrez le nom du joueur sur qui vous voulez envoyer le tas :");
 		String nomDuJoueurCible = PartieDeCartes.reader.nextLine();
 		nomDuJoueurCible.toLowerCase();
-		System.out.println("----"+nomDuJoueurCible+"------");
+		System.out.println("----" + nomDuJoueurCible + "------");
 		for (Iterator<Joueur> iterator = lj.iterator(); iterator.hasNext();) {
 			Joueur joueur = (Joueur) iterator.next();
 			if (nomDuJoueurCible.equals(joueur.getNom().toLowerCase())) {
@@ -271,7 +322,8 @@ public class Joueur {
 		else
 			return false;
 	}
-	public boolean estInferieurOuEgal(int valeur,Table table){
+
+	public boolean estInferieurOuEgal(int valeur, Table table) {
 		if (table.getListe().isEmpty()
 				|| table.getListe().getLast().getValeur() >= valeur)
 			return true;
@@ -309,8 +361,7 @@ public class Joueur {
 			for (Iterator<Carte> it = cartesEnMain.getCartemain().iterator(); it
 					.hasNext();) {
 				Carte c = (Carte) it.next();
-				if (estCeQueLeJoueurPeutJouerDesCartes(c.getValeur(),
-						1, table)) {
+				if (estCeQueLeJoueurPeutJouerDesCartes(c.getValeur(), 1, table)) {
 					return true;
 				}
 			}
@@ -318,8 +369,8 @@ public class Joueur {
 			for (Iterator<Carte> iterator = cartefaceVisibles
 					.getCartesVisibles().iterator(); iterator.hasNext();) {
 				Carte carte = (Carte) iterator.next();
-				if (estCeQueLeJoueurPeutJouerDesCartes(carte.getValeur(),
-						1, table))
+				if (estCeQueLeJoueurPeutJouerDesCartes(carte.getValeur(), 1,
+						table))
 					return true;
 			}
 		if (cartesEnMain.isEmpty() && cartefaceVisibles.isEmpty()
@@ -328,12 +379,11 @@ public class Joueur {
 		return false;
 	}
 
-	public boolean estCeQueLeJoueurPeutJouerDesCartes(
-			int valeur, int nombreOccurence,
-			Table table) {
+	public boolean estCeQueLeJoueurPeutJouerDesCartes(int valeur,
+			int nombreOccurence, Table table) {
 		if (valeur == 2 || valeur == 1)
 			return true;
-		if(table.possedeUnSept() && estInferieurOuEgal(valeur, table) )
+		if (table.possedeUnSept() && estInferieurOuEgal(valeur, table))
 			return true;
 		if (valeur == 8) {
 			if (estCeQueJePeuxJouerUnHuit(table))
@@ -385,7 +435,7 @@ public class Joueur {
 					&& estCeQueLeJoueurPeutJouerDesCartes(valeur,
 							nombreDeCarteAjouer, table)) {
 				hc = cartesEnMain.supCarteMain(valeur, nombreDeCarteAjouer);
-				table.ajouterCarteTable(hc);
+				table.ajouterCartesTable(hc);
 				for (int i = 1; i <= hc.size(); i++) {
 					piocher(pioche);
 				}
@@ -393,12 +443,11 @@ public class Joueur {
 			} else if (cartesEnMain.getCartemain().isEmpty()) {
 				if (estPossedeDansDansLesCartesVisibles(valeur,
 						nombreDeCarteAjouer)
-						&& estCeQueLeJoueurPeutJouerDesCartes(
-								valeur, nombreDeCarteAjouer,
-								table)) {
+						&& estCeQueLeJoueurPeutJouerDesCartes(valeur,
+								nombreDeCarteAjouer, table)) {
 					hc = cartefaceVisibles.supCarteVisible(valeur,
 							nombreDeCarteAjouer);
-					table.ajouterCarteTable(hc);
+					table.ajouterCartesTable(hc);
 					for (int i = 1; i <= hc.size(); i++) {
 						piocher(pioche);
 					}
@@ -418,15 +467,15 @@ public class Joueur {
 		if (cartesEnMain.getCartemain().isEmpty()
 				&& cartefaceVisibles.getCartesVisibles().isEmpty()) {
 			Carte carte;
-			carte=carteFacesCachees.prendreAuhasard();
+			carte = carteFacesCachees.prendreAuhasard();
 			hc.add(carte);
-			if(estCeQueLeJoueurPeutJouerDesCartes(carte.getValeur(), 1, table)){
+			if (estCeQueLeJoueurPeutJouerDesCartes(carte.getValeur(), 1, table)) {
 				System.out.println("JE PEUX JOUER CETTE CARTE");
-				table.ajouterCarteTable(hc);
-			}else{
+				table.ajouterCartesTable(hc);
+			} else {
 				System.out.println("JE NE PEUX PAS JOUER CETTE CARTE");
 				ajouterCartesEnMain(table.ramasserLeTas());
-				System.out.println("VOUS AVEZ RAMMASSER LE TAS "+getNom());
+				System.out.println("VOUS AVEZ RAMMASSER LE TAS " + getNom());
 			}
 			return hc;
 		}
@@ -443,7 +492,7 @@ public class Joueur {
 		if (table.isEmpty())
 			return;
 		j.cartesEnMain.addAll(table);
-		System.out.println("ETAT DE LA TABLE: "+table);
+		System.out.println("ETAT DE LA TABLE: " + table);
 		table.viderTas();
 	}
 

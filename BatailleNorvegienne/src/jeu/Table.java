@@ -57,7 +57,7 @@ public class Table {
 	 * 
 	 * @param hashSetCartes
 	 */
-	public void ajouterCarteTable(HashSet<Carte> hashSetCartes) {
+	public void ajouterCartesTable(HashSet<Carte> hashSetCartes) {
 		for (Iterator<Carte> iterator = hashSetCartes.iterator(); iterator
 				.hasNext();) {
 			Carte carte = (Carte) iterator.next();

@@ -136,15 +136,19 @@ public class PartieDeCartes {
 		boolean passerLeTour = false;
 		int nombreDejoueurQuiPasseLeurTour = 0;
 		decalerListedesJoueurs(); // Le distributeur joue en dernier
-		for (Iterator iterator = llJoueur.iterator(); iterator.hasNext();) {
+		for (Iterator<Joueur> iterator = llJoueur.iterator(); iterator.hasNext();) {
 			Joueur joueur = (Joueur) iterator.next();
 			System.out.println(joueur.getNom());
 		}
 		llJoueur.get(1).getCartesEnMain().supprimerToutesLesCartesEnmain();
 		llJoueur.get(1).ajouterCarteEnMain(new Carte(1, Couleur.Coeur));
+		llJoueur.get(1).ajouterCarteEnMain(new Carte(1, Couleur.Coeur));
+		llJoueur.get(0).ajouterCarteEnMain(new Carte(2, Couleur.Coeur));
+
+
 
 		// EchangerLesCartes();
-		//pioche.viderPioche();
+		pioche.viderPioche();
 		HashSet<Carte> derniereCartesPosees = new HashSet<Carte>();
 		while (cond) {
 			for (Iterator<Joueur> iterator = llJoueur.iterator(); iterator

@@ -49,7 +49,15 @@ public class JoueurIA extends Joueur {
 	 * @param lj collection de joueurs
 	 * @return joueur
 	 */
+	public void seDefendreContreUnAs(Table table) {
+		System.out.println("JE SUIS IA");
+		int vCarte=strategie.contrerUnAs(this);
+		if (estPossedeDansLamain(vCarte, 1))
+			table.ajouterCartesTable(cartesEnMain.supCarteMain(vCarte, 1));
+		else
+			table.ajouterCartesTable(cartefaceVisibles.supCarteVisible(vCarte, 1));
 
+	}
 	public Joueur quiAleMoinsDeCarte(LinkedList<Joueur> lj) {
 		int nombreDeCarteMin = 100;
 		Joueur j = null;
@@ -58,6 +66,7 @@ public class JoueurIA extends Joueur {
 			if (joueur.nombreTotalDecarteQuePossedeUnJoueur() < nombreDeCarteMin
 					&& this != joueur) {
 				j = joueur;
+				System.out.println("VICTTTTTTTIME"+j);
 				nombreDeCarteMin = joueur
 						.nombreTotalDecarteQuePossedeUnJoueur();
 			}
@@ -189,7 +198,7 @@ public class JoueurIA extends Joueur {
 					&& estCeQueLeJoueurPeutJouerDesCartes(valeur,
 							nombreDeCarteAjouer, table)) {
 				hc = cartesEnMain.supCarteMain(valeur, nombreDeCarteAjouer);
-				table.ajouterCarteTable(hc);
+				table.ajouterCartesTable(hc);
 				for (int i = 1; i <= hc.size(); i++) {
 					System.out.println();
 					piocher(pioche);
@@ -202,7 +211,7 @@ public class JoueurIA extends Joueur {
 						nombreDeCarteAjouer)) {
 					hc = cartefaceVisibles.supCarteVisible(valeur,
 							nombreDeCarteAjouer);
-					table.ajouterCarteTable(hc);
+					table.ajouterCartesTable(hc);
 					for (int i = 1; i <= hc.size(); i++) {
 						piocher(pioche);
 					}
@@ -215,7 +224,7 @@ public class JoueurIA extends Joueur {
 			Carte carte=carteFacesCachees.prendreAuhasard();
 			if(estCeQueLeJoueurPeutJouerDesCartes(carte.getValeur(), 1, table)){
 				System.out.println("JE PEUX JOUER CETTE CARTE");
-				table.ajouterCarteTable(hc);
+				table.ajouterCartesTable(hc);
 				hc.add(carte);
 			}else{
 				System.out.println("JE NE PEUX PAS JOUER CETTE CARTE");
@@ -229,6 +238,7 @@ public class JoueurIA extends Joueur {
 
 	public Joueur choixDuJoueurCibleePourEnvoyerLetas(LinkedList<Joueur> lj) {
 		System.out.println("OUIIIIIII");
+		System.out.println(strategie.getClass());
 		return strategie.choixDuJoueurCibleePourEnvoyerLetas(this, lj);
 	}
 
