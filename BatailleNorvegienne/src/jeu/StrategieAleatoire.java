@@ -12,7 +12,7 @@ public class StrategieAleatoire implements Strategie {
 		int nbDeHuit = ia.nombreDeHuitQueLeJoueurPossede();
 		if (nbDeHuit >= 2)
 			return rand.nextInt((nbDeHuit - 1) + 1) + 1;
-		else 
+		else  
 			return 1;
 	}
 
@@ -28,7 +28,7 @@ public class StrategieAleatoire implements Strategie {
 			return lj.get(numeroDuJoueurDesigne);
 		}
 		else
-			j.choixDuJoueurCibleePourEnvoyerLetas(lj);
+			j.choixDuJoueurCibleePourEnvoyerLaTable(lj);
 		return null;
 	}
 

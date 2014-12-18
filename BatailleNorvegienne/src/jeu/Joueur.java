@@ -118,33 +118,28 @@ public class Joueur {
 		this.nom = nom;
 	}
 
-	/**
-	 * methode qui supprime la table si un 10 a ete pose
-	 * 
-	 * @param derniereCartesPosees
-	 * @param table
-	 */
+/**
+ * methode qui supprime la table si un 10 a ete pose
+ * @param derniereCartesPosees par le joueur precedent
+ * @param table 
+ */
 	public void PoserUnDix(HashSet<Carte> derniereCartesPosees, Table table) {
 		for (Iterator<Carte> iterator = derniereCartesPosees.iterator(); iterator
 				.hasNext();) {
 			Carte carte = (Carte) iterator.next();
 			if (carte.getValeur() == 10) {
-				table.viderTas();
+				table.viderTable();
 				break;
 			}
 		}
 	}
 
-	/*
-	 * renvoie le nombre de personne qui vont passer leur tour, il y a autant de
-	 * 8 poses que de joueurs qui passent leur tour
-	 */
 	/**
-	 * Cette methode renvoie le tas sur un joueur lorsqu'un 8 est joue
-	 * 
+	 * Renvoie le nombre de personne qui vont passer leur tour, il y a autant de
+	 * 8 poses que de joueurs qui passent leur tour
 	 * @param derniereCartesPosees
 	 * @param table
-	 * @return
+	 * @return le nombre de 8 pose par un joueur
 	 */
 	public int PoserUnHuit(HashSet<Carte> derniereCartesPosees, Table table) {
 		int nombreDeHuit = 0;
@@ -220,6 +215,13 @@ public class Joueur {
 		return i;
 	}
 
+	
+	/**
+	 * Cet methode permet dobtenir le numero d un joueur
+	 * @param lj etant la lidte de tous les joueurs
+	 * @param j etant le joueur dont on veut avoir son numero
+	 * @return le numero du joueur
+	 */
 	public int getNumeroduJoueurDansLaListeDeJoueur(LinkedList<Joueur> lj,
 			Joueur j) {
 		for (int i = 0; i < lj.size(); i++) {
@@ -230,11 +232,10 @@ public class Joueur {
 	}
 
 	/**
-	 * Envoi du tas sur un joueur si un AS a ete joue
-	 * 
+	 * Envoi du  table sur un joueur si un AS a ete joue
 	 * @param derniereCartesPosees
 	 * @param table
-	 * @param lj
+	 * @param lj : la liste des joueurs, ceci permet de choisir la victime , c est a dire sur qui envoyer le table
 	 */
 	public void PoserUnAs(HashSet<Carte> derniereCartesPosees, Table table,
 			LinkedList<Joueur> lj) {
@@ -266,10 +267,16 @@ public class Joueur {
 	 * @param lj
 	 * @return
 	 */
+
+/**
+ * Ceci permet au joueur qui a pose un As de choisir sur qui envoyer le table
+ * @param lj
+ * @return le joueur qui sera victime
+ */
 	public Joueur choixDuJoueurCibleePourEnvoyerLetas(LinkedList<Joueur> lj) {
 		PartieDeCartes.reader.nextLine();
 		System.out
-				.println("Entrez le nom du joueur sur qui vous voulez envoyer le tas :");
+				.println("Entrez le nom du joueur sur qui vous voulez envoyer le table :");
 		String nomDuJoueurCible = PartieDeCartes.reader.nextLine();
 		nomDuJoueurCible.toLowerCase();
 		System.out.println("----" + nomDuJoueurCible + "------");
@@ -410,12 +417,11 @@ public class Joueur {
 	}
 
 	/**
-	 * Methode qui permet au joueur de jouer une ou des cartes
-	 * 
+	 * Methode qui permet au joueur de jouer une ou des cartes  
 	 * @param table
 	 * @param pioche
 	 * @param derniereCartesPosees
-	 * @return
+	 * @return une collection de cartes, de type hashset, que le joueur veut jouer
 	 */
 	public HashSet<Carte> jouerLibrement(Table table, Pioche pioche,
 			HashSet<Carte> derniereCartesPosees) {
@@ -481,7 +487,6 @@ public class Joueur {
 		}
 		return hc;
 	}
-
 	/**
 	 * envoyer la table sur un joueur choisi
 	 * 
@@ -493,7 +498,7 @@ public class Joueur {
 			return;
 		j.cartesEnMain.addAll(table);
 		System.out.println("ETAT DE LA TABLE: " + table);
-		table.viderTas();
+		table.viderTable();
 	}
 
 	public void recevoirUneCarte(Carte ca) {
@@ -534,7 +539,7 @@ public class Joueur {
 	 * Methode pour faire des echanges de cartes avant de commencer le jeu
 	 * 
 	 * @param tab
-	 * @return
+	 * @return vrai si le joueur est pret a echanger des cartes avant le demarrage du jeu 
 	 */
 
 	public boolean echangerCarte(int tab[]) {
@@ -554,8 +559,7 @@ public class Joueur {
 				if (c.getValeur() == vCarte1) {
 					c1 = c;
 					break;
-				}
-			}
+				}			}
 			for (Iterator<Carte> it = cartefaceVisibles.getCartesVisibles()
 					.iterator(); it.hasNext();) {
 				Carte c = (Carte) it.next();

@@ -235,8 +235,7 @@ public class JoueurIA extends Joueur {
 		}
 		return hc;
 	}
-
-	public Joueur choixDuJoueurCibleePourEnvoyerLetas(LinkedList<Joueur> lj) {
+	public Joueur choixDuJoueurCibleePourEnvoyerLaTable(LinkedList<Joueur> lj) {
 		System.out.println("OUIIIIIII");
 		System.out.println(strategie.getClass());
 		return strategie.choixDuJoueurCibleePourEnvoyerLetas(this, lj);

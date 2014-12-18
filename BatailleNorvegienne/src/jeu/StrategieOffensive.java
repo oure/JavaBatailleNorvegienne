@@ -21,8 +21,8 @@ public class StrategieOffensive implements Strategie {
 
 	@Override
 	/**
-	 * Cette methode permet au joueur IA d'enoyer le tas sur le joueur qui a le moins de carte
-	 * @return  un joueur sur qui le tas sera envoye
+	 * Cette methode permet au joueur IA d'enoyer la table sur le joueur qui a le moins de carte
+	 * @return  un joueur sur qui la table sera envoye
 	 */
 	public Joueur choixDuJoueurCibleePourEnvoyerLetas(JoueurIA j,
 			LinkedList<Joueur> lj) {

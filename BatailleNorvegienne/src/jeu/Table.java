@@ -2,7 +2,7 @@ package jeu;
 
 /**
  * La classe table
- *C'est le tas constitue par les cartes jouees pas les joueurs 
+ *C'est la table constitue par les cartes jouees pas les joueurs 
  */
 import java.util.*;
 
@@ -15,7 +15,7 @@ public class Table {
 	/**
 	 * Vider la table de toute ses cartes
 	 */
-	public void viderTas() {
+	public void viderTable() {
 		liste.clear();
 	}
 
@@ -25,7 +25,7 @@ public class Table {
 			Carte carte = (Carte) iterator.next();
 			h.add(carte);
 		}
-		viderTas();
+		viderTable();
 		return h;
 	}
 

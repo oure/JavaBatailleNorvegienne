@@ -86,7 +86,7 @@ public class PartieDeCartes {
 	}
 
 	/**
-	 * Creation d'un ou plusieurs jeu de carte en fonction du nombre de joueur.
+	 * Creation d'un ou plusieurs jeux de carte en fonction du nombre de joueur.
 	 */
 	private void miseEnPlaceDesJeuxdeCartes() {
 		if (llJoueur.size() <= 5 && llJoueur.size() > 1) {
@@ -121,6 +121,11 @@ public class PartieDeCartes {
 			}
 		}
 	}
+	/**
+	 * Methode pour affecter un numero a chaque joueur
+	 * @param joueur
+	 * @return le numero du joueur pris en parametre 
+	 */
 
 	public int PositionJoueurDansLaListe(Joueur joueur) {
 		return (llJoueur.indexOf(joueur));
@@ -128,11 +133,13 @@ public class PartieDeCartes {
 
 	/**
 	 * deroulement du jeu
+	 * Seul le joueur va entrer son nom
+	 * les Joueurs IA sont generes automatiquement avec leur nom et tout ce dont ils ont besoin pour jouer
 	 */
 	private void deroulementDujeu() {
 		Joueur gagnant = null;
 		boolean cond = true;
-		int compteurPourPasserLesTours = 0;
+		int compteurPourPasserLesTours = 0; // compte le nombre de joueur qui vont passer  leur tour apres que de 8 ont etes jouees
 		boolean passerLeTour = false;
 		int nombreDejoueurQuiPasseLeurTour = 0;
 		decalerListedesJoueurs(); // Le distributeur joue en dernier

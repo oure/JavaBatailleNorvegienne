@@ -50,14 +50,9 @@ public class CartesFacesCachees {
 		}
 		return null;
 	}
-	
-	/**cette methode permet d'ajouter  des cartes  sur la classe carte visible
-	 * @ param s : un hashset
-	 */
-	public void addAll(HashSet<Carte> s) {
-		cartesCachees.addAll(s);
-	}
-	/**tester si la liste de cartes cachees ne sont pas vide
+
+	/** cette methode return vrai si la collection  de cartes cachees est  vide
+	 * @return un booleen
 	 */
 	public boolean isEmpty() {
 		return cartesCachees.isEmpty();
@@ -69,10 +64,13 @@ public class CartesFacesCachees {
 			System.out.print(carte.getValeur() + " " + carte.getCouleur()
 					+ "  ");
 		}
+		
+		
 	}
 	/**cette methode permet d'ajouter une seule carte  sur les cartes face cachee
 	 * @ param car : une carte
 	 */
+
 	public void ajouterUnecarteFaceCachee(Carte car) {
 		cartesCachees.add(car);
 	}
@@ -80,4 +78,5 @@ public class CartesFacesCachees {
 	public void clear() {
 		this.getCartesCachees().clear();
 	}
+
 }
