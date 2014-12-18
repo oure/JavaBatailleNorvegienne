@@ -155,7 +155,7 @@ public class JoueurIA extends Joueur {
 	 * Le joueur IA va jouer aleatoirement des cartes pour l'instant
 	 */
 	@Override
-	public HashSet<Carte> jouerLibrement(Table tas, Pioche pioche,
+	public HashSet<Carte> jouerLibrement(Table table, Pioche pioche,
 			HashSet<Carte> derniereCartesPosees) {
 		HashSet<Carte> hc = new HashSet<Carte>();
 		int[] tab = choixDesCartesAJouer();
@@ -165,7 +165,7 @@ public class JoueurIA extends Joueur {
 				|| !cartefaceVisibles.getCartesVisibles().isEmpty()) {
 			if (estPossedeDansLamain(valeur, nombreDeCarteAjouer)) {
 				hc = cartesEnMain.supCarteMain(valeur, nombreDeCarteAjouer);
-				tas.ajouterCarteTable(hc);
+				table.ajouterCarteTable(hc);
 				for (int i = 0; i <= hc.size(); i++) {
 					ajouterCarteEnMain(pioche.prendreCarte());
 				}
@@ -175,20 +175,20 @@ public class JoueurIA extends Joueur {
 						nombreDeCarteAjouer)) {
 					hc = cartefaceVisibles.supCarteVisible(valeur,
 							nombreDeCarteAjouer);
-					tas.ajouterCarteTable(hc);
+					table.ajouterCarteTable(hc);
 					return hc;
 				}
 			}
 		}
 		if (cartesEnMain.getCartemain().isEmpty()
 				&& cartefaceVisibles.getCartesVisibles().isEmpty()) {
-			tas.ajouterCarteALaTable(carteFacesCachees.prendreAuhasard());
+			table.ajouterCarteALaTable(carteFacesCachees.prendreAuhasard());
 			return hc;
 		}
 		return hc;
 	}
-	public Joueur choixDuJoueurCibleePourEnvoyerLetas(LinkedList<Joueur> lj){
-		return strategie.choixDuJoueurCibleePourEnvoyerLetas(this, lj);
+	public Joueur choixDuJoueurCibleePourEnvoyerLaTable(LinkedList<Joueur> lj){
+		return strategie.choixDuJoueurCibleePourEnvoyerLaTable(this, lj);
 	}
 	public int test(JoueurIA ia,
 			LinkedList<Joueur> lj){

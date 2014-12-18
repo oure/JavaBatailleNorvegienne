@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class CartesFacesCachees {
 	/**
-	 * cette classe prend un seul attribut de type hashset
+	 * cette classe prend un seul attribut de type Hashset
 	 */
 	
 	private HashSet<Carte> cartesCachees = new HashSet<Carte>();
@@ -64,6 +64,12 @@ public class CartesFacesCachees {
 			System.out.print(carte.getValeur() + " " + carte.getCouleur()
 					+ "  ");
 		}
+		
+		
+	}
+	
+	public void ajouterUnecarteFaceCachee(Carte car) {
+		cartesCachees.add(car);
 	}
 
 }

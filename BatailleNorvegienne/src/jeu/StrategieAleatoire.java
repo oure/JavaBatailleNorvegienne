@@ -18,20 +18,23 @@ public class StrategieAleatoire implements Strategie {
 		int nbDeHuit = ia.nombreDeHuitQueLeJoueurPossede();
 		if (nbDeHuit >= 2)
 			return rand.nextInt((nbDeHuit - 1) + 1) + 1;
-		else 
+		else  
 			return 1;
-	}
-
+	} 
+ 
 	@Override
-	public Joueur choixDuJoueurCibleePourEnvoyerLetas(JoueurIA j,
+/**
+ * @see Joueur#choixDuJoueurCibleePourEnvoyerLetable
+ */
+	public Joueur choixDuJoueurCibleePourEnvoyerLaTable(JoueurIA j,
 			LinkedList<Joueur> lj) {
 		int num = j.getNumeroduJoueurDansLaListeDeJoueur(lj, j);
 		int numeroDuJoueurDesigne = JoueurIA.randInt(0, lj.size() - 1);
-		// Il serait idiot qu'un joueurIA se lance le tas à lui même.
+		// Il serait idiot qu'un joueurIA se lance la table a� lui meme.
 		if (numeroDuJoueurDesigne != num)
 			return lj.get(numeroDuJoueurDesigne);
 		else
-			j.choixDuJoueurCibleePourEnvoyerLetas(lj);
+			j.choixDuJoueurCibleePourEnvoyerLaTable(lj);
 		return null;
 	}
 }

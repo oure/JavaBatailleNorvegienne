@@ -111,15 +111,15 @@ public class Joueur {
 	}
 /**
  * methode qui supprime la table si un 10 a ete pose
- * @param derniereCartesPosees
- * @param table
+ * @param derniereCartesPosees par le joueur precedent
+ * @param table 
  */
 	public void PoserUnDix(HashSet<Carte> derniereCartesPosees, Table table) {
 		for (Iterator<Carte> iterator = derniereCartesPosees.iterator(); iterator
 				.hasNext();) {
 			Carte carte = (Carte) iterator.next();
 			if (carte.getValeur() == 10) {
-				table.viderTas();
+				table.viderTable();
 				break;
 			}
 		}
@@ -130,10 +130,10 @@ public class Joueur {
 	 * 8 poses que de joueurs qui passent leur tour
 	 */
 	/**
-	 * Cette methode renvoie le tas sur un joueur lorsqu'un 8 est joue
+	 * Cette methode renvoie le table sur un joueur lorsqu'un 8 est joue
 	 * @param derniereCartesPosees
 	 * @param table
-	 * @return
+	 * @return le nombre de 8 pose par un joueur
 	 */
 	public int PoserUnHuit(HashSet<Carte> derniereCartesPosees, Table table) {
 		int nombreDeHuit = 0;
@@ -146,6 +146,7 @@ public class Joueur {
 		}
 		return nombreDeHuit;
 	}
+	
 	public int nombreDeHuitQueLeJoueurPossede(){
 		int i=0;
 		if (!cartesEnMain.getCartemain().isEmpty()) {
@@ -163,6 +164,13 @@ public class Joueur {
 			}
 		return i;
 	}
+	
+	/**
+	 * Cet methode permet dobtenir le numero d un joueur
+	 * @param lj etant la lidte de tous les joueurs
+	 * @param j etant le joueur dont on veut avoir son numero
+	 * @return le numero du joueur
+	 */
 	public int getNumeroduJoueurDansLaListeDeJoueur(LinkedList<Joueur> lj,
 			Joueur j) {
 		for (int i = 0; i < lj.size() - 1; i++) {
@@ -172,10 +180,10 @@ public class Joueur {
 		return -1;
 	}
 	/**
-	 * Envoi du  tas sur un joueur si un AS a ete joue
+	 * Envoi du  table sur un joueur si un AS a ete joue
 	 * @param derniereCartesPosees
 	 * @param table
-	 * @param lj
+	 * @param lj : la liste des joueurs, ceci permet de choisir la victime , c est a dire sur qui envoyer le table
 	 */
 
 	public void PoserUnAs(HashSet<Carte> derniereCartesPosees, Table table,
@@ -187,22 +195,22 @@ public class Joueur {
 			if (carte.getValeur() == 1) {
 				if (this instanceof JoueurIA) {
 					System.out.println("OMG JE SUIS UN JOUEUR IA");
-					j = choixDuJoueurCibleePourEnvoyerLetas(lj);
+					j = choixDuJoueurCibleePourEnvoyerLetable(lj);
 					System.out.println("VICTIME : " + j);
 				}
-				envoyerTasSurJoueur(j, table);
+				envoyertableSurJoueur(j, table);
 			}
 
 		}
 	}
 /**
- * Ceci permet au joueur qui a pose un As de choisir sur qui envoyer le tas
+ * Ceci permet au joueur qui a pose un As de choisir sur qui envoyer le table
  * @param lj
- * @return
+ * @return le joueur qui sera victime
  */
-	public Joueur choixDuJoueurCibleePourEnvoyerLetas(LinkedList<Joueur> lj) {
+	public Joueur choixDuJoueurCibleePourEnvoyerLetable(LinkedList<Joueur> lj) {
 		System.out
-				.println("Entrez le nom du joueur sur qui vous voulez envoyer le tas :");
+				.println("Entrez le nom du joueur sur qui vous voulez envoyer le table :");
 		String nomDuJoueurCible = PartieDeCartes.reader.nextLine();
 		nomDuJoueurCible.toLowerCase();
 		for (Iterator<Joueur> iterator = lj.iterator(); iterator.hasNext();) {
@@ -212,7 +220,7 @@ public class Joueur {
 			}
 		}
 		System.out.println("Vous avez specifier un nom incorrect monsieur !");
-		return choixDuJoueurCibleePourEnvoyerLetas(lj);
+		return choixDuJoueurCibleePourEnvoyerLetable(lj);
 
 	}
 /**
@@ -235,13 +243,13 @@ public class Joueur {
 	/**
 	 *Methode pour tester si un joueur peut joueur en sachant la derniere carte jouee
 	 * @param valeur
-	 * @param tas
+	 * @param table
 	 * @return
 	 */
 
-	public boolean estSuperieureOuEgal(int valeur, Table tas) {
-		if (tas.getListe().isEmpty()
-				|| tas.getListe().getLast().getValeur() <= valeur)
+	public boolean estSuperieureOuEgal(int valeur, Table table) {
+		if (table.getListe().isEmpty()
+				|| table.getListe().getLast().getValeur() <= valeur)
 			return true;
 		else
 			return false;
@@ -253,7 +261,7 @@ public class Joueur {
 	 */
 
 	public boolean estCeQueJePeuxJouerUnHuit(Table table) {
-		if (table.afficherDerniereCarteDuTas().getValeur() < 8)
+		if (table.afficherDerniereCarteDelaTable().getValeur() < 8)
 			return true;
 		else
 			return false;
@@ -322,12 +330,12 @@ public class Joueur {
 
 	/**
 	 * Methode qui permet au joueur de jouer une ou des cartes  
-	 * @param tas
+	 * @param table
 	 * @param pioche
 	 * @param derniereCartesPosees
-	 * @return
+	 * @return une collection de cartes, de type hashset, que le joueur veut jouer
 	 */
-	public HashSet<Carte> jouerLibrement(Table tas, Pioche pioche,
+	public HashSet<Carte> jouerLibrement(Table table, Pioche pioche,
 			HashSet<Carte> derniereCartesPosees) {
 		HashSet<Carte> hc = new HashSet<Carte>();
 		if (!cartesEnMain.getCartemain().isEmpty()
@@ -339,7 +347,7 @@ public class Joueur {
 			int valeur = PartieDeCartes.reader.nextInt();
 			if (estPossedeDansLamain(valeur, nombreDeCarteAjouer)) {
 				hc = cartesEnMain.supCarteMain(valeur, nombreDeCarteAjouer);
-				tas.ajouterCarteTable(hc);
+				table.ajouterCarteTable(hc);
 				for (int i = 0; i < hc.size(); i++) {
 					ajouterCarteEnMain(pioche.prendreCarte());
 				}
@@ -350,7 +358,7 @@ public class Joueur {
 						nombreDeCarteAjouer)) {
 					hc = cartefaceVisibles.supCarteVisible(valeur,
 							nombreDeCarteAjouer);
-					tas.ajouterCarteTable(hc);
+					table.ajouterCarteTable(hc);
 					return hc;
 				} else
 					System.out
@@ -359,24 +367,24 @@ public class Joueur {
 			} else {
 				System.out
 						.println("Impossible vous ne posseder pas cette carte.");
-				jouerLibrement(tas, pioche, derniereCartesPosees);
+				jouerLibrement(table, pioche, derniereCartesPosees);
 			}
 		}
 		if (cartesEnMain.getCartemain().isEmpty()
 				&& cartefaceVisibles.getCartesVisibles().isEmpty()) {
-			tas.ajouterCarteALaTable(carteFacesCachees.prendreAuhasard());
+			table.ajouterCarteALaTable(carteFacesCachees.prendreAuhasard());
 			return hc;
 		}
 		return hc;
 	}
 /**
- * envoyer le as sur un joueur choisi
+ * envoyer le as sur un joueur choisi 
  * @param j
- * @param tas
+ * @param table
  */
-	public void envoyerTasSurJoueur(Joueur j, Table tas) {
-		j.cartesEnMain.addAll(tas);
-		tas.viderTas();
+	public void envoyertableSurJoueur(Joueur j, Table table) {
+		j.cartesEnMain.addAll(table);
+		table.viderTable();
 	}
 
 	public void recevoirUneCarte(Carte ca) {
@@ -418,7 +426,7 @@ public class Joueur {
 	/**
 	 * Methode pour faire des echanges de cartes avant de commencer le jeu
 	 * @param tab
-	 * @return
+	 * @return vrai si le joueur est pret a echanger des cartes avant le demarrage du jeu 
 	 */
 
 	public boolean echangerCarte(int tab[]) {
@@ -438,7 +446,7 @@ public class Joueur {
 					c1 = c;
 					break;
 				}
-			}
+			} 
 			for (Iterator<Carte> it = cartefaceVisibles.getCartesVisibles().iterator(); it
 					.hasNext();) {
 				Carte c = (Carte) it.next();

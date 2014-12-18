@@ -26,27 +26,18 @@ public class CartesEnMain {
 		}
 	}
 	
-	/**cette methode permet d'ajouter une seule carte  sur les cartes  en main
+	
+	/**
+	 * cette methode permet d'ajouter une seule carte  sur les cartes  en main
 	 * @ param c : une carte
 	 */
 	
-	public void add(Carte c) {
-		cartemain.add(c);
-	}
-	
-	/**cette methode permet de remplacer une seule carte  sur les cartes  en main
-	 * @ param c : une carte
-	 */
-
-	public void remplacer(Carte c) {
-
-	}
-
 	public void ajouterCarteMain(Carte car) {
 		cartemain.add(car);
 	}
 
-	/**la methode  qui permet de supprimer des cartes  en main
+	/**
+	 * la methode  qui permet de supprimer des cartes  en main
 	 * @ param valeur : la valeur de la carte a supprimer
 	 * @ param nombreOccurence: le nombre de cartes a supprimer
 	 * @return une collection de cartes de type Hashset. ce sont les cartes que l'on vient de supprimer de la main

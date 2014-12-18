@@ -1,7 +1,7 @@
 package jeu;
 /**
  * La classe table
- *C'est le tas constitue par les cartes jouees pas les joueurs 
+ *C'est la table constitue par les cartes jouees pas les joueurs 
  */
 import java.util.*;
 
@@ -15,7 +15,7 @@ public class Table {
 	/**
 	 * Vider la table de toute ses cartes
 	 */
-	public void viderTas() {
+	public void viderTable() {
 		liste.clear();
 	}
 
@@ -31,7 +31,7 @@ public class Table {
 	 * affichage de la derniere carte jouee sur la table
 	 * @return une carte
 	 */
-	public Carte afficherDerniereCarteDuTas() {
+	public Carte afficherDerniereCarteDelaTable() {
 		return liste.getLast();
 	}
 /**
