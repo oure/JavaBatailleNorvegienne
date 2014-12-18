@@ -13,8 +13,9 @@ public class CartesEnMain {
 	
 	private HashSet<Carte> cartemain = new HashSet<Carte>();
 
-	/**cette methode permet d'ajouter  des cartes  sur les cartes en main
-	 * @ param tas : un hashset
+	/**
+	 * cette methode permet d'ajouter  des cartes  sur les cartes en main
+	 * @ param tas : un hashset 
 	 */
 	
 	public void addAll(Table tas) {
@@ -32,26 +33,19 @@ public class CartesEnMain {
 	public void add(Carte c) {
 		cartemain.add(c);
 	}
-	
-	/**cette methode permet de remplacer une seule carte  sur les cartes  en main
-	 * @ param c : une carte
-	 */
-
-	public void remplacer(Carte c) {
-
-	}
 
 	public void ajouterCarteMain(Carte car) {
 		cartemain.add(car);
 	}
 
-	/**la methode  qui permet de supprimer des cartes  en main
+	/**
+	 * la methode  qui permet de supprimer des cartes  en main
 	 * @ param valeur : la valeur de la carte a supprimer
 	 * @ param nombreOccurence: le nombre de cartes a supprimer
+	 * @return 
 	  */
 	
-
-	public HashSet<Carte> supCarteMain(int valeur, int nombreOccurence) {
+public HashSet<Carte> supCarteMain(int valeur, int nombreOccurence) {
 		int i = 0;
 		HashSet<Carte> hc=new HashSet<Carte>();
 		for (Iterator<Carte> iterator = cartemain.iterator(); iterator.hasNext();) {
@@ -65,8 +59,9 @@ public class CartesEnMain {
 		cartemain.removeAll(hc);
 		return hc;
 	}
-	/**la methode  qui permet de supprimer toutes les cartes  en main
-	 * 
+	/**
+	 * la methode  qui permet de supprimer toutes les cartes  en main
+	 * @see HashSet#clear()
 	  */
 	
 	public void supprimerToutesLesCartesEnmain(){

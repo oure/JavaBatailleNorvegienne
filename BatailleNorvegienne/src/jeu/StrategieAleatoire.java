@@ -7,12 +7,6 @@ import java.util.LinkedList;
 import java.util.Random;
 
 public class StrategieAleatoire implements Strategie {
-
-	@Override
-	public void algoStrat() {
-		// TODO Auto-generated method stub
-	}
-
 	public int nombreDeHuitQueIaDoitPoser(JoueurIA ia, LinkedList<Joueur> lj) {
 		Random rand = new Random();
 		int nbDeHuit = ia.nombreDeHuitQueLeJoueurPossede();
@@ -22,7 +16,6 @@ public class StrategieAleatoire implements Strategie {
 			return 1;
 	}
 
-	@Override
 	public Joueur choixDuJoueurCibleePourEnvoyerLetas(JoueurIA j,
 			LinkedList<Joueur> lj) {
 		int num = j.getNumeroduJoueurDansLaListeDeJoueur(lj, j);

@@ -1,17 +1,17 @@
 package jeu;
+
 /**
  * La classe table
  *C'est le tas constitue par les cartes jouees pas les joueurs 
  */
 import java.util.*;
 
-
 public class Table {
 	/**
 	 * attributs de la classe table
 	 */
 	private LinkedList<Carte> liste = new LinkedList<Carte>();
-	private HashSet<Carte> derniereCartesPoses=new HashSet<Carte>();
+
 	/**
 	 * Vider la table de toute ses cartes
 	 */
@@ -19,29 +19,33 @@ public class Table {
 		liste.clear();
 	}
 
-	public HashSet<Carte> getDerniereCartesPoses() {
-		return derniereCartesPoses;
-	}
-
-	public void setDerniereCartesPoses(HashSet<Carte> derniereCartesPoses) {
-		this.derniereCartesPoses = derniereCartesPoses;
+	public HashSet<Carte> ramasserLeTas() {
+		HashSet<Carte> h = new HashSet<Carte>();
+		for (Iterator<Carte> iterator = liste.iterator(); iterator.hasNext();) {
+			Carte carte = (Carte) iterator.next();
+			h.add(carte);
+		}
+		viderTas();
+		return h;
 	}
 
 	/**
 	 * affichage de la derniere carte jouee sur la table
+	 * 
 	 * @return une carte
 	 */
-	public Carte afficherDerniereCarteDuTas() {
+	public Carte getDerniereCarteDuTas() {
 		return liste.getLast();
 	}
-/**
- * Un joueur peut jouer sur la table grace  a cette methode
- * @param ca
- */
+
+	/**
+	 * Un joueur peut jouer sur la table grace a cette methode
+	 * 
+	 * @param ca
+	 */
 	public void ajouterCarteALaTable(Carte ca) {
+		System.out.println("J'ajoute un carte à la table "+ca.getValeur());
 		liste.add(ca);
-		derniereCartesPoses.clear();
-		derniereCartesPoses.add(ca);
 	}
 
 	public LinkedList<Carte> getListe() {
@@ -49,26 +53,39 @@ public class Table {
 	}
 
 	/**
-	 * @param Carte
-	 */
-	/**
 	 * cette methode servira au joueur qui veut jouer plus d une carte
+	 * 
 	 * @param hashSetCartes
 	 */
 	public void ajouterCarteTable(HashSet<Carte> hashSetCartes) {
-		for (Iterator<Carte> iterator = hashSetCartes.iterator(); iterator.hasNext();) {
+		for (Iterator<Carte> iterator = hashSetCartes.iterator(); iterator
+				.hasNext();) {
 			Carte carte = (Carte) iterator.next();
 			liste.add(carte);
 		}
 	}
-
+	public boolean possedeUnSept(){
+		for (Iterator<Carte> iterator = liste.iterator(); iterator.hasNext();) {
+			Carte carte = (Carte) iterator.next();
+			if (carte.getValeur()==7)
+				return true;
+		}
+		return false;
+	}
 	public void setListe(LinkedList<Carte> liste) {
 		this.liste = liste;
+	}
+
+	public boolean isEmpty() {
+		return this.liste.isEmpty();
 	}
 
 	@Override
 	public String toString() {
 		return "Table [liste=" + liste + "]";
+	}
 
+	public int getDerniereValeurCarteDuTas() {
+		return getDerniereCarteDuTas().getValeur();
 	}
 }

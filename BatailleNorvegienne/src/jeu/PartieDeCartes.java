@@ -136,11 +136,20 @@ public class PartieDeCartes {
 		boolean passerLeTour = false;
 		int nombreDejoueurQuiPasseLeurTour = 0;
 		decalerListedesJoueurs(); // Le distributeur joue en dernier
+		for (Iterator iterator = llJoueur.iterator(); iterator.hasNext();) {
+			Joueur joueur = (Joueur) iterator.next();
+			System.out.println(joueur.getNom());
+		}
+		llJoueur.get(1).getCartesEnMain().supprimerToutesLesCartesEnmain();
+		llJoueur.get(1).ajouterCarteEnMain(new Carte(1, Couleur.Coeur));
+
 		// EchangerLesCartes();
+		//pioche.viderPioche();
 		HashSet<Carte> derniereCartesPosees = new HashSet<Carte>();
 		while (cond) {
 			for (Iterator<Joueur> iterator = llJoueur.iterator(); iterator
 					.hasNext();) {
+				System.out.println("Tas: " + table);
 				Joueur joueur = (Joueur) iterator.next();
 				if (!passerLeTour) {
 					if (llJoueur.get(0) == joueur) {
@@ -150,6 +159,7 @@ public class PartieDeCartes {
 					System.out.println("A vous de jouer " + joueur.getNom());
 					if (joueur.estCeQueLeJoueurPeutJouer(derniereCartesPosees,
 							table)) {
+						derniereCartesPosees.clear();
 						derniereCartesPosees = joueur.jouerLibrement(table,
 								pioche, derniereCartesPosees);
 						joueur.PoserUnDix(derniereCartesPosees, table);
@@ -157,8 +167,8 @@ public class PartieDeCartes {
 						nombreDejoueurQuiPasseLeurTour = joueur.PoserUnHuit(
 								derniereCartesPosees, table);
 					} else {
-						joueur.piocher(1, pioche);
-						System.out.println("JE PIOCHE");
+						joueur.ajouterCartesEnMain(table.ramasserLeTas());
+						System.out.println("VOUS AVEZ RAMMASSER LE TAS "+joueur.getNom());
 					}
 					if (nombreDejoueurQuiPasseLeurTour != 0) {
 						passerLeTour = true;
@@ -170,6 +180,8 @@ public class PartieDeCartes {
 						cond = false;
 						break;
 					}
+					System.out.println("Pioche " + pioche);
+
 				} else {
 					System.out.println("JE PASSE MON TOUR " + joueur.getNom());
 					if (compteurPourPasserLesTours + 1 >= nombreDejoueurQuiPasseLeurTour) {
@@ -188,25 +200,20 @@ public class PartieDeCartes {
 	private void test() {
 		decalerListedesJoueurs();
 		System.out.println(llJoueur);
-		// HashSet<Carte> derniereCartesPosees = new HashSet<Carte>();
-		// table.getListe().clear();
-		// table.ajouterCarteALaTable(new Carte(3, Couleur.Pique));
-		// table.ajouterCarteALaTable(new Carte(1, Couleur.Pique));
-		// table.ajouterCarteALaTable(new Carte(3, Couleur.Pique));
-		// table.ajouterCarteALaTable(new Carte(2, Couleur.Pique));
-		// System.out
-		System.out.println(llJoueur.get(1).getNom());
-		llJoueur.get(1).getCartesEnMain().supprimerToutesLesCartesEnmain();
-		llJoueur.get(1).ajouterCarteEnMain(new Carte(8, Couleur.Coeur));
-		llJoueur.get(1).ajouterCarteEnMain(new Carte(8, Couleur.Trefle));
-		llJoueur.get(1).ajouterCarteEnMain(new Carte(8, Couleur.Carreau));
-		llJoueur.get(2).ajouterCarteEnMain(new Carte(8, Couleur.Pique));
-
-		int a = ((JoueurIA) llJoueur.get(1)).test((JoueurIA) llJoueur.get(2),
-				llJoueur);
-		System.out.println(llJoueur.get(1).getCartesEnMain());
-		System.out.println(a);
-		//
+		 HashSet<Carte> derniereCartesPosees = new HashSet<Carte>();
+		 table.getListe().clear();
+		 table.ajouterCarteALaTable(new Carte(3, Couleur.Pique));
+		 table.ajouterCarteALaTable(new Carte(1, Couleur.Pique));
+		 table.ajouterCarteALaTable(new Carte(3, Couleur.Pique));
+		 table.ajouterCarteALaTable(new Carte(2, Couleur.Pique));
+		 System.out.println(llJoueur.get(1).getNom());
+		 llJoueur.get(1).getCartesEnMain().supprimerToutesLesCartesEnmain();
+		 llJoueur.get(1).ajouterCarteEnMain(new Carte(8, Couleur.Coeur));
+		 llJoueur.get(1).ajouterCarteEnMain(new Carte(8, Couleur.Trefle));
+		 llJoueur.get(1).ajouterCarteEnMain(new Carte(8, Couleur.Carreau));
+		 llJoueur.get(2).ajouterCarteEnMain(new Carte(8, Couleur.Pique));
+		 System.out.println("Le joueur choisis est "+llJoueur.get(2).choixDuJoueurCibleePourEnvoyerLetas(llJoueur).getNom());
+		
 		// System.out.println("EST CE QUE LE JOUEUR PEUX JOUER "
 		// + llJoueur.get(2).estCeQueLeJoueurPeutJouer(
 		// derniereCartesPosees, table));
@@ -250,7 +257,7 @@ public class PartieDeCartes {
 		miseEnPlaceDesJeuxdeCartes();
 		distribuer();
 		deroulementDujeu();
-		// test();
+		//test();
 	}
 
 	public static void main(String[] args) {

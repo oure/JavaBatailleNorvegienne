@@ -1,8 +1,9 @@
 package jeu;
+
 /**
  * La classe joueur Intelligence Artificielle
  *Elle herite de la classe joueur 
- */	
+ */
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -22,10 +23,12 @@ public class JoueurIA extends Joueur {
 					"Gabriel", "Ethan", "Mathis", "Jules", "Emma", "Lea",
 					"Chloé", "Manon", "Ines", "Lola", "Jade", "Camille",
 					"Sarah", "Louise"));
-/**
- * Constructeur qui prend en parametre une strategie
- * @param strat
- */
+
+	/**
+	 * Constructeur qui prend en parametre une strategie
+	 * 
+	 * @param strat
+	 */
 	public JoueurIA(Strategie strat) {
 		String nom = null;
 		if (collectionNomDeJoueur.size() > 0) {
@@ -41,7 +44,7 @@ public class JoueurIA extends Joueur {
 	}
 
 	/**
-	 * Methode qui envoie le joueur qui a le moin de carte
+	 * Methode qui envoie le joueur qui a le moins de carte
 	 * 
 	 * @param lj collection de joueurs
 	 * @return joueur
@@ -52,7 +55,8 @@ public class JoueurIA extends Joueur {
 		Joueur j = null;
 		for (Iterator<Joueur> iterator = lj.iterator(); iterator.hasNext();) {
 			Joueur joueur = (Joueur) iterator.next();
-			if (joueur.nombreTotalDecarteQuePossedeUnJoueur() < nombreDeCarteMin &&  this!=joueur) {
+			if (joueur.nombreTotalDecarteQuePossedeUnJoueur() < nombreDeCarteMin
+					&& this != joueur) {
 				j = joueur;
 				nombreDeCarteMin = joueur
 						.nombreTotalDecarteQuePossedeUnJoueur();
@@ -85,13 +89,14 @@ public class JoueurIA extends Joueur {
 
 		return randomNum;
 	}
-/**
- * 
- * @return une carte
- */
+
+	/**
+	 * 
+	 * @return une carte
+	 */
 	public Carte retourneUneCarteNonSpecialDesCartesVisible() {
-		for (Iterator<Carte> iterator = cartefaceVisibles.getCartesVisibles().iterator(); iterator
-				.hasNext();) {
+		for (Iterator<Carte> iterator = cartefaceVisibles.getCartesVisibles()
+				.iterator(); iterator.hasNext();) {
 			Carte c = iterator.next();
 			if (c.getValeur() == 3 || c.getValeur() == 4 || c.getValeur() == 5
 					|| c.getValeur() == 6 || c.getValeur() == 9
@@ -126,21 +131,33 @@ public class JoueurIA extends Joueur {
 		return null;
 	}
 
-	public int[] choixDesCartesAJouer() {
+	public int[] choixDesCartesAJouer(Table table) {
 		/*
 		 * Dans la premiere case tu tableau nous mettons le nombre de carte a
 		 * jouer et dans la deuxieme nous mettons la valeur de la carte
 		 */
 		int[] choix = new int[2];
-
+		HashSet<Carte> hs=getCartesPosablesDansLeContexte(table);
+		if(hs==null){
+			return null;
+		}
+		if(hs.size()==1){
+			for (Iterator<Carte> iterator = hs.iterator(); iterator.hasNext();) {
+				Carte carte = (Carte) iterator.next();
+				choix[0]=1;
+				choix[1]=carte.getValeur();
+			}
+			return choix;
+		}
+		System.out.println("Les cartes jouables dans le contextes sont :"+hs);
 		if (!cartesEnMain.getCartemain().isEmpty()) {
-			Object[] tableauObjets = cartesEnMain.getCartemain().toArray();
+			Object[] tableauObjets = hs.toArray();
 			Carte c = (Carte) tableauObjets[randInt(0, tableauObjets.length - 1)];
 			choix[0] = 1;
 			choix[1] = c.getValeur();
 		} else if (!cartefaceVisibles.getCartesVisibles().isEmpty()) {
-			Object[] jk = cartefaceVisibles.getCartesVisibles().toArray();
-			Carte c = (Carte) jk[randInt(0, jk.length)];
+			Object[] jk = hs.toArray();
+			Carte c = (Carte) jk[randInt(0, jk.length-1)];
 			choix[0] = 1;
 			choix[1] = c.getValeur();
 		} else {
@@ -155,48 +172,90 @@ public class JoueurIA extends Joueur {
 	 * Le joueur IA va jouer aleatoirement des cartes pour l'instant
 	 */
 	@Override
-	public HashSet<Carte> jouerLibrement(Table tas, Pioche pioche,
+	public HashSet<Carte> jouerLibrement(Table table, Pioche pioche,
 			HashSet<Carte> derniereCartesPosees) {
 		HashSet<Carte> hc = new HashSet<Carte>();
-		int[] tab = choixDesCartesAJouer();
-		int valeur = tab[1];
-		int nombreDeCarteAjouer = tab[0];
+		if (!pioche.isEmpty() && cartesEnMain.isEmpty()){
+			piocher(pioche);
+			return hc;
+		}
+
 		if (!cartesEnMain.getCartemain().isEmpty()
 				|| !cartefaceVisibles.getCartesVisibles().isEmpty()) {
-			if (estPossedeDansLamain(valeur, nombreDeCarteAjouer)) {
+			int[] tab = choixDesCartesAJouer(table);
+			int valeur = tab[1];
+			int nombreDeCarteAjouer = tab[0];
+			if (estPossedeDansLamain(valeur, nombreDeCarteAjouer)
+					&& estCeQueLeJoueurPeutJouerDesCartes(valeur,
+							nombreDeCarteAjouer, table)) {
 				hc = cartesEnMain.supCarteMain(valeur, nombreDeCarteAjouer);
-				tas.ajouterCarteTable(hc);
-				for (int i = 0; i <= hc.size(); i++) {
-					ajouterCarteEnMain(pioche.prendreCarte());
+				table.ajouterCarteTable(hc);
+				for (int i = 1; i <= hc.size(); i++) {
+					System.out.println();
+					piocher(pioche);
 				}
 				return hc;
-			} else if (cartesEnMain.getCartemain().isEmpty() ) {
+			} else if (cartesEnMain.getCartemain().isEmpty()
+					&& estCeQueLeJoueurPeutJouerDesCartes(valeur,
+							nombreDeCarteAjouer, table)) {
 				if (estPossedeDansDansLesCartesVisibles(valeur,
 						nombreDeCarteAjouer)) {
 					hc = cartefaceVisibles.supCarteVisible(valeur,
 							nombreDeCarteAjouer);
-					tas.ajouterCarteTable(hc);
+					table.ajouterCarteTable(hc);
+					for (int i = 1; i <= hc.size(); i++) {
+						piocher(pioche);
+					}
 					return hc;
 				}
 			}
 		}
 		if (cartesEnMain.getCartemain().isEmpty()
 				&& cartefaceVisibles.getCartesVisibles().isEmpty()) {
-			tas.ajouterCarteALaTable(carteFacesCachees.prendreAuhasard());
+			Carte carte=carteFacesCachees.prendreAuhasard();
+			if(estCeQueLeJoueurPeutJouerDesCartes(carte.getValeur(), 1, table)){
+				System.out.println("JE PEUX JOUER CETTE CARTE");
+				table.ajouterCarteTable(hc);
+				hc.add(carte);
+			}else{
+				System.out.println("JE NE PEUX PAS JOUER CETTE CARTE");
+				ajouterCartesEnMain(table.ramasserLeTas());
+				System.out.println("VOUS AVEZ RAMMASSER LE TAS "+getNom());
+			}
 			return hc;
 		}
 		return hc;
 	}
-	public Joueur choixDuJoueurCibleePourEnvoyerLetas(LinkedList<Joueur> lj){
+
+	public Joueur choixDuJoueurCibleePourEnvoyerLetas(LinkedList<Joueur> lj) {
+		System.out.println("OUIIIIIII");
 		return strategie.choixDuJoueurCibleePourEnvoyerLetas(this, lj);
 	}
-	public int test(JoueurIA ia,
-			LinkedList<Joueur> lj){
-		return strategie.nombreDeHuitQueIaDoitPoser(ia,lj);
+
+	public HashSet<Carte> getCartesPosablesDansLeContexte(Table table){
+		HashSet<Carte> cartesPosables=new HashSet<Carte>();
+		if (!cartesEnMain.isEmpty()) 
+			for (Iterator<Carte> iterator = cartesEnMain.getCartemain().iterator(); iterator
+					.hasNext();) {
+				Carte c = (Carte) iterator.next();
+				if (table.isEmpty() || c.getValeur()>=table.getDerniereValeurCarteDuTas() || c.getValeur()==2 || c.getValeur()==1 )
+					cartesPosables.add(c);
+			}
+			else if (cartesEnMain.isEmpty() && !cartefaceVisibles.isEmpty()) 
+				for (Iterator<Carte> iterator = cartefaceVisibles.getCartesVisibles().iterator(); iterator
+						.hasNext();) {
+					Carte c = (Carte) iterator.next();
+					if (table.isEmpty() || c.getValeur()>=table.getDerniereValeurCarteDuTas() || c.getValeur()==2 || c.getValeur()==1)
+						cartesPosables.add(c);
+				}
+			else cartesPosables=null;
+		return cartesPosables;
 	}
+
 	public Strategie getStrategie() {
 		return strategie;
 	}
+
 	public void setStrategie(Strategie strategie) {
 		this.strategie = strategie;
 	}

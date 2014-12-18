@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class CartesFacesCachees {
 	/**
-	 * cette classe prend un seul attribut de type hashset
+	 * cette classe prend un seul attribut de type Hashset
 	 */
 	
 	private HashSet<Carte> cartesCachees = new HashSet<Carte>();
@@ -26,8 +26,8 @@ public class CartesFacesCachees {
 	public void setCartesCachees(HashSet<Carte> cartesCachees) {
 		this.cartesCachees = cartesCachees;
 	}
-	/**la methode qui permet de prendre au hasard une carte de face cachée pour l'ajouter sur les cartes en main
-	 *
+	/**
+	 * la methode qui permet de prendre au hasard une carte de face cachee pour l'ajouter sur les cartes en main
 	 */
 
 	public Carte prendreAuhasard(){
@@ -70,10 +70,14 @@ public class CartesFacesCachees {
 					+ "  ");
 		}
 	}
-	/**cette methode permet d'ajouter une seule carte  sur les cartes face cachée
+	/**cette methode permet d'ajouter une seule carte  sur les cartes face cachee
 	 * @ param car : une carte
 	 */
 	public void ajouterUnecarteFaceCachee(Carte car) {
 		cartesCachees.add(car);
+	}
+
+	public void clear() {
+		this.getCartesCachees().clear();
 	}
 }

@@ -4,19 +4,19 @@ package jeu;
  * Elle definit une carte avec toutes ses caracteristiques 
  */
 public class Carte {
-	enum Couleur {
+	public enum Couleur {
 		Pique, Coeur, Carreau, Trefle
 	};
 
-	int valeur;
-	Couleur couleur;
+	private int valeur;
+	private Couleur couleur;
 
 	private boolean estVisible;
 
 	/**
 	 * le constructeur de la classe 
-	 * @param v : une valeur
-	 * @param c : une couleur
+	 * @param v : une valeur de type entier
+	 * @param c : une couleur de type enum Couleur
 	 */
 	
 	public Carte(int v, Couleur c) {

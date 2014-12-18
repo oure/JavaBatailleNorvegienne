@@ -72,4 +72,8 @@ public class CartesfacesVisibles {
 	public boolean isEmpty() {
 		return cartesVisibles.isEmpty();
 	}
+
+	public void clear() {
+		this.getCartesVisibles().clear();
+	}
 }

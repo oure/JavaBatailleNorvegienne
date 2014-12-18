@@ -1,16 +1,12 @@
 package jeu;
 /**
  * La classe Strategie offensive
- * Elle herite de Strategie et represente la tactique offensive  des joueurs  virtuels 
+ * Elle herite de Strategie et represente la tactique offensive des joueurs virtuels 
  */
 import java.util.LinkedList;
 
 public class StrategieOffensive implements Strategie {
 
-	@Override
-	public void algoStrat() {
-
-	}
 	public int nombreDeHuitQueIaDoitPoser(JoueurIA ia,
 			LinkedList<Joueur> lj){
 		int nbDeHuit=ia.nombreDeHuitQueLeJoueurPossede();

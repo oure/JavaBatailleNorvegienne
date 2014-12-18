@@ -1,6 +1,7 @@
 package jeu;
+
 /**
- * La classe pioche
+ *La classe pioche
  *C'est la pile de cartes qui reste apres la distribution
  */
 import java.util.*;
@@ -11,7 +12,7 @@ public class Pioche {
 
 	private static LinkedList<Carte> listeDeCarte = null;
 
-	/** Constructeur prive */
+	/** Constructeur privée */
 	public Pioche() {
 	}
 
@@ -41,7 +42,7 @@ public class Pioche {
 		for (Iterator<Carte> iterator = listeDeCarte.iterator(); iterator
 				.hasNext();) {
 			Carte carte = (Carte) iterator.next();
-			s += " " +carte;
+			s += " " + carte;
 		}
 		return "Pioche : " + s;
 	}
@@ -52,11 +53,13 @@ public class Pioche {
 	public void viderPioche() {
 		listeDeCarte.clear();
 	}
-/**
- * recuperer et supprimer le dernier element  de la liste
- * @return
- */
-	public Carte prendreCarte() { 
+
+	/**
+	 * recuperer et supprimer le dernier element de la liste
+	 * 
+	 * @return
+	 */
+	public Carte prendreCarte() {
 		return listeDeCarte.pollLast();
 	}
 
