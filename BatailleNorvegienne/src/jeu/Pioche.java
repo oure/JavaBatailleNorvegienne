@@ -60,6 +60,7 @@ public class Pioche {
 	 * @return
 	 */
 	public Carte prendreCarte() {
+		System.out.println("Je pioche");
 		return listeDeCarte.pollLast();
 	}
 

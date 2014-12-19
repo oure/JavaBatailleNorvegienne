@@ -44,7 +44,7 @@ public class Table {
 	 * @param ca
 	 */
 	public void ajouterCarteALaTable(Carte ca) {
-		System.out.println("J'ajoute un carte à la table "+ca.getValeur());
+		System.out.println("J'ajoute un carte à la table " + ca.getValeur());
 		liste.add(ca);
 	}
 
@@ -64,14 +64,17 @@ public class Table {
 			liste.add(carte);
 		}
 	}
-	public boolean possedeUnSept(){
-		for (Iterator<Carte> iterator = liste.iterator(); iterator.hasNext();) {
-			Carte carte = (Carte) iterator.next();
-			if (carte.getValeur()==7)
-				return true;
+
+	public boolean laDerniereCarteDuJeuEstUnSept() {
+		if (!this.isEmpty()){
+		if (getDerniereValeurCarteDuTas() == 7)
+			return true;
+		else
+			return false;
 		}
-		return false;
+		else return false;
 	}
+
 	public void setListe(LinkedList<Carte> liste) {
 		this.liste = liste;
 	}

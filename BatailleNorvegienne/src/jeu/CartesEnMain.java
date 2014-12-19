@@ -40,11 +40,7 @@ public class CartesEnMain {
 	 * la methode  qui permet de supprimer des cartes  en main
 	 * @ param valeur : la valeur de la carte a supprimer
 	 * @ param nombreOccurence: le nombre de cartes a supprimer
-<<<<<<< HEAD
-	 * @return 
-=======
 	 * @return une collection de cartes de type Hashset. ce sont les cartes que l'on vient de supprimer de la main
->>>>>>> refs/remotes/oure/master
 	  */
 	
 public HashSet<Carte> supCarteMain(int valeur, int nombreOccurence) {

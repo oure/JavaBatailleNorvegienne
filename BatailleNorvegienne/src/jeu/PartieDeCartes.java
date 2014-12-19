@@ -45,7 +45,8 @@ public class PartieDeCartes {
 	}
 
 	/**
-	 * Methode de mise en place d'une partie de jeu
+	 * Seul le joueur va entrer son nom
+	 * les Joueurs IA sont generes automatiquement avec leur nom et tout ce dont ils ont besoin pour jouer
 	 */
 	private void miseEnPlaceDeLaListeDesJoueurs() {
 		System.out.println("Mise en place de la liste des joueurs :");
@@ -131,11 +132,6 @@ public class PartieDeCartes {
 		return (llJoueur.indexOf(joueur));
 	}
 
-	/**
-	 * deroulement du jeu
-	 * Seul le joueur va entrer son nom
-	 * les Joueurs IA sont generes automatiquement avec leur nom et tout ce dont ils ont besoin pour jouer
-	 */
 	private void deroulementDujeu() {
 		Joueur gagnant = null;
 		boolean cond = true;
@@ -147,15 +143,12 @@ public class PartieDeCartes {
 			Joueur joueur = (Joueur) iterator.next();
 			System.out.println(joueur.getNom());
 		}
-		llJoueur.get(1).getCartesEnMain().supprimerToutesLesCartesEnmain();
-		llJoueur.get(1).ajouterCarteEnMain(new Carte(1, Couleur.Coeur));
-		llJoueur.get(1).ajouterCarteEnMain(new Carte(1, Couleur.Coeur));
-		llJoueur.get(0).ajouterCarteEnMain(new Carte(2, Couleur.Coeur));
-
-
+		llJoueur.get(1).getCartesEnMain().getCartemain().clear();
+		llJoueur.get(1).getCartesEnMain().ajouterCarteMain(new Carte(7, Couleur.Carreau));
+		llJoueur.get(1).getCartesEnMain().ajouterCarteMain(new Carte(7, Couleur.Coeur));
+		llJoueur.get(1).getCartesEnMain().ajouterCarteMain(new Carte(7, Couleur.Carreau));
 
 		// EchangerLesCartes();
-		pioche.viderPioche();
 		HashSet<Carte> derniereCartesPosees = new HashSet<Carte>();
 		while (cond) {
 			for (Iterator<Joueur> iterator = llJoueur.iterator(); iterator
@@ -179,13 +172,12 @@ public class PartieDeCartes {
 								derniereCartesPosees, table);
 					} else {
 						joueur.ajouterCartesEnMain(table.ramasserLeTas());
-						System.out.println("VOUS AVEZ RAMMASSER LE TAS "+joueur.getNom());
+						System.out.println("VOUS AVEZ RAMASSE LE TAS "+joueur.getNom());
 					}
 					if (nombreDejoueurQuiPasseLeurTour != 0) {
 						passerLeTour = true;
 					}
-					System.out.println("derniere carte :"
-							+ derniereCartesPosees);
+					System.out.println("derniere carte :"+ derniereCartesPosees);
 					if (joueur.avoirAucuneCarte()) {
 						gagnant = joueur;
 						cond = false;
@@ -223,7 +215,7 @@ public class PartieDeCartes {
 		 llJoueur.get(1).ajouterCarteEnMain(new Carte(8, Couleur.Trefle));
 		 llJoueur.get(1).ajouterCarteEnMain(new Carte(8, Couleur.Carreau));
 		 llJoueur.get(2).ajouterCarteEnMain(new Carte(8, Couleur.Pique));
-		 System.out.println("Le joueur choisis est "+llJoueur.get(2).choixDuJoueurCibleePourEnvoyerLetas(llJoueur).getNom());
+		 System.out.println("Le joueur choisis est "+llJoueur.get(2).choixDuJoueurCibleePourEnvoyerLaTable(llJoueur).getNom());
 		
 		// System.out.println("EST CE QUE LE JOUEUR PEUX JOUER "
 		// + llJoueur.get(2).estCeQueLeJoueurPeutJouer(

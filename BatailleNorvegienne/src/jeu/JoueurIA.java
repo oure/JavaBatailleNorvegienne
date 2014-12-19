@@ -21,7 +21,7 @@ public class JoueurIA extends Joueur {
 	static private ArrayList<String> collectionNomDeJoueur = new ArrayList<String>(
 			Arrays.asList("Nathan", "Lucas", "Enzo", "Leo", "Louis", "Hugo",
 					"Gabriel", "Ethan", "Mathis", "Jules", "Emma", "Lea",
-					"Chloé", "Manon", "Ines", "Lola", "Jade", "Camille",
+					"Chloe", "Manon", "Ines", "Lola", "Jade", "Camille",
 					"Sarah", "Louise"));
 
 	/**
@@ -46,18 +46,20 @@ public class JoueurIA extends Joueur {
 	/**
 	 * Methode qui envoie le joueur qui a le moins de carte
 	 * 
-	 * @param lj collection de joueurs
+	 * @param lj
+	 *            collection de joueurs
 	 * @return joueur
 	 */
 	public void seDefendreContreUnAs(Table table) {
-		System.out.println("JE SUIS IA");
-		int vCarte=strategie.contrerUnAs(this);
+		int vCarte = strategie.contrerUnAs(this);
 		if (estPossedeDansLamain(vCarte, 1))
 			table.ajouterCartesTable(cartesEnMain.supCarteMain(vCarte, 1));
 		else
-			table.ajouterCartesTable(cartefaceVisibles.supCarteVisible(vCarte, 1));
+			table.ajouterCartesTable(cartefaceVisibles.supCarteVisible(vCarte,
+					1));
 
 	}
+
 	public Joueur quiAleMoinsDeCarte(LinkedList<Joueur> lj) {
 		int nombreDeCarteMin = 100;
 		Joueur j = null;
@@ -66,7 +68,7 @@ public class JoueurIA extends Joueur {
 			if (joueur.nombreTotalDecarteQuePossedeUnJoueur() < nombreDeCarteMin
 					&& this != joueur) {
 				j = joueur;
-				System.out.println("VICTTTTTTTIME"+j);
+				System.out.println("VICTTTTTTTIME" + j);
 				nombreDeCarteMin = joueur
 						.nombreTotalDecarteQuePossedeUnJoueur();
 			}
@@ -146,19 +148,19 @@ public class JoueurIA extends Joueur {
 		 * jouer et dans la deuxieme nous mettons la valeur de la carte
 		 */
 		int[] choix = new int[2];
-		HashSet<Carte> hs=getCartesPosablesDansLeContexte(table);
-		if(hs==null){
+		HashSet<Carte> hs = getCartesPosablesDansLeContexte(table);
+		if (hs.isEmpty()) {
 			return null;
 		}
-		if(hs.size()==1){
+		if (hs.size() == 1) {
 			for (Iterator<Carte> iterator = hs.iterator(); iterator.hasNext();) {
 				Carte carte = (Carte) iterator.next();
-				choix[0]=1;
-				choix[1]=carte.getValeur();
+				choix[0] = 1;
+				choix[1] = carte.getValeur();
 			}
 			return choix;
 		}
-		System.out.println("Les cartes jouables dans le contextes sont :"+hs);
+		System.out.println("Les cartes jouables dans le contextes sont :" + hs);
 		if (!cartesEnMain.getCartemain().isEmpty()) {
 			Object[] tableauObjets = hs.toArray();
 			Carte c = (Carte) tableauObjets[randInt(0, tableauObjets.length - 1)];
@@ -166,13 +168,12 @@ public class JoueurIA extends Joueur {
 			choix[1] = c.getValeur();
 		} else if (!cartefaceVisibles.getCartesVisibles().isEmpty()) {
 			Object[] jk = hs.toArray();
-			Carte c = (Carte) jk[randInt(0, jk.length-1)];
+			Carte c = (Carte) jk[randInt(0, jk.length - 1)];
 			choix[0] = 1;
 			choix[1] = c.getValeur();
 		} else {
 			choix[0] = 1;
 			choix[1] = carteFacesCachees.prendreAuhasard().getValeur();
-
 		}
 		return choix;
 	}
@@ -184,7 +185,7 @@ public class JoueurIA extends Joueur {
 	public HashSet<Carte> jouerLibrement(Table table, Pioche pioche,
 			HashSet<Carte> derniereCartesPosees) {
 		HashSet<Carte> hc = new HashSet<Carte>();
-		if (!pioche.isEmpty() && cartesEnMain.isEmpty()){
+		if (!pioche.isEmpty() && cartesEnMain.isEmpty()) {
 			piocher(pioche);
 			return hc;
 		}
@@ -192,6 +193,11 @@ public class JoueurIA extends Joueur {
 		if (!cartesEnMain.getCartemain().isEmpty()
 				|| !cartefaceVisibles.getCartesVisibles().isEmpty()) {
 			int[] tab = choixDesCartesAJouer(table);
+			if (tab == null) {
+				System.out.println("JE PiOCHE");
+				piocher(pioche);
+				return hc;
+			}
 			int valeur = tab[1];
 			int nombreDeCarteAjouer = tab[0];
 			if (estPossedeDansLamain(valeur, nombreDeCarteAjouer)
@@ -221,43 +227,57 @@ public class JoueurIA extends Joueur {
 		}
 		if (cartesEnMain.getCartemain().isEmpty()
 				&& cartefaceVisibles.getCartesVisibles().isEmpty()) {
-			Carte carte=carteFacesCachees.prendreAuhasard();
-			if(estCeQueLeJoueurPeutJouerDesCartes(carte.getValeur(), 1, table)){
+			Carte carte = carteFacesCachees.prendreAuhasard();
+			if (estCeQueLeJoueurPeutJouerDesCartes(carte.getValeur(), 1, table)) {
 				System.out.println("JE PEUX JOUER CETTE CARTE");
-				table.ajouterCartesTable(hc);
 				hc.add(carte);
-			}else{
+				table.ajouterCartesTable(hc);
+			} else {
 				System.out.println("JE NE PEUX PAS JOUER CETTE CARTE");
 				ajouterCartesEnMain(table.ramasserLeTas());
-				System.out.println("VOUS AVEZ RAMMASSER LE TAS "+getNom());
+				System.out.println("VOUS AVEZ RAMMASSER LE TAS " + getNom());
 			}
 			return hc;
 		}
 		return hc;
 	}
+
 	public Joueur choixDuJoueurCibleePourEnvoyerLaTable(LinkedList<Joueur> lj) {
 		System.out.println("OUIIIIIII");
 		System.out.println(strategie.getClass());
 		return strategie.choixDuJoueurCibleePourEnvoyerLetas(this, lj);
 	}
 
-	public HashSet<Carte> getCartesPosablesDansLeContexte(Table table){
-		HashSet<Carte> cartesPosables=new HashSet<Carte>();
-		if (!cartesEnMain.isEmpty()) 
-			for (Iterator<Carte> iterator = cartesEnMain.getCartemain().iterator(); iterator
-					.hasNext();) {
+	public HashSet<Carte> getCartesPosablesDansLeContexte(Table table) {
+		HashSet<Carte> cartesPosables = new HashSet<Carte>();
+		if (!cartesEnMain.isEmpty())
+			for (Iterator<Carte> iterator = cartesEnMain.getCartemain()
+					.iterator(); iterator.hasNext();) {
 				Carte c = (Carte) iterator.next();
-				if (table.isEmpty() || c.getValeur()>=table.getDerniereValeurCarteDuTas() || c.getValeur()==2 || c.getValeur()==1 )
+				if (table.isEmpty()
+						|| (table.laDerniereCarteDuJeuEstUnSept() && estInferieurOuEgal(
+								c.getValeur(), table))) {
+					cartesPosables.add(c);
+				}
+				if (table.isEmpty()
+						|| (c.getValeur() >= table
+								.getDerniereValeurCarteDuTas()
+								|| c.getValeur() == 2 || c.getValeur() == 1)
+						&& !table.laDerniereCarteDuJeuEstUnSept()) {
+					cartesPosables.add(c);
+				}
+			}
+		else if (cartesEnMain.isEmpty() && !cartefaceVisibles.isEmpty())
+			for (Iterator<Carte> iterator = cartefaceVisibles
+					.getCartesVisibles().iterator(); iterator.hasNext();) {
+				Carte c = (Carte) iterator.next();
+				if (table.isEmpty()
+						|| c.getValeur() >= table.getDerniereValeurCarteDuTas()
+						|| c.getValeur() == 2 || c.getValeur() == 1)
 					cartesPosables.add(c);
 			}
-			else if (cartesEnMain.isEmpty() && !cartefaceVisibles.isEmpty()) 
-				for (Iterator<Carte> iterator = cartefaceVisibles.getCartesVisibles().iterator(); iterator
-						.hasNext();) {
-					Carte c = (Carte) iterator.next();
-					if (table.isEmpty() || c.getValeur()>=table.getDerniereValeurCarteDuTas() || c.getValeur()==2 || c.getValeur()==1)
-						cartesPosables.add(c);
-				}
-			else cartesPosables=null;
+		else
+			cartesPosables.clear();
 		return cartesPosables;
 	}
 
