@@ -132,7 +132,8 @@ public class PartieDeCartes {
 							table)) {
 						derniereCartesPosees.clear();
 						derniereCartesPosees = joueur.jouerLibrement(table,
-								pioche, derniereCartesPosees);
+								pioche, derniereCartesPosees,llJoueur);
+						System.out.println("Les dernieres cartes posees sont "+derniereCartesPosees);
 						joueur.PoserUnDix(derniereCartesPosees, table);
 						joueur.PoserUnAs(derniereCartesPosees, table, llJoueur);
 						nombreDejoueurQuiPasseLeurTour = joueur.PoserUnHuit(
@@ -144,7 +145,6 @@ public class PartieDeCartes {
 					if (nombreDejoueurQuiPasseLeurTour != 0) {
 						passerLeTour = true;
 					}
-					System.out.println("La ou les dernieres cartes posees sont "+ derniereCartesPosees);
 					if (joueur.avoirAucuneCarte()) {
 						gagnant = joueur;
 						cond = false;
@@ -169,7 +169,12 @@ public class PartieDeCartes {
 		}
 		
 	}
-
+	private void melanger(){
+		for (Iterator<JeuDeCartes> it = setJeuDeCartes.iterator(); it.hasNext();) {
+			JeuDeCartes jdc = (JeuDeCartes) it.next();
+			jdc.melanger();
+		}
+	}
 	private void afficherListeDesJoueurs() {
 		System.out.println("La liste des joueurs est :");
 		for (Iterator<Joueur> iterator = llJoueur.iterator(); iterator.hasNext();) {
@@ -205,7 +210,6 @@ public class PartieDeCartes {
 	}
 	private void echangerLesCartes() {
 		for (int i = 1; i < llJoueur.size(); i++) {
-			System.out.println(llJoueur.get(i));
 			((JoueurIA) llJoueur.get(i)).echangerLesCartes();
 		}
 		llJoueur.get(0).afficherLesCartes();
@@ -231,6 +235,7 @@ public class PartieDeCartes {
 	 * choix du distributeur parmi les joueurs IA
 	 */
 	private void distribuer() {
+		melanger();
 		for (Iterator<Joueur> it = llJoueur.iterator(); it.hasNext();) {
 			Joueur joueur = (Joueur) it.next();
 			if (joueur instanceof Distributeur) {

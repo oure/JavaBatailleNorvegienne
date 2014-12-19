@@ -186,6 +186,7 @@ public class JoueurIA extends Joueur {
 			choix[0] = 1;
 			choix[1] = c.getValeur();
 			if(c.getValeur()==8){
+				System.out.println(lljoueur);
 				int nb=nombreDeHuitQueIaDoitPoser(lljoueur);
 				if (nb!=-1)
 					choix[0] = nb;
@@ -212,7 +213,7 @@ public class JoueurIA extends Joueur {
 	 */
 	@Override
 	public HashSet<Carte> jouerLibrement(Table table, Pioche pioche,
-			HashSet<Carte> derniereCartesPosees) {
+			HashSet<Carte> derniereCartesPosees,LinkedList<Joueur> lljoueur) {
 		HashSet<Carte> hc = new HashSet<Carte>();
 		if (!pioche.isEmpty() && cartesEnMain.isEmpty()) {
 			piocher(pioche);
@@ -221,7 +222,7 @@ public class JoueurIA extends Joueur {
 
 		if (!cartesEnMain.getCartemain().isEmpty()
 				|| !cartefaceVisibles.getCartesVisibles().isEmpty()) {
-			int[] tab = choixDesCartesAJouer(table, null);
+			int[] tab = choixDesCartesAJouer(table,lljoueur);
 			if (tab == null) {
 				piocher(pioche);
 				return hc;

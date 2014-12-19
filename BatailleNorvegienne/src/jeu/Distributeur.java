@@ -40,11 +40,6 @@ public class Distributeur extends JoueurIA {
 			JeuDeCartes jdc = (JeuDeCartes) iterator.next();
 			ListeDeCarte.addAll((LinkedList<Carte>) jdc.getLs());
 		}
-		for (Iterator<Carte> it = ListeDeCarte.iterator(); it.hasNext();) {
-			Carte carte = (Carte) it.next();
-			System.out.print(carte.getValeur() + "-");
-
-		}
 		Pioche pioche = new Pioche();
 		distribuerCartesEnmMain(lj);
 		distribuerCartesVisibles(lj);

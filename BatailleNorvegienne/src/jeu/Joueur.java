@@ -242,6 +242,8 @@ public class Joueur {
 	 */
 	public int getNumeroduJoueurDansLaListeDeJoueur(LinkedList<Joueur> lj,
 			Joueur j) {
+		System.out.println(lj);
+		System.out.println(j);
 		for (int i = 0; i < lj.size(); i++) {
 			if (lj.get(i) == j)
 				return i;
@@ -479,7 +481,7 @@ public class Joueur {
 	 *         jouer
 	 */
 	public HashSet<Carte> jouerLibrement(Table table, Pioche pioche,
-			HashSet<Carte> derniereCartesPosees) {
+			HashSet<Carte> derniereCartesPosees,LinkedList<Joueur> lljoueur) {
 		HashSet<Carte> hc = new HashSet<Carte>();
 		if (!pioche.isEmpty() && cartesEnMain.isEmpty()) {
 			piocher(pioche);
@@ -516,13 +518,13 @@ public class Joueur {
 				} else {
 					System.out
 							.println("Impossible vous ne pouvez pas poser cette carte !");
-					jouerLibrement(table, pioche, derniereCartesPosees);
+					jouerLibrement(table, pioche, derniereCartesPosees,lljoueur);
 				}
 
 			} else {
 				System.out
 						.println("impossible vous ne pouvez pas poser cette carte !");
-				jouerLibrement(table, pioche, derniereCartesPosees);
+				jouerLibrement(table, pioche, derniereCartesPosees,lljoueur);
 			}
 		}
 		if (cartesEnMain.getCartemain().isEmpty()
