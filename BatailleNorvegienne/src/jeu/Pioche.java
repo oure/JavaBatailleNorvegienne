@@ -8,13 +8,7 @@ import java.util.*;
 
 public class Pioche {
 
-	/** Instance unique non preinitialisee */
-
 	private static LinkedList<Carte> listeDeCarte = null;
-
-	/** Constructeur privée */
-	public Pioche() {
-	}
 
 	public static LinkedList<Carte> getListeDeCarte() {
 		return listeDeCarte;
@@ -23,7 +17,7 @@ public class Pioche {
 	public void setListeDeCarte(LinkedList<Carte> listeDeCarte) {
 		Pioche.listeDeCarte = listeDeCarte;
 	}
-
+	
 	/** Point d'acces pour l'instance unique du singleton */
 
 	public static LinkedList<Carte> getPioche() {
@@ -71,4 +65,4 @@ public class Pioche {
 		return listeDeCarte.isEmpty();
 
 	}
-}
+} 

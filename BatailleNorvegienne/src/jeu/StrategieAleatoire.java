@@ -1,8 +1,10 @@
 package jeu;
+
 /**
  * La classe Strategie aleatoire
  * Elle herite de Strategie 
  */
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -12,7 +14,7 @@ public class StrategieAleatoire implements Strategie {
 		int nbDeHuit = ia.nombreDeHuitQueLeJoueurPossede();
 		if (nbDeHuit >= 2)
 			return rand.nextInt((nbDeHuit - 1) + 1) + 1;
-		else  
+		else
 			return 1;
 	}
 
@@ -20,16 +22,15 @@ public class StrategieAleatoire implements Strategie {
 			LinkedList<Joueur> lj) {
 		int num = j.getNumeroduJoueurDansLaListeDeJoueur(lj, j);
 		int numeroDuJoueurDesigne = JoueurIA.randInt(0, lj.size() - 1);
-		System.out.println("numeroDuJoueurDesigne "+numeroDuJoueurDesigne);
-		System.out.println("num "+num);
-		// Il serait idiot qu'un+ joueurIA se lance le tas à lui même.
-		if (numeroDuJoueurDesigne != num){
-			System.out.println("HAHAHA" +lj.get(numeroDuJoueurDesigne).getNom() );
+		System.out.println("numeroDuJoueurDesigne " + numeroDuJoueurDesigne);
+		System.out.println("num " + num);
+		// Il serait idiot qu'un joueurIA se lance le tas à lui même.
+		if (numeroDuJoueurDesigne != num) {
+			System.out.println(j.getNom()+" envoie les cartes de la table a"
+					+ lj.get(numeroDuJoueurDesigne).getNom());
 			return lj.get(numeroDuJoueurDesigne);
-		}
-		else
-			j.choixDuJoueurCibleePourEnvoyerLaTable(lj);
-		return null;
+		} else
+			return j.choixDuJoueurCibleePourEnvoyerLaTable(lj);
 	}
 
 	public int contrerUnAs(JoueurIA ia) {
@@ -50,6 +51,21 @@ public class StrategieAleatoire implements Strategie {
 				return vCarte;
 			else
 				return vCarte2;
+		if(!ia.getCartefaceVisibles().isEmpty()
+				&& !ia.getCartesEnMain().isEmpty() 
+				&& ia.getCarteFacesCachees().isEmpty()){
+			Carte c=ia.getCarteFacesCachees().prendreAuhasard();
+			if(c.getValeur() == 1 || c.getValeur()==2)
+				return c.getValeur();
+			else
+				ia.ajouterCarteFaceCachee(c);
+		}
 		return -1;
+	}
+
+	@Override
+	public void EchangerLesCartes(JoueurIA ia,
+			HashSet<Carte> sMain,
+			HashSet<Carte> nonSVisible) {
 	}
 }

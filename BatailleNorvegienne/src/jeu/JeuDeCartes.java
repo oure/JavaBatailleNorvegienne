@@ -3,6 +3,7 @@ package jeu;
 /**
  * La classe jeu de carte
  *C'est le paquet de l'ensemble des cartes du jeu 
+ *cette classe prend un attribut de type linkedlist
  */
 import java.util.Collections;
 import java.util.LinkedList;
@@ -11,10 +12,6 @@ import java.util.List;
 import jeu.Carte.Couleur;
 
 public class JeuDeCartes {
-
-	/**
-	 * cette classe prend un attribut de type linkedlist
-	 */
 	private LinkedList<Carte> ls = new LinkedList<Carte>();
 
 	public List<Carte> getLs() {
@@ -26,7 +23,8 @@ public class JeuDeCartes {
 	}
 
 	/**
-	 * le constructeur de paquets de cartes suivant le nombre de joueur
+	 * le constructeur de JeuDeCartes va creer un paquet de 52 cartes tel que
+	 * l'on achete dans le commerce
 	 */
 	public JeuDeCartes() {
 		for (int i = 1; i <= 13; i++) {
@@ -37,15 +35,12 @@ public class JeuDeCartes {
 					break;
 				case 2:
 					ls.add(new Carte(i, Couleur.Coeur));
-
 					break;
 				case 3:
 					ls.add(new Carte(i, Couleur.Carreau));
-
 					break;
 				case 4:
 					ls.add(new Carte(i, Couleur.Trefle));
-
 					break;
 				}
 
@@ -55,6 +50,7 @@ public class JeuDeCartes {
 
 	/**
 	 * la methode qui melange les cartes du paquets
+	 * 
 	 * @see Collections#shuffle(List)
 	 */
 
@@ -63,8 +59,9 @@ public class JeuDeCartes {
 	}
 
 	/**
-	 * cette classe prend un attribut de type linkedlistPour retirer une carte
-	 * du paquet
+	 * Cette methode prend et retourne la derniere carte du paquet
+	 * 
+	 * @return Carte la derniere carte du paquet
 	 */
 
 	public Carte prendre() {
