@@ -129,8 +129,8 @@ public class PartieDeCartes {
 					if (joueur.estCeQueLeJoueurPeutJouer(derniereCartesPosees,
 							table)) {
 						derniereCartesPosees.clear();
-						derniereCartesPosees = joueur.jouerLibrement(table,
-								pioche, derniereCartesPosees,llJoueur);
+						derniereCartesPosees = null; //.joueur.jouerLibrement(table,
+							//	pioche, derniereCartesPosees,llJoueur);
 						System.out.println("Les dernieres cartes posees sont "+derniereCartesPosees);
 						joueur.PoserUnDix(derniereCartesPosees, table);
 						joueur.PoserUnAs(derniereCartesPosees, table, llJoueur);

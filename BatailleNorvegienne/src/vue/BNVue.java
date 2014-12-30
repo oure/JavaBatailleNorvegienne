@@ -12,18 +12,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import jeu.Joueur;
 
 public class BNVue extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -63,13 +65,10 @@ public class BNVue extends JFrame {
 		miseEnPlaceDesJoueurs.add(new JLabel(""));
 		miseEnPlaceDesJoueurs.add(butLauch);
 
-		JPanel card3 = new JPanel();
-		card3.setBackground(Color.black);
 		JPanel boutonPane = new JPanel();
 
 		panel.setLayout(cl);
 		panel.add(miseEnPlaceDesJoueurs, listContent[0]);
-		panel.add(card3, listContent[2]);
 		this.getContentPane().add(boutonPane, BorderLayout.NORTH);
 		this.getContentPane().add(panel, BorderLayout.CENTER);
 
@@ -147,7 +146,6 @@ public class BNVue extends JFrame {
 			} catch (Exception e) {
 				System.out.println("Ce n'est pas un entier");
 				return -1;
-
 			}
 			return Integer.parseInt(texteNbJoueur.getText());
 		}
@@ -160,12 +158,18 @@ public class BNVue extends JFrame {
 		else
 			return "";
 	}
-	public void choixListeJoueurLancerTas(String[] nomJoueurs){
-		private JLabel display;  
-	    private JComboBox<String> box;
-        display = new JLabel("Choisissez votre victime :");
-        box = new JComboBox<String>(nomJoueurs);
-
+	public void choixListeJoueurLancerTas(LinkedList<Joueur> list){
+		String[] array =new String[list.size()-1];
+		int i=0;
+	    for (Iterator<Joueur> iterator = list.iterator(); iterator.hasNext();) {
+			Joueur joueur = (Joueur) iterator.next();
+			if (joueur!=list.getFirst()){
+				System.out.println(joueur.getNom());
+				array[i]=joueur.getNom();
+				i++;
+			}
+		}
+		DialogChoixJoueurEnvoieTas d=new DialogChoixJoueurEnvoieTas(array);
 	}
 	public void AfficheCartesVisibles(ArrayList<String> NomFichiers) {
 		for (Iterator<String> iterator = NomFichiers.iterator(); iterator

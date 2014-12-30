@@ -8,7 +8,17 @@ public class MVCBN {
 	public static void main(String[] args) {
 		BNVue theView = new BNVue();
 		PartieDeCartes theModel = new PartieDeCartes();
-		new BNControleur(theView, theModel);
+		BNControleur theContoleur = new BNControleur(theView, theModel);
 		theView.setVisible(true);
+		synchronized (theContoleur.object) {
+			try {
+				theContoleur.object.wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}// je bloque en attendant la réponse
+		}
+		theContoleur.deroulementDujeu();
+
 	}
 }

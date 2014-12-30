@@ -21,6 +21,7 @@ import jeu.Table;
 import vue.BNVue;
 
 public class BNControleur {
+	public Object object=new String("2");
 	private BNVue vue;
 	private PartieDeCartes pdc;
 	private boolean clicked = false;
@@ -34,12 +35,30 @@ public class BNControleur {
 		vue.addBNListener(new BouttonLancerListenner());
 	}
 
+	public void desalouageListener() {
+		for (Iterator<JButton> iterator = vue.getbCartesEnMain().iterator(); iterator
+				.hasNext();) {
+			JButton bouton = iterator.next();
+			bouton.removeActionListener(new BouttonCartesEnMainListener());
+		}
+		for (Iterator<JButton> iterator = vue.getbCartesVisibles().iterator(); iterator
+				.hasNext();) {
+			JButton bouton = iterator.next();
+			bouton.removeActionListener(new BoutonCartesVisiblesListener());
+		}
+		for (Iterator<JButton> iterator = vue.getbCartesCachees().iterator(); iterator
+				.hasNext();) {
+			JButton bouton = iterator.next();
+			bouton.removeActionListener(new BoutonCartesCacheesListener());
+		}
+	}
+
 	public void miseAJourEcouteBoutons() {
 		System.out.println("MISE EN PLACE DES LISTENNER");
 		for (Iterator<JButton> iterator = vue.getbCartesEnMain().iterator(); iterator
 				.hasNext();) {
 			JButton bouton = iterator.next();
-			vue.addBoutonCartes(bouton, new BouttonCartesEnMain());
+			vue.addBoutonCartes(bouton, new BouttonCartesEnMainListener());
 		}
 		for (Iterator<JButton> iterator = vue.getbCartesVisibles().iterator(); iterator
 				.hasNext();) {
@@ -75,23 +94,35 @@ public class BNControleur {
 			pdc.miseEnPlaceDesJeuxdeCartes();
 			pdc.distribuer();
 			vue.MiseEnPlaceDuPlateau();
-			vue.changerDePanel(1);
-			
 			miseAJourDeLaffichage();
 			miseAJourEcouteBoutons();
-			deroulementDujeu();
+			pdc.decalerListedesJoueurs(); // Le distributeur joue en dernier
+			pdc.afficherListeDesJoueurs();
+			// vue.choixListeJoueurLancerTas(pdc.getListeDesJoueurs());
+			vue.changerDePanel(1);
+			System.out.println("JE CHANGE LA VUE");
+			synchronized(object)
+            {
+				object.notify();// je débloque
+				System.out.println("UNLOCK DU GAME");
+
+            }  
 		}
 	}
 
-	class BouttonCartesEnMain implements ActionListener {
+	class BouttonCartesEnMainListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			synchronized (this) {
+				this.notify();// je débloque
+
+			}
 			System.out
 					.println("Vous avez cliquez sur une carte dans votre main !");
 			String nomCarte = getButtonName((JButton) e.getSource());
-			valeur=Integer.parseInt(nomCarte.substring(0, 1));
+			valeur = Integer.parseInt(nomCarte.substring(0, 1));
 			System.out.println(valeur);
-			clicked=true;
+			clicked = true;
 		}
 	}
 
@@ -101,8 +132,8 @@ public class BNControleur {
 			System.out
 					.println("Vous avez cliquez sur une de vos cartes visibles !");
 			String nomCarte = getButtonName((JButton) e.getSource());
-			valeur=Integer.parseInt(nomCarte.substring(0, 1));
-			clicked=true;
+			valeur = Integer.parseInt(nomCarte.substring(0, 1));
+			clicked = true;
 
 		}
 	}
@@ -112,8 +143,8 @@ public class BNControleur {
 		public void actionPerformed(ActionEvent e) {
 			String nomCarte = getButtonName((JButton) e.getSource());
 			System.out.println(nomCarte);
-			valeur=Integer.parseInt(nomCarte.substring(0,1 ));
-			clicked=true;
+			valeur = Integer.parseInt(nomCarte.substring(0, 1));
+			clicked = true;
 		}
 	}
 
@@ -173,11 +204,12 @@ public class BNControleur {
 		return myButton.getName().substring(0, myButton.getName().length() - 4);
 	}
 
-	public void JouerUneCarte() {
-
+	public synchronized void lancementDeLaPartie() {
+		deroulementDujeu();
 	}
 
-	private void deroulementDujeu() {
+	public void deroulementDujeu() {
+		System.out.println("JE DEREOULE LE JEU AIGHT");
 		Joueur gagnant = null;
 		boolean cond = true;
 		int compteurPourPasserLesTours = 0; // compte le nombre de joueur qui
@@ -186,8 +218,6 @@ public class BNControleur {
 		boolean passerLeTour = false;
 		int nombreDejoueurQuiPasseLeurTour = 0;
 		int tour = 1;
-		pdc.decalerListedesJoueurs(); // Le distributeur joue en dernier
-		pdc.afficherListeDesJoueurs();
 		// pdc.echangerLesCartes();
 		HashSet<Carte> derniereCartesPosees = new HashSet<Carte>();
 		while (cond) {
@@ -254,7 +284,7 @@ public class BNControleur {
 	}
 
 	public HashSet<Carte> jouerLibrementHumain(Table table, Pioche pioche,
-			HashSet<Carte> derniereCartesPosees, LinkedList<Joueur> lljoueur){
+			HashSet<Carte> derniereCartesPosees, LinkedList<Joueur> lljoueur) {
 		CartesEnMain cartesEnMain = lljoueur.getFirst().getCartesEnMain();
 		CartesfacesVisibles cartefaceVisibles = lljoueur.getFirst()
 				.getCartefaceVisibles();
@@ -268,13 +298,21 @@ public class BNControleur {
 		}
 		if (!cartesEnMain.getCartemain().isEmpty()
 				|| !cartefaceVisibles.getCartesVisibles().isEmpty()) {
+			System.out.println("oui");
 			// System.out.print("Entrez le nombre de carte à jouer :");
 			// int nombreDeCarteAjouer = PartieDeCartes.reader.nextInt();
 			// System.out
 			// .print("Entrez la valeur de la carte a jouer (de 1 a 13) :");
 			// int valeur = PartieDeCartes.reader.nextInt();
-			System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAA");
-			attenteCartesClique();
+			try {
+				vue.changerDePanel(1);
+				Thread.sleep(2000);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+			System.out.println("JE CONTINUE");
 			if (j.estPossedeDansLamain(valeur, nombreDeCarteAjouer)
 					&& j.estCeQueLeJoueurPeutJouerDesCartes(valeur,
 							nombreDeCarteAjouer, table)) {
@@ -328,16 +366,5 @@ public class BNControleur {
 			return hc;
 		}
 		return hc;
-	}
-
-	private void attenteCartesClique() {
-		clicked = false;
-		while (!clicked) {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
 	}
 }
