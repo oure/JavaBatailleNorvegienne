@@ -1,11 +1,11 @@
 package jeu;
+
 /**
- * La classe Carte 
- * Elle definit une carte avec toutes ses caracteristiques 
+ * La classe Carte Elle definit une carte avec toutes ses caracteristiques
  */
 public class Carte {
 	public enum Couleur {
-		Pique, Coeur, Carreau, Trefle
+		Pique, Coeur, Carreau, Treffle
 	};
 
 	private int valeur;
@@ -14,11 +14,14 @@ public class Carte {
 	private boolean estVisible;
 
 	/**
-	 * le constructeur de la classe 
-	 * @param v : une valeur de type entier
-	 * @param c : une couleur de type enum Couleur
+	 * le constructeur de la classe
+	 * 
+	 * @param v
+	 *            : une valeur de type entier
+	 * @param c
+	 *            : une couleur de type enum Couleur
 	 */
-	
+
 	public Carte(int v, Couleur c) {
 		if (v >= 1 && v <= 13) {
 			valeur = v;
@@ -27,13 +30,11 @@ public class Carte {
 			System.exit(0);
 		}
 		if (c == Couleur.Pique || c == Couleur.Coeur || c == Couleur.Carreau
-				|| c == Couleur.Trefle) {
+				|| c == Couleur.Treffle) {
 			couleur = c;
-		} else {
-	}
+		} 
 	}
 
-	
 	public int getValeur() {
 		return valeur;
 	}
@@ -60,5 +61,6 @@ public class Carte {
 
 	@Override
 	public String toString() {
-		return valeur +""+ couleur.toString().toLowerCase().substring(0,2);
-	}}
+		return valeur + "" + couleur.toString().toLowerCase().substring(0, 2);
+	}
+}

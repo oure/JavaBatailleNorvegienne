@@ -211,7 +211,6 @@ public class JoueurIA extends Joueur {
 	/**
 	 * Le joueur IA va jouer aleatoirement des cartes pour l'instant
 	 */
-	@Override
 	public HashSet<Carte> jouerLibrement(Table table, Pioche pioche,
 			HashSet<Carte> derniereCartesPosees,LinkedList<Joueur> lljoueur) {
 		HashSet<Carte> hc = new HashSet<Carte>();

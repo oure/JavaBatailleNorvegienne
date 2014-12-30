@@ -480,70 +480,7 @@ public class Joueur {
 	 * @return une collection de cartes, de type hashset, que le joueur veut
 	 *         jouer
 	 */
-	public HashSet<Carte> jouerLibrement(Table table, Pioche pioche,
-			HashSet<Carte> derniereCartesPosees,LinkedList<Joueur> lljoueur) {
-		HashSet<Carte> hc = new HashSet<Carte>();
-		if (!pioche.isEmpty() && cartesEnMain.isEmpty()) {
-			piocher(pioche);
-			return hc;
-		}
-		if (!cartesEnMain.getCartemain().isEmpty()
-				|| !cartefaceVisibles.getCartesVisibles().isEmpty()) {
-			System.out.print("Entrez le nombre de carte à jouer :");
-			int nombreDeCarteAjouer = PartieDeCartes.reader.nextInt();
-			System.out
-					.print("Entrez la valeur de la carte a jouer (de 1 a 13) :");
-			int valeur = PartieDeCartes.reader.nextInt();
-			if (estPossedeDansLamain(valeur, nombreDeCarteAjouer)
-					&& estCeQueLeJoueurPeutJouerDesCartes(valeur,
-							nombreDeCarteAjouer, table)) {
-				hc = cartesEnMain.supCarteMain(valeur, nombreDeCarteAjouer);
-				table.ajouterCartesTable(hc);
-				for (int i = 1; i <= hc.size(); i++) {
-					piocher(pioche);
-				}
-				return hc;
-			} else if (cartesEnMain.getCartemain().isEmpty()) {
-				if (estPossedeDansDansLesCartesVisibles(valeur,
-						nombreDeCarteAjouer)
-						&& estCeQueLeJoueurPeutJouerDesCartes(valeur,
-								nombreDeCarteAjouer, table)) {
-					hc = cartefaceVisibles.supCarteVisible(valeur,
-							nombreDeCarteAjouer);
-					table.ajouterCartesTable(hc);
-					for (int i = 1; i <= hc.size(); i++) {
-						piocher(pioche);
-					}
-					return hc;
-				} else {
-					System.out
-							.println("Impossible vous ne pouvez pas poser cette carte !");
-					jouerLibrement(table, pioche, derniereCartesPosees,lljoueur);
-				}
-
-			} else {
-				System.out
-						.println("impossible vous ne pouvez pas poser cette carte !");
-				jouerLibrement(table, pioche, derniereCartesPosees,lljoueur);
-			}
-		}
-		if (cartesEnMain.getCartemain().isEmpty()
-				&& cartefaceVisibles.getCartesVisibles().isEmpty()) {
-			Carte carte;
-			carte = carteFacesCachees.prendreAuhasard();
-			hc.add(carte);
-			if (estCeQueLeJoueurPeutJouerDesCartes(carte.getValeur(), 1, table)) {
-				table.ajouterCartesTable(hc);
-			} else {
-				hc.clear();
-				System.out.println("Je ne peux pas jouer cette carte");
-				ajouterCartesEnMain(table.ramasserLeTas());
-				System.out.println("Vous avez ramassez les cartes de la table " + getNom());
-			}
-			return hc;
-		}
-		return hc;
-	}
+	
 
 	/**
 	 * envoyer la table sur un joueur choisi

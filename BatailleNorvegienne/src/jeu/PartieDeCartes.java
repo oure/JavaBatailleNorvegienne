@@ -13,17 +13,12 @@ import java.util.Scanner;
 import jeu.Carte.Couleur;
 
 public class PartieDeCartes {
-	
 	 // attributs de la carte	 
 	public static Scanner reader;
 	private Pioche pioche = new Pioche();
 	private HashSet<JeuDeCartes> setJeuDeCartes = new HashSet<JeuDeCartes>();
 	private Table table = new Table();
 	private LinkedList<Joueur> llJoueur = new LinkedList<Joueur>();
-
-	public Pioche getPioche() {
-		return pioche;
-	}
 
 	/**
 	 * Methode qui choisit aleatoirement le type de strategie d'un joueurIA
@@ -50,18 +45,22 @@ public class PartieDeCartes {
 	{
 		System.out.println("### Bienvenue dans dans le jeu de la Bataille Norvegienne ####");
 	}
-	private void miseEnPlaceDeLaListeDesJoueurs() {
+	private Object[] demandeNomEtNbJoueur(){
+		Object[] a = new Object[2];
 		System.out.print("-Saisissez le nombre de joueur :");
 		reader = new Scanner(System.in);
 		int nbJoueur = reader.nextInt();
-		String name = null;
 		reader.nextLine();
+		String name = null;
+		System.out.print("-Entrer votre nom :");
+		name = reader.nextLine();
+		a[0]=name;
+		a[1]=nbJoueur;
+		return a;
+	}
+	public void miseEnPlaceDeLaListeDesJoueurs(int nbJoueur,String name) {
 		for (int i = 1; i <= nbJoueur; i++) {
 			Random r = new Random();
-			if (i == 1) {
-				System.out.print("-Entrer votre nom :");
-				name = reader.nextLine();
-			}
 			if (i == 1)
 				llJoueur.add(new Distributeur(choixDuneStrategie(r)));
 			else if (i == 2)
@@ -77,7 +76,7 @@ public class PartieDeCartes {
 	 * commencer
 	 */
 
-	private void decalerListedesJoueurs() {
+	public void decalerListedesJoueurs() {
 		Joueur j = llJoueur.getFirst();
 		llJoueur.remove();
 		llJoueur.addLast(j);
@@ -86,7 +85,7 @@ public class PartieDeCartes {
 	/**
 	 * Creation d'un ou plusieurs jeux de carte en fonction du nombre de joueur.
 	 */
-	private void miseEnPlaceDesJeuxdeCartes() {
+	public void miseEnPlaceDesJeuxdeCartes() {
 		if (llJoueur.size() <= 5 && llJoueur.size() > 1) {
 			setJeuDeCartes.add(new JeuDeCartes());
 		} else if (llJoueur.size() > 5 && llJoueur.size() <= 11) {
@@ -95,7 +94,6 @@ public class PartieDeCartes {
 		} else {
 			System.out
 					.println("Veuillez renseigner le bon nombre d'utilisateur ! ");
-			miseEnPlaceDeLaListeDesJoueurs();
 		}
 	}
 	/**
@@ -104,7 +102,7 @@ public class PartieDeCartes {
 	 * @return le numero du joueur pris en parametre 
 	 */
 
-	public int PositionJoueurDansLaListe(Joueur joueur) {
+	public int positionJoueurDansLaListe(Joueur joueur) {
 		return (llJoueur.indexOf(joueur));
 	}
 
@@ -175,7 +173,7 @@ public class PartieDeCartes {
 			jdc.melanger();
 		}
 	}
-	private void afficherListeDesJoueurs() {
+	public void afficherListeDesJoueurs() {
 		System.out.println("La liste des joueurs est :");
 		for (Iterator<Joueur> iterator = llJoueur.iterator(); iterator.hasNext();) {
 			Joueur joueur = (Joueur) iterator.next();
@@ -196,7 +194,7 @@ public class PartieDeCartes {
 		 System.out.println(llJoueur.get(1).getNom());
 		 llJoueur.get(1).getCartesEnMain().supprimerToutesLesCartesEnmain();
 		 llJoueur.get(1).ajouterCarteEnMain(new Carte(8, Couleur.Coeur));
-		 llJoueur.get(1).ajouterCarteEnMain(new Carte(8, Couleur.Trefle));
+		 llJoueur.get(1).ajouterCarteEnMain(new Carte(8, Couleur.Treffle));
 		 llJoueur.get(1).ajouterCarteEnMain(new Carte(8, Couleur.Carreau));
 		 llJoueur.get(2).ajouterCarteEnMain(new Carte(8, Couleur.Pique));
 		System.out.println(llJoueur.get(2).getNom()+" zrrerraaze"+((JoueurIA) llJoueur.get(2)).nombreDeHuitQueIaDoitPoser(llJoueur));
@@ -208,7 +206,7 @@ public class PartieDeCartes {
 	public boolean controleDesBornes(int nb, int b1, int b2){
 		return (nb>=b1 && nb<=b2);
 	}
-	private void echangerLesCartes() {
+	public void echangerLesCartes() {
 		for (int i = 1; i < llJoueur.size(); i++) {
 			((JoueurIA) llJoueur.get(i)).echangerLesCartes();
 		}
@@ -234,7 +232,7 @@ public class PartieDeCartes {
 	/**
 	 * choix du distributeur parmi les joueurs IA
 	 */
-	private void distribuer() {
+	public void distribuer() {
 		melanger();
 		for (Iterator<Joueur> it = llJoueur.iterator(); it.hasNext();) {
 			Joueur joueur = (Joueur) it.next();
@@ -253,16 +251,35 @@ public class PartieDeCartes {
 	 */
 	private void demarrer() {
 		affichageBienvenu();
-		miseEnPlaceDeLaListeDesJoueurs();
+		//miseEnPlaceDeLaListeDesJoueurs();
 		miseEnPlaceDesJeuxdeCartes();
 		distribuer();
 		deroulementDujeu();
-		//test();
+		test();
 	}
 
 	public static void main(String[] args) {
 		PartieDeCartes pdc = new PartieDeCartes();
 		pdc.demarrer();
 	}
+	public HashSet<Carte> getCartesEnMainJoueurHumain(){
+		return llJoueur.get(0).getCartesEnMain().getCartemain();
+	}
+	public HashSet<Carte> getCartesVisiblesJoueurHumain() {
+		return llJoueur.getFirst().getCartefaceVisibles().getCartesVisibles();
+	}
+	public HashSet<Carte> getCartesCacheesJoueurHumain(){
+		return llJoueur.getFirst().getCarteFacesCachees().getCartesCachees();
+	}
+	public Pioche getPioche() {
+		return pioche;
+	}
+	public Table getTable() {
+		return table;
+	}
+	public LinkedList<Joueur> getListeDesJoueurs() {
+		return llJoueur;
+	}
 
+	
 }

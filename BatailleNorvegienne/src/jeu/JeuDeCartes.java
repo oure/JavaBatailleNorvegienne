@@ -40,7 +40,7 @@ public class JeuDeCartes {
 					ls.add(new Carte(i, Couleur.Carreau));
 					break;
 				case 4:
-					ls.add(new Carte(i, Couleur.Trefle));
+					ls.add(new Carte(i, Couleur.Treffle));
 					break;
 				}
 
