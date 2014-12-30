@@ -121,6 +121,8 @@ public class BNControleur {
 					.println("Vous avez cliquez sur une carte dans votre main !");
 			String nomCarte = getButtonName((JButton) e.getSource());
 			valeur = Integer.parseInt(nomCarte.substring(0, 1));
+			String couleur= (nomCarte.substring(2,nomCarte.length() );
+
 			System.out.println(valeur);
 			clicked = true;
 		}
