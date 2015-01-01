@@ -21,6 +21,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -46,6 +47,7 @@ public class BNVue extends JFrame {
 	JTextField texteNbJoueur = new JTextField(2);
 	JButton butLauch = new JButton("Lancer la partie !");
 	int indice = 0;
+	Color vertTapis=new Color(42,114,32);
 
 	public BNVue() {
 		this.add(panel);
@@ -86,11 +88,11 @@ public class BNVue extends JFrame {
 		panelCartesVisibles = new JPanel();
 		panelCartesEnMain = new JPanel();
 
-		panelTas.setBackground(Color.green);
-		panelCartesCachees.setBackground(Color.green);
-		plateauDuJeu.setBackground(Color.green);
-		panelCartesVisibles.setBackground(Color.GREEN);
-		panelCartesEnMain.setBackground(Color.green);
+		panelTas.setBackground(vertTapis);
+		panelCartesCachees.setBackground(vertTapis);
+		plateauDuJeu.setBackground(vertTapis);
+		panelCartesVisibles.setBackground(vertTapis);
+		panelCartesEnMain.setBackground(vertTapis);
 		panelTas.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		panelCartesVisibles.setBorder(BorderFactory.createEmptyBorder(5, 5, 5,
 				5));
@@ -158,20 +160,27 @@ public class BNVue extends JFrame {
 		else
 			return "";
 	}
-	public void choixListeJoueurLancerTas(LinkedList<Joueur> list){
-		String[] array =new String[list.size()-1];
+	public void creerUneFenetreDinformation(String g){
+		JOptionPane.showMessageDialog(this,
+			    g);
+	}
+	public String choixListeJoueurLancerTas(LinkedList<Joueur> list){
+		String[] tableauDeJoueur =new String[list.size()-1];
 		int i=0;
 	    for (Iterator<Joueur> iterator = list.iterator(); iterator.hasNext();) {
 			Joueur joueur = (Joueur) iterator.next();
 			if (joueur!=list.getFirst()){
 				System.out.println(joueur.getNom());
-				array[i]=joueur.getNom();
+				tableauDeJoueur[i]=joueur.getNom();
 				i++;
 			}
 		}
-		DialogChoixJoueurEnvoieTas d=new DialogChoixJoueurEnvoieTas(array);
+	    DialogChoixJoueurEnvoieTas a= new DialogChoixJoueurEnvoieTas(tableauDeJoueur);
+	    return a.getnomChoisi();
 	}
+
 	public void AfficheCartesVisibles(ArrayList<String> NomFichiers) {
+		panelCartesVisibles.removeAll();
 		for (Iterator<String> iterator = NomFichiers.iterator(); iterator
 				.hasNext();) {
 			String string = (String) iterator.next();
@@ -184,6 +193,7 @@ public class BNVue extends JFrame {
 	}
 
 	public void AfficheCartesEnMain(ArrayList<String> NomFichiers) {
+		panelCartesEnMain.removeAll();
 		for (Iterator<String> iterator = NomFichiers.iterator(); iterator
 				.hasNext();) {
 			String string = (String) iterator.next();
@@ -196,6 +206,7 @@ public class BNVue extends JFrame {
 	}
 
 	public void AfficherCartesCachees(ArrayList<String> NomFichiers) {
+		panelCartesCachees.removeAll();
 		for (Iterator<String> iterator = NomFichiers.iterator(); iterator
 				.hasNext();) {
 			String string = (String) iterator.next();
@@ -206,15 +217,25 @@ public class BNVue extends JFrame {
 		}
 	}
 
-	public void AfficherDerniereCarteDuTas(String nomDeLaCarte) {
+	public void afficherDerniereCarteDeLatable(String nomDeLaCarte, int tour) {
+		panelTas.removeAll();
 		if (nomDeLaCarte.equals("")) {
+			String s;
+			if (tour<=1)
+				s="<html><font color=\"white\"><center>Pas<br>encore<br>de tas</center></color></html>";
+			else
+				s="<html><font color=\"white\"><center>Tas<br>Vide</center></color></html>";
 			panelTas.add(new JLabel(
-					"<html><center>Pas<br>encore<br>de tas</center></html>"),
+					s),
 					BorderLayout.CENTER);
 			this.pack();
 			return;
 		}
-		panelTas.add(getCarteButton("hidden"), BorderLayout.CENTER);
+		panelTas.removeAll();
+		panelTas.add(getCarteButton(nomDeLaCarte), BorderLayout.CENTER);
+		panel.revalidate();
+		panel.repaint();
+		pack();
 	}
 
 	public JButton getCarteButton(String fileName) {

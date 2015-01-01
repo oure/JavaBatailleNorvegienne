@@ -91,10 +91,14 @@ public class PartieDeCartes {
 		} else if (llJoueur.size() > 5 && llJoueur.size() <= 11) {
 			setJeuDeCartes.add(new JeuDeCartes());
 			setJeuDeCartes.add(new JeuDeCartes());
-		} else {
-			System.out
-					.println("Veuillez renseigner le bon nombre d'utilisateur ! ");
+		} else if (llJoueur.size() > 11 && llJoueur.size() <= 20) {
+			setJeuDeCartes.add(new JeuDeCartes());
+			setJeuDeCartes.add(new JeuDeCartes());
+			setJeuDeCartes.add(new JeuDeCartes());
 		}
+		else 
+			System.out
+		.println("Veuillez renseigner le bon nombre d'utilisateur ! ");
 	}
 	/**
 	 * Methode qui renvoie la postion d'un joueur dans la LinkedList de Joueur
@@ -133,7 +137,7 @@ public class PartieDeCartes {
 							//	pioche, derniereCartesPosees,llJoueur);
 						System.out.println("Les dernieres cartes posees sont "+derniereCartesPosees);
 						joueur.PoserUnDix(derniereCartesPosees, table);
-						joueur.PoserUnAs(derniereCartesPosees, table, llJoueur);
+						//joueur.PoserUnAs(derniereCartesPosees, table, llJoueur);
 						nombreDejoueurQuiPasseLeurTour = joueur.PoserUnHuit(
 								derniereCartesPosees, table);
 					} else {

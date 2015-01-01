@@ -10,9 +10,9 @@ public class MVCBN {
 		PartieDeCartes theModel = new PartieDeCartes();
 		BNControleur theContoleur = new BNControleur(theView, theModel);
 		theView.setVisible(true);
-		synchronized (theContoleur.object) {
+		synchronized (theContoleur.verrou) {
 			try {
-				theContoleur.object.wait();
+				theContoleur.verrou.wait();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

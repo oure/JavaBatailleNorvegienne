@@ -213,6 +213,7 @@ public class JoueurIA extends Joueur {
 	 */
 	public HashSet<Carte> jouerLibrement(Table table, Pioche pioche,
 			HashSet<Carte> derniereCartesPosees,LinkedList<Joueur> lljoueur) {
+		System.out.println("JE SUIS IA ET JE JOUE !!");
 		HashSet<Carte> hc = new HashSet<Carte>();
 		if (!pioche.isEmpty() && cartesEnMain.isEmpty()) {
 			piocher(pioche);

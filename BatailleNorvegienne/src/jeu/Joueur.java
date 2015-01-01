@@ -136,15 +136,16 @@ public class Joueur {
 	 *            par le joueur precedent
 	 * @param table
 	 */
-	public void PoserUnDix(HashSet<Carte> derniereCartesPosees, Table table) {
+	public boolean PoserUnDix(HashSet<Carte> derniereCartesPosees, Table table) {
 		for (Iterator<Carte> iterator = derniereCartesPosees.iterator(); iterator
 				.hasNext();) {
 			Carte carte = (Carte) iterator.next();
 			if (carte.getValeur() == 10) {
 				table.viderTable();
-				break;
+				return true;
 			}
 		}
+		return false;
 	}
 
 	/**
@@ -172,21 +173,6 @@ public class Joueur {
 			return true;
 		else
 			return false;
-	}
-
-	public void seDefendreContreUnAs(Table table) {
-		System.out.println("gzyyyyyyyg");
-		System.out
-				.print("Defender vous ! Un joueur veux vous envoyer le tas ! Quelles cartes voulez vous poser ?");
-		int valeur = PartieDeCartes.reader.nextInt();
-		System.out.println(estPossedeDansLamain(valeur, 1));
-		if (estPossedeDansLamain(valeur, 1) && (valeur == 2 || valeur == 1))
-			table.ajouterCartesTable(cartesEnMain.supCarteMain(valeur, 1));
-		else {
-			System.out
-					.println("Vous ne possedez pas cette carte ou elle ne peut pas contrer un as !");
-			seDefendreContreUnAs(table);
-		}
 	}
 
 	public boolean estCeQueJeSuisEnMesureDecontrerUnAs(Joueur j) {
@@ -259,81 +245,6 @@ public class Joueur {
 			return true;
 		else
 			return false;
-	}
-
-	/**
-	 * Envoi de la table sur un joueur si un AS a ete joue
-	 * 
-	 * @param derniereCartesPosees
-	 * @param table
-	 * @param lj
-	 *            la liste des joueurs, ceci permet de choisir la victime en
-	 *            fonction du type du joueur et de sa strategie, c est a dire
-	 *            sur qui envoyer la table
-	 */
-	public void PoserUnAs(HashSet<Carte> derniereCartesPosees, Table table,
-			LinkedList<Joueur> lj) {
-		Joueur j = null;
-		for (Iterator<Carte> iterator = derniereCartesPosees.iterator(); iterator
-				.hasNext();) {
-			Carte carte = (Carte) iterator.next();
-			if (carte.getValeur() == 1) {
-				j = choixDuJoueurCibleePourEnvoyerLaTable(lj);
-				if (estCeQueJeSuisEnMesureDecontrerUnAs(j)) {
-					System.out.println(j.getNom()
-							+ " : \"Je suis en mesure de contrer l'as\"");
-					j.seDefendreContreUnAs(table);
-					return;
-				} else {
-					Carte c = null;
-					if (cartesEnMain.isEmpty() && cartefaceVisibles.isEmpty()
-							&& !carteFacesCachees.isEmpty()) {
-						c = carteFacesCachees.prendreAuhasard();
-						if (c.getValeur() == 2 || c.getValeur() == 1) {
-							table.ajouterCarteALaTable(c);
-							System.out
-									.println("Vous avez contrer l'as en prennant au hasard une de vos cartes cachees !");
-							return;
-						} else {
-							carteFacesCachees.getCartesCachees().add(c);
-							System.out
-									.println("Vous avez tirer au hasard une de vos cartes cachees mais vous n'avez pas ete capable de le contrer");
-						}
-					}
-					System.out
-							.println("Je suis suis pas en mesure de contrer l'as");
-					envoyerTasSurJoueur(j, table);
-					System.out.println(j);
-				}
-				return;
-			}
-		}
-	}
-
-	/**
-	 * Ceci permet au joueur qui a pose un As de choisir sur qui envoyer la
-	 * table
-	 * 
-	 * @param lj
-	 * @return le joueur qui sera victime
-	 */
-	public Joueur choixDuJoueurCibleePourEnvoyerLaTable(LinkedList<Joueur> lj) {
-		PartieDeCartes.reader.nextLine();
-		System.out
-				.println("Entrez le nom du joueur sur qui vous voulez envoyer le table :");
-		String nomDuJoueurCible = PartieDeCartes.reader.nextLine();
-		nomDuJoueurCible.toLowerCase();
-		System.out.println("Vous envoyez le tas sur :"+nomDuJoueurCible);
-		for (Iterator<Joueur> iterator = lj.iterator(); iterator.hasNext();) {
-			Joueur joueur = (Joueur) iterator.next();
-			if (nomDuJoueurCible.equals(joueur.getNom().toLowerCase())) {
-				return joueur;
-			}
-		}
-		System.out.println("Vous avez specifier un nom incorrect monsieur !");
-		PartieDeCartes.reader.nextLine();
-		return choixDuJoueurCibleePourEnvoyerLaTable(lj);
-
 	}
 
 	/**
