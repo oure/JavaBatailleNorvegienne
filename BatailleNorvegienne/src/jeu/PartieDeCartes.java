@@ -4,6 +4,7 @@ package jeu;
  * La classe partie de carte
  *Elle represente une partie de jeu avec des joueurs, une pioche,un table et un paquet de carte 
  */
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -12,7 +13,7 @@ import java.util.Scanner;
 
 import jeu.Carte.Couleur;
 
-public class PartieDeCartes {
+public class PartieDeCartes implements Serializable {
 	 // attributs de la carte	 
 	public static Scanner reader;
 	private Pioche pioche = new Pioche();

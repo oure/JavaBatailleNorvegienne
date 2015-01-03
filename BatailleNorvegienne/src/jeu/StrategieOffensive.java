@@ -1,5 +1,6 @@
 package jeu;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
 /**
@@ -8,7 +9,7 @@ import java.util.Iterator;
  */
 import java.util.LinkedList;
 
-public class StrategieOffensive implements Strategie {
+public class StrategieOffensive implements Strategie, Serializable {
 
 	public int nombreDeHuitQueIaDoitPoser(JoueurIA ia, LinkedList<Joueur> lj) {
 		int nbDeHuit = ia.nombreDeHuitQueLeJoueurPossede();

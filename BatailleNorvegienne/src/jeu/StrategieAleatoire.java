@@ -4,11 +4,12 @@ package jeu;
  * La classe Strategie aleatoire
  * Elle herite de Strategie 
  */
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Random;
 
-public class StrategieAleatoire implements Strategie {
+public class StrategieAleatoire implements Strategie, Serializable {
 	public int nombreDeHuitQueIaDoitPoser(JoueurIA ia, LinkedList<Joueur> lj) {
 		Random rand = new Random();
 		int nbDeHuit = ia.nombreDeHuitQueLeJoueurPossede();

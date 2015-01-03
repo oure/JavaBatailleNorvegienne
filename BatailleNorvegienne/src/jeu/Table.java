@@ -1,12 +1,13 @@
 package jeu;
 
+import java.io.Serializable;
 /**
  * La classe table
  *C'est la table constitue par les cartes jouees pas les joueurs 
  */
 import java.util.*;
 
-public class Table {
+public class Table implements Serializable {
 	/**
 	 * attributs de la classe table
 	 */

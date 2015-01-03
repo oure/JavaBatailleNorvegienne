@@ -4,11 +4,12 @@ package jeu;
  * c'est l'ensemble des cartes  a face decouverte qu'un joueur dispose sur la table 
  * cette classe prend un seul attribut de type Hashset
  */
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Random;
 
-public class CartesFacesCachees {	
+public class CartesFacesCachees implements Serializable {	
 	private HashSet<Carte> cartesCachees = new HashSet<Carte>();
 
 	@Override

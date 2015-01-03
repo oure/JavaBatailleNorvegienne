@@ -2,6 +2,7 @@ package controleur;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -21,7 +22,7 @@ import jeu.Table;
 import jeu.Carte.Couleur;
 import vue.BNVue;
 
-public class BNControleur {
+public class BNControleur implements Serializable {
 	public Object verrou = new String("Je suis un verrou");
 	public Object verrou2 = new String("Je suis un deuxieme verrou");
 	private BNVue vue;

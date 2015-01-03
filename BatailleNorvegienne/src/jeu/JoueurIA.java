@@ -4,6 +4,7 @@ package jeu;
  * La classe joueur Intelligence Artificielle
  *Elle herite de la classe joueur 
  */
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -12,7 +13,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
 
-public class JoueurIA extends Joueur {
+public class JoueurIA extends Joueur implements Serializable {
 	/**
 	 * les attributs de la classe joueur IA
 	 */

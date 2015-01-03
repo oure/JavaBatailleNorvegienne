@@ -5,10 +5,11 @@ package jeu;
  * c'est l'ensemble des cartes qu'un joueur dispose dans sa main 
  * cette classe prend un seul attribut de type hashset
  */
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
 
-public class CartesEnMain {
+public class CartesEnMain implements Serializable {
 	private HashSet<Carte> cartemain = new HashSet<Carte>();
 
 	/**

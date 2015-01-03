@@ -1,9 +1,11 @@
 package jeu;
 
+import java.io.Serializable;
+
 /**
  * La classe Carte Elle definit une carte avec toutes ses caracteristiques
  */
-public class Carte {
+public class Carte  implements Serializable{
 	public enum Couleur {
 		Pique, Coeur, Carreau, Treffle
 	};

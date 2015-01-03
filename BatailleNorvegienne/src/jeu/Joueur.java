@@ -1,5 +1,6 @@
 package jeu;
 
+import java.io.Serializable;
 /**
  * La classe Joueur
  *Elle definit en general un joueur, quil soit humain ou virtuel
@@ -8,7 +9,7 @@ package jeu;
  */
 import java.util.*;
 
-public class Joueur {
+public class Joueur implements Serializable {
 	/**
 	 * les attributs de la classe joueur
 	 */

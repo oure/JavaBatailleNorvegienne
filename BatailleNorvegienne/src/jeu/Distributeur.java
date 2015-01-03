@@ -7,11 +7,12 @@ package jeu;
  *  cette classe prend un attribut de type linkedlist ce sont les cartes qui vont etre distribuees
  */
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class Distributeur extends JoueurIA {
+public class Distributeur extends JoueurIA implements Serializable {
 	/**
 	 * constructeur de la classe Distributeur qui appelle le constructeur de sa
 	 * classe JoueurIA

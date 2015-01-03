@@ -5,13 +5,14 @@ package jeu;
  *C'est le paquet de l'ensemble des cartes du jeu 
  *cette classe prend un attribut de type linkedlist
  */
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 import jeu.Carte.Couleur;
 
-public class JeuDeCartes {
+public class JeuDeCartes implements Serializable {
 	private LinkedList<Carte> ls = new LinkedList<Carte>();
 
 	public List<Carte> getLs() {

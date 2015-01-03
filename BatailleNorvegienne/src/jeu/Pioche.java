@@ -1,12 +1,13 @@
 package jeu;
 
+import java.io.Serializable;
 /**
  *La classe pioche
  *C'est la pile de cartes qui reste apres la distribution
  */
 import java.util.*;
 
-public class Pioche {
+public class Pioche implements Serializable {
 
 	private static LinkedList<Carte> listeDeCarte = null;
 
